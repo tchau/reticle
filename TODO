@@ -1,6 +1,6 @@
----------------------------------------
-TODO
----------------------------------------
+============================================================
+===        TODO
+============================================================
 
 - insert inside
 	- append after, inside [ok]
@@ -16,16 +16,28 @@ TODO
 
 - info panel explaining all the values (attrs and tags and such)
 
+- CSS Search: quickly pull up style editor for this node (shows rules that apply - pick one to edit -- boom, edit right there. no context switch.)
 
-
-- deletes
 - copy / pasta
 - code generate (export)
 - live preview
 
 
----------------------------------------
-DONE
----------------------------------------
+
+============================================================
+==       VISUALS
+============================================================
+
+- menu "blips" in on the right, and blips away when you commit or cancel
+- help icon in lower right
+
+
+
+
+
+============================================================
+==        DONE
+============================================================
 
 - appending new node after
+- deletes

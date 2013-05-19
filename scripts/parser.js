@@ -21,7 +21,10 @@ YUI.add('parser', function (Y) {
  		   // create blockEl from element attributes
  		   var blockEl = Y.Node.create('<div class="block-el"></div>');
 
-         blockEl.setAttribute('data-nodeName', el.get('nodeName'));
+         var nodeName = el.get('nodeName');
+         blockEl.addClass(Y.Reticle.TagMeta.findByName(nodeName).displayType);
+
+         blockEl.setAttribute('data-node-name', el.get('nodeName'));
 
          var id = el.get('id')
          if (Y.Lang.isValue(id) && id !== '')
@@ -56,5 +59,5 @@ YUI.add('parser', function (Y) {
    });
 
 }, '1.0', {
-    requires: ['node', 'event', 'base', 'handlebars']
+    requires: ['node', 'event', 'base', 'handlebars', 'reticle-attributes']
 });

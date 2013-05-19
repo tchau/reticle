@@ -1,46 +1,125 @@
-/***
-	Encodes knowledge of HTML
-*/
-var helpers = {
-	mimeType: function() {
+YUI.add('reticle-attributes', function (Y) {
 
-	}
-};
+   Y.Reticle = Y.namespace('Y.Reticle');
 
-var attrs = {
-	a: {
-		displayType: 'inline'
-	},
+	/***
+		Encodes knowledge of HTML
+	*/
+	var helpers = {
+		mimeType: function() {
 
-	div: {
-		displayType: 'block'
-	},
+		}
+	};
 
-	ul: {
-		attributes: [],
-		validChildren: ['li']
-	},
+	/**
+		do we want to enumerate all valid children...
+		or simply say which tags MUST be inside of certain others? 
 
-	input: {
-		attributes: [
-			{
-				name: 'accept'
-				// literal or function
-				values: [ 'audio/*', 'video/*', 'image/*', helpers.mimeType ]
-			},
+		in many cases it's infeasible...
+		well, we can do a combo
 
-			{
-				name: 'align',
-				warn: 'deprecated in html4.01'
-				values: [ 'left', 'right', 'top', 'middle', 'bottom' ]
-			},
+			// only valid within a select
+			OPTION
+				validParents: select
 
-			{
-				name: 'formaction',
-				values: [ helpers.url ]
-			}
-		]
-	}
+			// cannot contain children
+			A
+				validChildren: []
+
+			// null means anything is good
+			DIV
+				validChildren: null
+	*/
 
 
-}
+	// map or ... fuck.
+	// this should probably just be a list
+
+	Y.Reticle.Tags = [
+		{
+			name: 'A',
+			displayType: 'inline',
+			validChildren: []
+		},
+
+		{
+			name: 'DIV',
+			displayType: 'block'
+		},
+
+		{
+			name: 'UL',
+			attributes: [],
+			validChildren: ['LI'],
+			displayType: 'block',
+		},
+
+		{
+			name: 'INPUT',
+			attributes: [
+				{
+					name: 'accept',
+					// literal or function
+					values: [ 'audio/*', 'video/*', 'image/*', helpers.mimeType ]
+				},
+
+				{
+					name: 'align',
+					warn: 'deprecated in html4.01',
+					values: [ 'left', 'right', 'top', 'middle', 'bottom' ]
+				},
+
+				{
+					name: 'formaction',
+					values: [ helpers.url ]
+				}
+			]
+		},
+
+		{
+			name: 'P',
+			displayType: 'block'
+		},
+
+		{
+			name: 'LI',
+			validParents: 'UL',
+			displayType: 'block',
+		},
+
+		{
+			name: 'SELECT',
+			validChildren: ['OPTION'],
+			displayType: 'block',
+		},
+
+		{
+			name: 'OPTION',
+			displayType: 'block',
+			validParents: ['SELECT']
+		},
+
+		{
+			name: 'SPAN',
+			displayType: 'inline'
+		}
+	];
+
+	Y.Reticle.TagMeta = {
+		findByName: function(name) {
+			return Y.Array.find(Y.Reticle.Tags, function(meta) {
+				return (meta.name === name);
+			});
+		}
+		// getAsList: function() {
+		// 	var list = [];
+		// 	Y.Object.each(Y.Reticle.Tags, function(value, key) {
+		// 		list.push();
+		// 	});
+		// }
+	};
+
+
+}, '1.0', {
+    requires: []
+});

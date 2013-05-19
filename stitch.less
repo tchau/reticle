@@ -136,6 +136,10 @@ body {
 	margin: 8px 0 5px 0;
 	background: rgba(162, 175, 198, 0.1);
 	border:1px solid @light-steel;
+
+	&.inline {
+		display: inline-block;
+	}
 }
 
 #reticle {
@@ -222,28 +226,53 @@ body {
 	left:0;
 
 	.meta {
-		.content {
-			position: relative;
-			top: -0.8em;
-			left: 1em;
-			color: #666;
-			display:inline-block;
-			font-size: 8px;
-			font-weight: normal;
-			
-			.bubble {
-				line-height: 1.4em;
-				margin-left: 5px;
-				background: white;
-				border: 1px solid @light-steel;
-				.border(5px);
-				padding: 0px 6px;
-				display: inline-block;
-			}
+		&.inline {
+			.content {
+				position: absolute;
+				top:0;
+				color: #666;
+				display:inline-block;
+				font-size: 8px;
+				font-weight: normal;
+				
+				.bubble {
+					background: #eee;
+					border-right: 1px solid @steel;
+					padding: 0px 2px;
+					display: inline-block;
+				}
 
-			.bubble.nodeName {
-				background:@steel;
-				color:white;
+				.bubble.node-name {
+					background: white;
+					color: #666;
+					line-height: 1.4em;
+				}
+			}
+		}
+		&.block {
+			.content {
+				position: relative;
+				top: -0.8em;
+				left: 1em;
+				color: #666;
+				display:inline-block;
+				font-size: 8px;
+				font-weight: normal;
+				
+				.bubble {
+					line-height: 1.4em;
+					margin-left: 5px;
+					background: white;
+					border: 1px solid @light-steel;
+					.border(5px);
+					padding: 0px 6px;
+					display: inline-block;
+				}
+
+				.bubble.node-name {
+					background:@steel;
+					color:white;
+				}
 			}
 		}
 	}

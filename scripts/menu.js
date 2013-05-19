@@ -6,8 +6,11 @@ YUI.add('menu', function (Y) {
       Y.Reticle.Menu.superclass.constructor.apply(this, arguments);
    };
 
-   var tags = 'a,div,span,img,h1,h2,h3,h4,table,tr';
-   tags = tags.split(',');
+   // var tags = 'a,div,span,img,h1,h2,h3,h4,table,tr';
+   // tags = tags.split(',');
+
+
+
 
    var PROMPT_MODES = {
       appendAfter: 'Add Element',
@@ -27,13 +30,18 @@ YUI.add('menu', function (Y) {
          // what action?
          var prompt = PROMPT_MODES[this.get('mode')];
 
+         // what tags?
+
+        
 			var menu = Y.Node.create('<div>' + prompt + '<input type="text"></input><div class="tagset"></div></div>');
    		menu.addClass('menu');
 
          var tagset = menu.one('.tagset');
 
    		// show contextual menu
-   		Y.Array.each(tags, function(tag) {
+         var tags = this._getFilteredTags();
+   		Y.Array.each(tags, function(tagMeta) {
+            var tag = tagMeta.name;
             var chars = tag.split('');
             chars = Y.Array.map(chars, function(c) {
                return '<span class="' + c + '">' + c + "</span>";
@@ -46,6 +54,45 @@ YUI.add('menu', function (Y) {
 
    		contentBox.append(menu);
    	},
+
+      _getFilteredTags: function() {
+         var root = this.get('rootNode');
+         var rootMeta = Y.Reticle.TagMeta.findByName(root.getAttribute('data-node-name'));
+
+         var filtered = [];
+
+         console.log("ROOT META: ",rootMeta);
+
+
+         // if this root has a strict list, filter only those in that list
+         if (Y.Lang.isValue(rootMeta.validChildren)) {
+            Y.Array.each(Y.Reticle.Tags, function(meta) {
+               if (rootMeta.validChildren.indexOf(meta.name) > -1) {
+                  filtered.push(meta);
+               }
+            });
+         }
+         else {
+            // go through all potential children
+            Y.Array.each(Y.Reticle.Tags, function(meta) {
+               // if it has a strict parent, see if it matches the root
+               if (Y.Lang.isValue(meta.validParents)) {
+                 if (meta.validParents.indexOf(rootMeta.name) > -1) {
+                   filtered.push(meta);
+                 }
+               }
+               else {
+                  // else good to go
+                  filtered.push(meta);
+               }
+            });
+         }
+
+         // if this root has no strict list
+
+
+         return filtered;
+      },
 
       bindUI: function() {
          var input = this.get('contentBox').one('input');
@@ -72,6 +119,7 @@ YUI.add('menu', function (Y) {
          input.on('valuechange', function() {
             tagset.all('.highlighted').removeClass('highlighted');
             var str = input.get('value');
+            str = str.toUpperCase();
             var chars = str.split('');
 
             var partialMatches = [];
@@ -119,10 +167,13 @@ YUI.add('menu', function (Y) {
          },
          mode: {
             value: null // appendAfter, append
+         },
+         rootNode: {
+            value: null
          }
    	}
    });
 
 }, '1.0', {
-    requires: ['node', 'array-extras', 'event', 'base', 'handlebars', 'widget']
+    requires: ['node', 'array-extras', 'event', 'base', 'handlebars', 'widget', 'reticle-attributes']
 });

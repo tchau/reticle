@@ -4,7 +4,7 @@
 
 var GLOB = {};
 
-YUI().use('node', 'event', 'menu-manager', 'parser', 'keyboard-model', 'reticle', function (Y) {
+YUI().use('node', 'event', 'menu-manager', 'parser', 'reticle-attributes', 'keyboard-model', 'reticle', function (Y) {
   console.log('initializing Reticle System...');
 
   var parser = new Y.Reticle.Parser();
@@ -44,13 +44,16 @@ YUI().use('node', 'event', 'menu-manager', 'parser', 'keyboard-model', 'reticle'
     	var metaContent = $('<div class="content"></div>');
     	var metaEl = $('<div></div>').addClass('meta').append(metaContent);
 
+      // displaying
+      metaEl.addClass(Y.Reticle.TagMeta.findByName(el.getAttribute('data-node-name')).displayType);
+
     	var classes = $(el).attr('data-classes');
     	var id = $(el).attr('data-id');
        
       var nodeEl = $('<div></div>')
         .addClass('bubble')
-        .addClass('nodeName')
-        .html($(el).attr('data-nodeName'));
+        .addClass('node-name')
+        .html($(el).attr('data-node-name'));
       metaContent.append(nodeEl);
 
     	if (Y.Lang.isValue(id)) {

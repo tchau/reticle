@@ -11,36 +11,45 @@ YUI.add('menu-manager', function (Y) {
    Y.extend(Y.Reticle.MenuManager, Y.Base, {
 
    	initializer: function() {
-         Y.Reticle.MenuManager.superclass.constructor.apply(this, arguments);
+      Y.Reticle.MenuManager.superclass.constructor.apply(this, arguments);
    		console.log('created new menumanager');
 
-         this.get('reticle').on('moved',function () {
-            this._hideMenu();
-         }, this);
+      this.get('reticle').on('moved',function () {
+        this._hideMenu();
+      }, this);
    	},
 
-      _hideMenu: function() {
-         var currMenu = this.get('currentMenu');
-         if (Y.Lang.isValue(currMenu)) {
-            currMenu.destroy();
-         }
+    _hideMenu: function() {
+      var currMenu = this.get('currentMenu');
+      if (Y.Lang.isValue(currMenu)) {
+         currMenu.destroy();
+      }
 
-         this.fire('blur');
-      },
+      this.fire('blur');
+    },
 
-      cancel: function() {
-         console.log('cancelling')
-         this._hideMenu();
-      },
+    cancel: function() {
+      console.log('cancelling')
+      this._hideMenu();
+    },
 
    	showAddMenu: function(mode) {
       var reticle = this.get('reticle');
       var parser = this.get('parser');
-
       this._hideMenu();
+      
+      // menu
+      var root;
+      if (mode == 'appendAfter') {
+        root = reticle.get('curr').get('parentNode');
+      }
+      else if (mode == 'append'){
+        root = reticle.get('curr');
+      }
 
       var menu = new Y.Reticle.Menu({
-        mode: mode
+        mode: mode,
+        rootNode: root
       });
 
    		// generaets newEl
