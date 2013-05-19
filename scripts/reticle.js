@@ -13,26 +13,26 @@ YUI.add('reticle', function (Y) {
    		console.log('created new Reticle');
    	},
 
-      renderUI: function() {
-         var contentBox = this.get('contentBox');
+    renderUI: function() {
+       var contentBox = this.get('contentBox');
 
-         var el = Y.Node.create('<div id="reticle">' +
-               '<div class="info-panel"></div><div class="menu-container"></div>' +
-            '</div>');
+       var el = Y.Node.create('<div id="reticle">' +
+             '<div class="info-panel"></div><div class="menu-container"></div>' +
+          '</div>');
 
-         contentBox.append(el);
-      },
+       contentBox.append(el);
+    },
 
-      syncUI: function() {
-         this._moveReticle();
-      },
+    syncUI: function() {
+       this._moveReticle();
+    },
 
    	scopeUp: function() {
    		var curr = this.get('curr');
    		// console.log('scoping up');
 
    		// limit at canvas top level
-   	   if (! (curr.get('parentNode').get('id') == '#canvas')) {
+   	   if (! (curr.get('parentNode').get('id') == 'canvas')) {
    	     	curr = curr.get('parentNode');
    	   }
 
@@ -81,41 +81,67 @@ YUI.add('reticle', function (Y) {
    		var curr = this.get('curr');
 
 			var reticle = Y.one('#reticle');
-         reticle.setXY(curr.getXY());
-         reticle.setStyles({
-            width: curr.get('offsetWith'),
-            height: curr.get('offsetHeight')
-         });
+
+      reticle.setXY(curr.getXY());
+      reticle.setStyles({
+        width: curr.get('offsetWidth') - 2,
+        height: curr.get('offsetHeight') -2
+      });
 
    //       var reticle = $('#reticle')
 			// reticle.offset(curr.offset());
 			// reticle.width(curr.innerWidth());
 			// reticle.height(curr.innerHeight());
 
-         this.fire('moved');
+      this.fire('moved');
    	},
 
-      showMenu: function(menu) {
+    showMenu: function(menu) {
 
-         //sigh
-         menu.render(Y.one('#reticle').one('.menu-container'));
+      //sigh
+      menu.render(Y.one('#reticle').one('.menu-container'));
 
-      },
+    },
+
+    removeCurr: function() {
+      var curr = this.get('curr');
+
+      var newCurr; 
+
+      if (Y.Lang.isValue(curr.next())) {
+        newCurr = curr.next();
+      }
+      else if (Y.Lang.isValue(curr.previous())) {
+        newCurr = curr.previous();
+      }
+      else {
+        newCurr = curr.get('parentNode');
+      }
+
+      curr.remove();
+      this.set('curr', newCurr);
+      this._moveReticle();
+      this.fire('structure-change');
+    },
+
+    append: function(newEl) {
+      var curr = this.get('curr');
+      curr.insert(newEl);
+      this.set('curr', newEl);
+      this._moveReticle();
+
+      // move somehwere else...into a structuremanager thing
+      this.fire('structure-change');
+    },
 
    	appendAfter: function(newEl) {
+      var curr = this.get('curr');
+      curr.insert(newEl, 'after');
+      this.set('curr', newEl);
+      this._moveReticle();
 
-
-         var curr = this.get('curr');
-         curr.insert(newEl, 'after');
-         this.set('curr', newEl);
-
-         // jquery version
-         /*
-   		var curr = this.get('curr');
-	      curr.after(newEl);
-	      this.set('curr', newEl);
-         */
-         this._moveReticle();
+      // move somehwere else...into a structuremanager thing
+      this.fire('structure-change');
    	}
 
   }, {

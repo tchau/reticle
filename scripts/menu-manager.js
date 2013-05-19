@@ -33,30 +33,36 @@ YUI.add('menu-manager', function (Y) {
          this._hideMenu();
       },
 
-   	showAddMenu: function() {
-         var reticle = this.get('reticle');
-         var parser = this.get('parser');
+   	showAddMenu: function(mode) {
+      var reticle = this.get('reticle');
+      var parser = this.get('parser');
 
-         this._hideMenu();
+      this._hideMenu();
 
-         var menu = new Y.Reticle.Menu();
+      var menu = new Y.Reticle.Menu({
+        mode: mode
+      });
 
    		// generaets newEl
    		menu.on('create-requested', function(e) {
-            console.log("making a new one", e.elementName);
-            var el = e.elementName;
-            var node = Y.Node.create('<' + el + '></' + el + '>');
+        console.log("making a new one", e.elementName);
+        var el = e.elementName;
+        var node = Y.Node.create('<' + el + '></' + el + '>');
 
-   			reticle.appendAfter(parser.parse(node));
+        if (mode == 'appendAfter') {
+          reticle.appendAfter(parser.parse(node));
+        }
+        else if (mode == 'append') {
+          reticle.append(parser.parse(node));
+        }
 
-            this._hideMenu();
+        this._hideMenu();
    		}, this);
 
-         reticle.showMenu(menu);
-         menu.focus();
-
-         this.set('currentMenu', menu);
-         this.fire('focused');
+      reticle.showMenu(menu);
+      menu.focus();
+      this.set('currentMenu', menu);
+      this.fire('focused');
    	}
 
    }, {

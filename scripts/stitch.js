@@ -29,40 +29,48 @@ YUI().use('node', 'event', 'menu-manager', 'parser', 'keyboard-model', 'reticle'
 
   // a controller
   var keyboard = new Y.Reticle.KeyboardModel({
-  	reticle: reticle,
-  	menuManager: menuMan
+    reticle: reticle,
+    menuManager: menuMan
   });
+
 
   // command interpreter takes action events and turns them into
   // model changes
 
-  $('.block-el').each(function(i, el) {
-  	var metaContent = $('<div class="content"></div>');
-  	var metaEl = $('<div></div>').addClass('meta').append(metaContent);
+  function displayMeta() {
+    $('#info-layer').empty()
 
-  	var classes = $(el).attr('data-classes');
-  	var id = $(el).attr('data-id');
-     
-    var nodeEl = $('<div></div>')
-      .addClass('bubble')
-      .addClass('nodeName')
-      .html($(el).attr('data-nodeName'));
-    metaContent.append(nodeEl);
+    $('.block-el').each(function(i, el) {
+    	var metaContent = $('<div class="content"></div>');
+    	var metaEl = $('<div></div>').addClass('meta').append(metaContent);
 
-  	if (Y.Lang.isValue(id)) {
-	  	metaContent.append($('<div></div>')
+    	var classes = $(el).attr('data-classes');
+    	var id = $(el).attr('data-id');
+       
+      var nodeEl = $('<div></div>')
         .addClass('bubble')
-        .html('#' + id));
-  	}
-  	if (Y.Lang.isValue(classes)) {
-      metaContent.append($('<div></div>')
-        .addClass('bubble')
-        .html(classes));
-  	}
+        .addClass('nodeName')
+        .html($(el).attr('data-nodeName'));
+      metaContent.append(nodeEl);
 
-  	$('#info-layer').append(metaEl);
-  	metaEl.offset($(el).offset());
-  });
+    	if (Y.Lang.isValue(id)) {
+  	  	metaContent.append($('<div></div>')
+          .addClass('bubble')
+          .html('#' + id));
+    	}
+    	if (Y.Lang.isValue(classes)) {
+        metaContent.append($('<div></div>')
+          .addClass('bubble')
+          .html(classes));
+    	}
+
+    	$('#info-layer').append(metaEl);
+    	metaEl.offset($(el).offset());
+    });
+  }
+
+  displayMeta();
+  reticle.on('structure-change', displayMeta);
 
 
 });

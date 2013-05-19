@@ -9,6 +9,11 @@ YUI.add('menu', function (Y) {
    var tags = 'a,div,span,img,h1,h2,h3,h4,table,tr';
    tags = tags.split(',');
 
+   var PROMPT_MODES = {
+      appendAfter: 'Add Element',
+      append: 'Insert Element'
+   };
+
    Y.extend(Y.Reticle.Menu, Y.Widget, {
 
    	initializer: function() {
@@ -19,7 +24,10 @@ YUI.add('menu', function (Y) {
    	renderUI: function() {
    		var contentBox = this.get('contentBox');
 
-			var menu = Y.Node.create('<div>Add element<input type="text"></input><div class="tagset"></div></div>');
+         // what action?
+         var prompt = PROMPT_MODES[this.get('mode')];
+
+			var menu = Y.Node.create('<div>' + prompt + '<input type="text"></input><div class="tagset"></div></div>');
    		menu.addClass('menu');
 
          var tagset = menu.one('.tagset');
@@ -30,7 +38,6 @@ YUI.add('menu', function (Y) {
             chars = Y.Array.map(chars, function(c) {
                return '<span class="' + c + '">' + c + "</span>";
             });
-            console.log(chars);
 	   		tagset.append(
                Y.Node.create('<div class="tagname" data-name="' + tag + '">' +
                   chars.join('') +
@@ -109,6 +116,9 @@ YUI.add('menu', function (Y) {
    	ATTRS: {
          bestMatch: {
             value: null
+         },
+         mode: {
+            value: null // appendAfter, append
          }
    	}
    });

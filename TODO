@@ -1,0 +1,31 @@
+---------------------------------------
+TODO
+---------------------------------------
+
+- insert inside
+	- append after, inside [ok]
+	- context-sensitive (what tags make sense inside this one)
+
+- writing basic text nodes
+
+- edit attributes
+		shows all possible attributes for this elemenet, what they do
+		- value helpers (url, img, number, on/off, form_id) 
+		  that show you the valid values
+		- data helpers: if you want to insert substitutions like {{item.id}}
+
+- info panel explaining all the values (attrs and tags and such)
+
+
+
+- deletes
+- copy / pasta
+- code generate (export)
+- live preview
+
+
+---------------------------------------
+DONE
+---------------------------------------
+
+- appending new node after

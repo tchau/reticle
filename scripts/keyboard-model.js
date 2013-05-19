@@ -100,12 +100,25 @@ YUI.add('keyboard-model', function (Y) {
         menuMan.cancel();
       }, 'esc', this);
 
-      // A
-      Y.one(document).on('key', function(e) {
-        menuMan.showAddMenu();
+      // DEL
+      // Y.one(document).on('key', wrap(reticle.removeCurr, reticle), '46', reticle);
+      Y.one(document).on('key', wrap(function() {
+        reticle.removeCurr();
+      }), 'del', this);
+
+      // I for insert
+      Y.one(document).on('key', wrap(function(e) {
+        menuMan.showAddMenu('append');
         e.halt();
         e.preventDefault();
-      }, '65+shift', this);
+      }, this), 'i', this);
+
+      // A
+      Y.one(document).on('key', wrap(function(e) {
+        menuMan.showAddMenu('appendAfter');
+        e.halt()
+        e.preventDefault();
+      }, this), 'a', this);
 
 	    // J or DOWN
 	    Y.one(document).on('key', wrap(reticle.scopeDown, reticle), 'arrowdown+shift,74+shift', reticle);
