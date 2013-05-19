@@ -1,0 +1,114 @@
+<!doctype html>
+
+<html ng-app="components">
+
+<head>
+	<script src="jquery-1.9.1.min.js"></script>
+  <script src="yui-min.js"></script>
+
+  <script src="scripts/menu.js"></script>
+  <script src="scripts/menu-manager.js"></script>
+  <script src="scripts/parser.js"></script>
+  <script src="scripts/keyboard-model.js"></script>
+  <script src="scripts/reticle.js"></script>
+
+	<script src="scripts/stitch.js"></script>
+
+	<!--<link rel="stylesheet" href="bootstrap/css/bootstrap.css">-->
+	<link rel="stylesheet" href="reset.css">
+	<link rel="stylesheet/less" href="stitch.less">
+	<script type="text/javascript">
+    less = {
+        env: "development", // or "production"
+        async: false,       // load imports async
+        fileAsync: false,   // load imports async when in a page under 
+                            // a file protocol
+        poll: 1000,         // when in watch mode, time in ms between polls
+        functions: {},      // user functions, keyed by name
+        dumpLineNumbers: "comments", // or "mediaQuery" or "all"
+        relativeUrls: false,// whether to adjust url's to be relative
+                            // if false, url's are already relative to the
+                            // entry less file
+        rootpath: ":/a.com/"// a path to add on to the start of every url 
+                            //resource
+    };
+	</script>
+	<script src="less-1.3.3.min.js"></script>
+
+  <script>
+    var Y = YUI().use('base', 'node', 'event', 'menu-manager', function (Y) {
+
+      // The Node and Event modules are loaded and ready to use.
+      // Your code goes here!
+      console.log('started...');
+
+      //new Y.Reticle.MenuManager();
+
+      
+    });
+  </script>
+
+</head>
+
+<body>
+  <div id="top-tray">
+    import - export
+  </div>
+  <div id="data">
+    <div id="main-intro" class="intro">
+      <p>
+        hey there
+      </p>
+      <p class="yes">
+      </p>
+    </div>
+    <div id="sidebar" class="left sidebar">
+      <div class="picture"></div>
+    </div>
+  </div>
+
+  <!-- CANVAS -->
+  <div id="canvas">
+
+    <!--
+    <div class="start block-el" data-classes=".awesomeCls" data-id="canvas">
+      <div class="block-el"></div>
+    </div>
+    <div class="block-el">
+      <div class="block-el"></div>
+    </div>
+    <div class="block-el"></div>
+    -->
+  </div>
+
+
+  <div id="info-layer"></div>
+
+  <!-- depending on context, you can add certain attributes to the elemnt -->
+  <div id="edit-element-menu">
+    INPUT
+    readonly  (undefined: greyed out)
+    maxlength (undefined: greyed out)
+
+  </div>
+  <!-- depending on context, you can add certain elements-->
+  <div id="add-element-menu">
+    div
+    span
+    a
+    ul
+  </div>
+
+  <div id="tray">Add - Edit - etc. 
+    <div id="shift-status">Shift</div>
+  </div>
+
+  <!--training wheels show new users how to move -->
+  <div id="training-wheels">
+    move:     [j]
+           [h][k][l]
+    ^^:    shift+j
+    vv:    shift+k
+  </div>
+</body>
+</html>
