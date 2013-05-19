@@ -2,6 +2,8 @@
 
 */
 
+var GLOB = {};
+
 YUI().use('node', 'event', 'menu-manager', 'parser', 'keyboard-model', 'reticle', function (Y) {
   console.log('initializing Reticle System...');
 
@@ -13,15 +15,17 @@ YUI().use('node', 'event', 'menu-manager', 'parser', 'keyboard-model', 'reticle'
   // for manipulation -- sort of like the BLOCK CURSOR
   // in a text editor
   var reticle = new Y.Reticle.Reticle({
-  	curr:     $('.block-el').first()
+  	curr:     Y.one('.block-el')
   });
   reticle.render();
+  GLOB.reticle = reticle;
 
   // display and hides menus, positions thems
   var menuMan = new Y.Reticle.MenuManager({
     reticle: reticle,
     parser: parser
   });
+  GLOB.menuMan = menuMan;
 
   // a controller
   var keyboard = new Y.Reticle.KeyboardModel({

@@ -32,8 +32,8 @@ YUI.add('reticle', function (Y) {
    		// console.log('scoping up');
 
    		// limit at canvas top level
-   	   if (curr.parent('#canvas').length == 0) {
-   	     	curr = curr.parent().first();
+   	   if (! (curr.get('parentNode').get('id') == '#canvas')) {
+   	     	curr = curr.get('parentNode');
    	   }
 
    	   this.set('curr', curr);
@@ -43,8 +43,8 @@ YUI.add('reticle', function (Y) {
    	scopeDown: function() {
    		console.log('scoping down');
    		var curr = this.get('curr');
- 			if (curr.children().length > 0) {
-	 			curr = curr.children().first();
+ 			if (curr.get('children').size() > 0) {
+	 			curr = curr.get('children').item(0);
  			}
    	   this.set('curr', curr);
    	   this._moveReticle();
@@ -53,11 +53,11 @@ YUI.add('reticle', function (Y) {
    	moveUp: function() {
    		console.log('moving up')
    		var curr = this.get('curr');
-   		if (curr.prev().length == 0) {
-   	     	curr = curr.siblings().last();
+   		if (! Y.Lang.isValue(curr.previous())) {
+   	     	curr = curr.siblings('.block-el:last-child').item(0);
    	   }
    	   else {
-   		   curr = curr.prev();
+   		   curr = curr.previous();
    	   }
    	   this.set('curr', curr);
    	   this._moveReticle();
@@ -66,9 +66,9 @@ YUI.add('reticle', function (Y) {
    	moveDown: function() {
    		console.log('moving down')
    		var curr = this.get('curr');
-         console.log(curr)
-   		if (curr.next().length == 0) {
-   			curr = curr.siblings().first();
+
+   		if (! Y.Lang.isValue(curr.next())) {
+   			curr = curr.siblings('.block-el:first-child').item(0);
    		}
    		else {
    			curr = curr.next();
@@ -80,11 +80,17 @@ YUI.add('reticle', function (Y) {
    	_moveReticle: function() {
    		var curr = this.get('curr');
 
-			// var reticle = Y.one('#reticle');
-         var reticle = $('#reticle');
-			reticle.offset(curr.offset());
-			reticle.width(curr.innerWidth());
-			reticle.height(curr.innerHeight());
+			var reticle = Y.one('#reticle');
+         reticle.setXY(curr.getXY());
+         reticle.setStyles({
+            width: curr.get('offsetWith'),
+            height: curr.get('offsetHeight')
+         });
+
+   //       var reticle = $('#reticle')
+			// reticle.offset(curr.offset());
+			// reticle.width(curr.innerWidth());
+			// reticle.height(curr.innerHeight());
 
          this.fire('moved');
    	},
@@ -97,9 +103,18 @@ YUI.add('reticle', function (Y) {
       },
 
    	appendAfter: function(newEl) {
+
+
+         var curr = this.get('curr');
+         curr.insert(newEl, 'after');
+         this.set('curr', newEl);
+
+         // jquery version
+         /*
    		var curr = this.get('curr');
 	      curr.after(newEl);
 	      this.set('curr', newEl);
+         */
          this._moveReticle();
    	}
 
@@ -107,7 +122,10 @@ YUI.add('reticle', function (Y) {
    	NAME: 'Reticle',
    	ATTRS: {
    		curr: {
-   			value: null
+   			value: null,
+            validator: function(v) {
+               return Y.Lang.isValue(v);
+            }
    		},
 
    		keyboard: {
