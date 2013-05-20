@@ -11,12 +11,12 @@ YUI.add('keyboard-model', function (Y) {
   ///
   var SHIFT_STATE = false;
   var SHIFT = [16];
-  
+
   var J = 74; var K = 75;
   var UP = [38, K]; var LEFT = [37]; var DOWN = [40, J]; var RIGHT = [39];
   var DIRECTIONS = [UP, LEFT, DOWN, RIGHT];
   var DIRECTIONALS = UP.concat(LEFT).concat(DOWN).concat(RIGHT);
-  
+
   var DEL = [46];
   var A = 65;
   var COMMANDS = [A, DEL];
@@ -34,17 +34,17 @@ YUI.add('keyboard-model', function (Y) {
   ///
   Y.extend(Y.Reticle.KeyboardModel, Y.Base, {
 
-   	initializer: function(config) {
+    initializer: function(config) {
       Y.Reticle.KeyboardModel.superclass.constructor.apply(this, arguments);
 
-	    this.listen();
-	    this.bindIndicators();
+      this.listen();
+      this.bindIndicators();
       this.bindMenuMan();
 
-	    // TODO need to 
-	    // maintain a stack of foci 
-	    // when a Menu appears, that is the new Focus
-	    // key events are now manipulating the new focus
+      // TODO need to 
+      // maintain a stack of foci 
+      // when a Menu appears, that is the new Focus
+      // key events are now manipulating the new focus
     },
 
     bindMenuMan: function() {
@@ -58,34 +58,34 @@ YUI.add('keyboard-model', function (Y) {
 
       this.on('modeChange', function() {
         // console.log('keyboardmode change')
-      })
+      });
     },
 
     bindIndicators: function() {
 			$(document).keyup(function(e) {
 
-	     	var key = e.keyCode;     
+        var key = e.keyCode;
 
-	     	// modifiers
-	     	if (SHIFT.indexOf(key) >= 0) {
-	     		SHIFT_STATE = false;
-	     	}     
-     	  $('#shift-status').removeClass('on');
-	    });
+        // modifiers
+        if (SHIFT.indexOf(key) >= 0) {
+          SHIFT_STATE = false;
+        }
+
+        $('#shift-status').removeClass('on');
+      });
     },
 
     listen: function() {
 
+      Y.one(document).on('keydown', function(e) {
+        console.log(e.keyCode);
+      });
 
-    	Y.one(document).on('keydown', function(e) {
-    		console.log(e.keyCode);
-    	});
+      var reticle = this.get('reticle');
+      var menuMan = this.get('menuManager');
 
-	    var reticle = this.get('reticle');
-	    var menuMan = this.get('menuManager');
-
-	    Y.one(document).on('key', this._showShift, 'shift', this);
-	    Y.one(document).on('key', this._hideShift, 'keyup:shift', this);
+      Y.one(document).on('key', this._showShift, 'shift', this);
+      Y.one(document).on('key', this._hideShift, 'keyup:shift', this);
 
       var wrap = Y.bind(function(fun, scope) {
         return Y.bind(function(e) {
@@ -116,48 +116,45 @@ YUI.add('keyboard-model', function (Y) {
       // A
       Y.one(document).on('key', wrap(function(e) {
         menuMan.showAddMenu('appendAfter');
-        e.halt()
+        e.halt();
         e.preventDefault();
       }, this), 'a', this);
 
-	    // J or DOWN
-	    Y.one(document).on('key', wrap(reticle.scopeDown, reticle), 'arrowdown+shift,74+shift', reticle);
-	    Y.one(document).on('key', wrap(function(e) {
-	    	if (!e.shiftKey) {
-		    	reticle.moveDown();
-	    	}
-	    }, this), 'arrowdown,74', this);
+      // J or DOWN
+      Y.one(document).on('key', wrap(reticle.scopeDown, reticle), 'arrowdown+shift,74+shift', reticle);
+      Y.one(document).on('key', wrap(function(e) {
+        if (!e.shiftKey) {
+          reticle.moveDown();
+        }
+      }, this), 'arrowdown,74', this);
 
-	    // K or UP`
-	    Y.one(document).on('key', wrap(reticle.scopeUp, reticle), 'arrowup+shift,75+shift', reticle);
-	    Y.one(document).on('key', wrap(function(e) {
-	    	if (!e.shiftKey) {
-	    		reticle.moveUp();
-	    	}
-    	}, this), 'arrowup,75', this);
+      // K or UP`
+      Y.one(document).on('key', wrap(reticle.scopeUp, reticle), 'arrowup+shift,75+shift', reticle);
+      Y.one(document).on('key', wrap(function(e) {
+        if (!e.shiftKey) {
+          reticle.moveUp();
+        }
+      }, this), 'arrowup,75', this);
 
     },
 
     _showShift: function() {
-     	$('#shift-status').addClass('on');
-    },
-    _showShift: function() {
-     	$('#shift-status').removeClass('on');
+      $('#shift-status').addClass('on');
     }
 
   }, {
-   	NAME: 'KeyboardModel',
-   	ATTRS: {
-   		reticle: {
-   			value: null
-   		},
-   		menuManager: {
-   			value: null
-   		},
+    NAME: 'KeyboardModel',
+    ATTRS: {
+      reticle: {
+        value: null
+      },
+      menuManager: {
+        value: null
+      },
       mode: {
         value: "NAV"
       }
-   	}
+    }
   });
 
 }, '1.0', {

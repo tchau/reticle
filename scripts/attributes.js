@@ -51,7 +51,7 @@ YUI.add('reticle-attributes', function (Y) {
 			name: 'UL',
 			attributes: [],
 			validChildren: ['LI'],
-			displayType: 'block',
+			displayType: 'block'
 		},
 
 		{
@@ -69,10 +69,9 @@ YUI.add('reticle-attributes', function (Y) {
 					values: [ 'left', 'right', 'top', 'middle', 'bottom' ]
 				},
 
-				{
-					name: 'formaction',
-					values: [ helpers.url ]
-				}
+				{ name: 'formaction', values: [ helpers.url ] },
+
+				{ name: 'type', values: ['button', 'checkbox', 'radio'] }
 			]
 		},
 
@@ -84,13 +83,13 @@ YUI.add('reticle-attributes', function (Y) {
 		{
 			name: 'LI',
 			validParents: 'UL',
-			displayType: 'block',
+			displayType: 'block'
 		},
 
 		{
 			name: 'SELECT',
 			validChildren: ['OPTION'],
-			displayType: 'block',
+			displayType: 'block'
 		},
 
 		{

@@ -1,31 +1,52 @@
 ============================================================
-===        TODO
+TODO
 ============================================================
 
-- insert inside
-	- append after, inside [ok]
-	- context-sensitive (what tags make sense inside this one)
+PRIMARY EDITING
 
-- writing basic text nodes
+- hit enter: 
+  write basic text nodes (maybe enter should just be the scope-in function...?)
+  ENTER creates a new text node inside this element... and starts you editing it
+  ESC exits edit mode for that node, puts you back into NAV
+
+  how about mixing text nodes with spans and other inlines?
 
 - edit attributes
-		shows all possible attributes for this elemenet, what they do
+		- shows all possible attributes for this elemenet, what they do
 		- value helpers (url, img, number, on/off, form_id) 
 		  that show you the valid values
-		- data helpers: if you want to insert substitutions like {{item.id}}
+		- data helpers: if you want to insert substitutions like {{item.id}} ---- perhaps this should be done almost anywhere...?
+- append menu
+  info panel explaining all the values (attrs and tags and such)
+  always create objects with interesting defaults
 
-- info panel explaining all the values (attrs and tags and such)
 
+HELP
+- controls help at bottom of sceren
+- live preview on right
+
+
+TEMPLATING
+- templating (JSON-T)
+- data view (navigate the JSON structure)
+
+
+EXPORT
+- code generate (export)
+
+
+CSS
+- CSS context; given the classes here which rules are applied with the stylesheets we have?
 - CSS Search: quickly pull up style editor for this node (shows rules that apply - pick one to edit -- boom, edit right there. no context switch.)
 
+ADVANCED MANIPULATION
 - copy / pasta
-- code generate (export)
-- live preview
+- undo / redo
 
 
 
 ============================================================
-==       VISUALS
+VISUALS
 ============================================================
 
 - menu "blips" in on the right, and blips away when you commit or cancel
@@ -33,11 +54,12 @@
 
 
 
-
-
 ============================================================
-==        DONE
+DONE
 ============================================================
 
 - appending new node after
 - deletes
+- insert inside
+  - append after, inside [ok]
+  - context-sensitive (what tags make sense inside this one)

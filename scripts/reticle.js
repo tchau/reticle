@@ -8,10 +8,10 @@ YUI.add('reticle', function (Y) {
 
    Y.extend(Y.Reticle.Reticle, Y.Widget, {
 
-   	initializer: function(config) {
-         Y.Reticle.Reticle.superclass.constructor.apply(this, arguments);
-   		console.log('created new Reticle');
-   	},
+    initializer: function(config) {
+      Y.Reticle.Reticle.superclass.constructor.apply(this, arguments);
+      console.log('created new Reticle');
+    },
 
     renderUI: function() {
        var contentBox = this.get('contentBox');
@@ -27,59 +27,56 @@ YUI.add('reticle', function (Y) {
        this._moveReticle();
     },
 
-   	scopeUp: function() {
-   		var curr = this.get('curr');
-   		// console.log('scoping up');
+    scopeUp: function() {
+      var curr = this.get('curr');
+      // console.log('scoping up');
 
-   		// limit at canvas top level
-   	   if (! (curr.get('parentNode').get('id') == 'canvas')) {
-   	     	curr = curr.get('parentNode');
-   	   }
+      // limit at canvas top level
+      if (curr.get('parentNode').get('id') !== 'canvas') {
+        curr = curr.get('parentNode');
+      }
 
-   	   this.set('curr', curr);
-   	   this._moveReticle();
-   	},
-   	
-   	scopeDown: function() {
-   		console.log('scoping down');
-   		var curr = this.get('curr');
- 			if (curr.get('children').size() > 0) {
-	 			curr = curr.get('children').item(0);
- 			}
-   	   this.set('curr', curr);
-   	   this._moveReticle();
-   	},
+      this.set('curr', curr);
+      this._moveReticle();
+    },
 
-   	moveUp: function() {
-   		console.log('moving up')
-   		var curr = this.get('curr');
-   		if (! Y.Lang.isValue(curr.previous())) {
-   	     	curr = curr.siblings('.block-el:last-child').item(0);
-   	   }
-   	   else {
-   		   curr = curr.previous();
-   	   }
-   	   this.set('curr', curr);
-   	   this._moveReticle();
-   	},
+    scopeDown: function() {
+      console.log('scoping down');
+      var curr = this.get('curr');
+      if (curr.get('children').size() > 0) {
+        curr = curr.get('children').item(0);
+      }
+      this.set('curr', curr);
+      this._moveReticle();
+    },
 
-   	moveDown: function() {
-   		console.log('moving down')
-   		var curr = this.get('curr');
+    moveUp: function() {
+      console.log('moving up');
+      var curr = this.get('curr');
+      if (!Y.Lang.isValue(curr.previous())) {
+        curr = curr.siblings('.block-el:last-child').item(0);
+      } else {
+        curr = curr.previous();
+      }
+      this.set('curr', curr);
+      this._moveReticle();
+    },
 
-   		if (! Y.Lang.isValue(curr.next())) {
-   			curr = curr.siblings('.block-el:first-child').item(0);
-   		}
-   		else {
-   			curr = curr.next();
-   		}
-   	   this.set('curr', curr);
-   	   this._moveReticle();
-   	},
+    moveDown: function() {
+      console.log('moving down');
+      var curr = this.get('curr');
 
-   	_moveReticle: function() {
-   		var curr = this.get('curr');
+      if (!Y.Lang.isValue(curr.next())) {
+        curr = curr.siblings('.block-el:first-child').item(0);
+      } else {
+        curr = curr.next();
+      }
+      this.set('curr', curr);
+      this._moveReticle();
+    },
 
+    _moveReticle: function() {
+      var curr = this.get('curr');
 			var reticle = Y.one('#reticle');
 
       reticle.setXY(curr.getXY());
