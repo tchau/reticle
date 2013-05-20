@@ -95,8 +95,15 @@ YUI.add('reticle', function (Y) {
 
     showMenu: function(menu) {
 
-      //sigh
-      menu.render(Y.one('#reticle').one('.menu-container'));
+      // sigh
+      // menu.render(Y.one('#reticle').one('.menu-container'));
+      var reticle = Y.one('#reticle');
+
+      menu.render('#menu-layer');
+      var reticleXY = reticle.getXY();
+      console.log("XY ", reticleXY);
+      menu.setXY([ reticleXY[0],
+       reticleXY[1] + reticle.get('offsetHeight') ]);
 
     },
 
@@ -142,6 +149,11 @@ YUI.add('reticle', function (Y) {
       // move somehwere else...into a structuremanager thing
       this.fire('structure-change');
     },
+
+    refresh: function() {
+      this._moveReticle();
+      this.fire('structure-change');
+    }
 
   }, {
     NAME: 'Reticle',

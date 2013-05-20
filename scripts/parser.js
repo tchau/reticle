@@ -50,9 +50,12 @@ YUI.add('parser', function (Y) {
 
       // RECURSE
       // TODO this does not account for text nodes
-      el.get('children').each(function(child) {
+      el.get('childNodes').each(function(child) {
         if (Y.Lang.isValue(child)) {
-          blockEl.append(this.parse(child));
+
+         if (! (child.get('nodeType') == 3 && child.get('text').trim() == '')) {
+            blockEl.append(this.parse(child));
+         }
         }
       }, this);
 

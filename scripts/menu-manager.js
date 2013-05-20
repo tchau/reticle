@@ -13,10 +13,6 @@ YUI.add('menu-manager', function (Y) {
     initializer: function() {
       Y.Reticle.MenuManager.superclass.constructor.apply(this, arguments);
       console.log('created new menumanager');
-
-      this.get('reticle').on('moved', function() {
-        this._hideMenu();
-      }, this);
     },
 
     _hideMenu: function() {
@@ -24,6 +20,7 @@ YUI.add('menu-manager', function (Y) {
       var reticle = this.get('reticle');
       if (Y.Lang.isValue(currMenu)) {
         currMenu.destroy();
+        this.set('currentMenu', null);
       }
 
       this.fire('blur');
@@ -83,10 +80,13 @@ YUI.add('menu-manager', function (Y) {
       // delete the node
       menu.on('create-requested', function(e) {
         var text = menu.getText();
+        this._hideMenu();
         textNode.empty();
         textNode.set('text', text);
-        this._hideMenu();
+        reticle.refresh();
       }, this);
+
+      reticle.refresh();
     },
 
     showAddElementMenu: function(mode) {
@@ -108,13 +108,14 @@ YUI.add('menu-manager', function (Y) {
         var el = e.elementName;
         var node = Y.Node.create('<' + el + '></' + el + '>');
 
+        this._hideMenu();
+
         if (mode == 'append') {
           reticle.appendAfter(parser.parse(node));
         } else if (mode == 'insert') {
           reticle.insert(parser.parse(node));
         }
 
-        this._hideMenu();
       }, this);
 
       reticle.showMenu(menu);

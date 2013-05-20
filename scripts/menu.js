@@ -191,6 +191,10 @@ YUI.add('menu', function (Y) {
 
     focus: function() {
       this.get('contentBox').one('input').focus();
+    },
+
+    setXY: function(xy) {
+      this.get('boundingBox').setXY(xy);
     }
 
   }, {
