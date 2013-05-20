@@ -24,13 +24,7 @@ YUI.add('menu-manager', function (Y) {
       var reticle = this.get('reticle');
       if (Y.Lang.isValue(currMenu)) {
 
-      //   // if it's a text node... and it was cancelled...
-      //   if (currMenu instanceof Y.Reticle.InlineTextMenu && currMenu.getText().trim() === "") {
-      //     reticle.removeCurr();
-      //   }
-      //   else {
-      //     currMenu.destroy();
-      //   }
+
         currMenu.destroy();
       }
 
@@ -38,6 +32,14 @@ YUI.add('menu-manager', function (Y) {
     },
 
     cancel: function() {
+      var currMenu = this.get('currentMenu');
+      var reticle = this.get('reticle');
+
+      // empty text nodes: kill them
+      if (currMenu instanceof Y.Reticle.InlineTextMenu && currMenu.getText().trim() === "") {
+        reticle.removeCurr();
+      }
+
       this._hideMenu();
     },
 
