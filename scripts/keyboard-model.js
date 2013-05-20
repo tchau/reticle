@@ -100,8 +100,18 @@ YUI.add('keyboard-model', function (Y) {
         menuMan.cancel();
       }, 'esc', this);
 
+      // ENTER
+      Y.one(document).on('key', wrap(function() {
+        console.log('entering... ');
+
+        // edit 
+        // need to be able to edit/add text quickly from
+        // ANY point... what if i have a mixed node already..
+
+
+      }), 'enter', this);
+
       // DEL
-      // Y.one(document).on('key', wrap(reticle.removeCurr, reticle), '46', reticle);
       Y.one(document).on('key', wrap(function() {
         reticle.removeCurr();
       }), 'del', this);

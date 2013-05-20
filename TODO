@@ -4,19 +4,19 @@ TODO
 
 PRIMARY EDITING
 
-- hit enter: 
+- INLINE EDIT
   write basic text nodes (maybe enter should just be the scope-in function...?)
   ENTER creates a new text node inside this element... and starts you editing it
   ESC exits edit mode for that node, puts you back into NAV
 
   how about mixing text nodes with spans and other inlines?
 
-- edit attributes
+- EDIT ATTRS
 		- shows all possible attributes for this elemenet, what they do
 		- value helpers (url, img, number, on/off, form_id) 
 		  that show you the valid values
 		- data helpers: if you want to insert substitutions like {{item.id}} ---- perhaps this should be done almost anywhere...?
-- append menu
+- APPEND MENU
   info panel explaining all the values (attrs and tags and such)
   always create objects with interesting defaults
 
@@ -24,6 +24,10 @@ PRIMARY EDITING
 HELP
 - controls help at bottom of sceren
 - live preview on right
+
+MENU MANAGER
+- make it absolute positioned like a dialog
+- blip it in and out
 
 
 TEMPLATING

@@ -155,8 +155,8 @@ body {
 		background: #222;
 		color: #eee;
 		padding: 0px 5px;
-		font-family: monospace;
 		font-size: 10px;
+		.border(4px);
 	}
 }
 
@@ -191,6 +191,10 @@ body {
 
 .menu {
 	width: 300px;
+	position:relative;
+	padding-bottom: 50px;
+	margin: 10px;
+
 	.tagname {
 		border: 1px solid transparent;
 		font-size: 10px;
@@ -200,18 +204,26 @@ body {
 		margin: 2px;
 		color: #666;
 		.transition(border-color 0.1s);
+		font-family: monospace;
 
 		span {
 			.transition(color 0.1s);
 		}
 		span.highlighted {
 			color: #eee;
-
 		}
 	}
 
 	.tagname.best {
 		border: 1px solid white;
+	}
+
+	.foot {
+		position:absolute;
+		bottom:0;
+		width: 100%;
+		text-align: right;
+		color: #999;
 	}
 
 	input {
