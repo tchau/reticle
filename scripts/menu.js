@@ -2,21 +2,62 @@ YUI.add('menu', function (Y) {
 
    Y.Reticle = Y.namespace('Y.Reticle');
 
-   Y.Reticle.Menu = function() {
-      Y.Reticle.Menu.superclass.constructor.apply(this, arguments);
-   };
-
    // var tags = 'a,div,span,img,h1,h2,h3,h4,table,tr';
    // tags = tags.split(',');
 
-
-
-
   var PROMPT_MODES = {
-    appendAfter: 'Add Element',
-    append: 'Insert Element'
+    append: 'Add Element',
+    insert: 'Insert Element'
   };
 
+  Y.Reticle.InlineTextMenu = function() {
+    Y.Reticle.InlineTextMenu.superclass.constructor.apply(this, arguments);
+  };
+
+  Y.extend(Y.Reticle.InlineTextMenu, Y.Widget, {
+
+    renderUI: function() {
+      var contentBox = this.get('contentBox');
+      console.log('rendering.....');
+      contentBox.append(Y.Node.create('<input />'));
+    },
+
+    bindUI: function() {
+      var contentBox = this.get('contentBox');
+      contentBox.one('input').on('key', function() {
+        this.commit();
+      }, 'enter', this);
+    },
+
+    focus: function() {
+      var contentBox = this.get('contentBox');
+      contentBox.one('input').focus();
+    },
+
+    getText: function() {
+      var contentBox = this.get('contentBox');
+      return contentBox.one('input').get('value');
+    },
+
+    commit: function() {
+      this.fire('create-requested', {
+        elementName: this.get('bestMatch')
+      });
+    }
+
+  }, {
+    NAME: 'InlineTextMenu',
+    ATTRS: {
+      mode: {
+        value: null // insert, append
+      }
+    }
+  });
+
+
+  Y.Reticle.Menu = function() {
+    Y.Reticle.Menu.superclass.constructor.apply(this, arguments);
+  };
   Y.extend(Y.Reticle.Menu, Y.Widget, {
 
     initializer: function() {
@@ -67,7 +108,6 @@ YUI.add('menu', function (Y) {
 
       console.log("ROOT META: ", rootMeta);
 
-
       // if this root has a strict list, filter only those in that list
       if (Y.Lang.isValue(rootMeta.validChildren)) {
         Y.Array.each(Y.Reticle.Tags, function(meta) {
@@ -106,7 +146,7 @@ YUI.add('menu', function (Y) {
         var does = Y.Array.reduce(chars, true, function(prev, c) {
           return prev && Y.Lang.isValue(tag.one('.' + c));
         });
-        console.log(tag.getAttribute('data-name'), does)
+        console.log(tag.getAttribute('data-name'), does);
         return does;
       };
 
@@ -148,12 +188,9 @@ YUI.add('menu', function (Y) {
     },
 
     commit: function(tag) {
-      console.log('committing choice');
-
       this.fire('create-requested', {
         elementName: this.get('bestMatch')
       });
-
     },
 
     focus: function() {

@@ -139,6 +139,20 @@ body {
 
 	&.inline {
 		display: inline-block;
+		padding: 4px 12px;
+	}
+
+	&.text {
+		display: inline-block;
+		padding: 2px;
+		margin:0;
+		border: 1px solid #ddd;
+		background: none;
+
+		input {
+			border:none;
+			outline: none;
+		}
 	}
 }
 
@@ -146,7 +160,7 @@ body {
 	border:2px solid @blue;
 	position: absolute;
 	z-index: 10;
-	.transition(all 0.2s ease-out);
+	.transition(all 0.1s ease-out);
 
 	.info-panel, .menu-container {
 		position:absolute;

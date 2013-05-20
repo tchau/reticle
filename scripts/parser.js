@@ -10,53 +10,63 @@ YUI.add('parser', function (Y) {
 
    Y.extend(Y.Reticle.Parser, Y.Base, {
 
-   	initializer: function() {
-         Y.Reticle.Parser.superclass.constructor.apply(this, arguments);
-   		console.log('created new Parser');
-   	},
+    initializer: function() {
+      Y.Reticle.Parser.superclass.constructor.apply(this, arguments);
+      console.log('created new Parser');
+    },
 
-   	// recursively parses DOM into data elements
-   	parse: function(el) {
+    _makeTextNode: function(el) {
+      var blockEl = Y.Node.create('<div class="block-el text"></div>');
+      blockEl.append(el.get('nodeValue'));
+      return blockEl;
+    },
 
- 		   // create blockEl from element attributes
- 		   var blockEl = Y.Node.create('<div class="block-el"></div>');
+    // recursively parses DOM into data elements
+    parse: function(el) {
 
-         var nodeName = el.get('nodeName');
-         blockEl.addClass(Y.Reticle.TagMeta.findByName(nodeName).displayType);
+      // base case: TEXT node
+      if (el.get('nodeType') == 3) {
+        return this._makeTextNode(el);
+      }
 
-         blockEl.setAttribute('data-node-name', el.get('nodeName'));
+      // create blockEl from element attributes
+      var blockEl = Y.Node.create('<div class="block-el"></div>');
+      var nodeName = el.get('nodeName');
+      blockEl.addClass(Y.Reticle.TagMeta.findByName(nodeName).displayType);
 
-         var id = el.get('id')
-         if (Y.Lang.isValue(id) && id !== '')
-    		   blockEl.setAttribute('data-id', id);
+      // NODE NAME (div, span etc)
+      blockEl.setAttribute('data-node-name', el.get('nodeName'));
 
-         var claz = el.get('className')
-         if (Y.Lang.isValue(claz) && claz !== '')
-    		   blockEl.setAttribute('data-classes', claz);
+      // ID
+      var id = el.get('id');
+      if (Y.Lang.isValue(id) && id !== '') {
+        blockEl.setAttribute('data-id', id);
+      }
 
-         console.log(blockEl);
+      // CLASSES
+      var claz = el.get('className');
+      if (Y.Lang.isValue(claz) && claz !== '')
+        blockEl.setAttribute('data-classes', claz);
 
-   	   // children.each
-         el.get('children').each(function(child) {
-            // blockEl.apepend(parse(children))
-            console.log(child);
-            if (Y.Lang.isValue(child)) {
-               blockEl.append(this.parse(child));
-            }
-         }, this);
+      // RECURSE
+      // TODO this does not account for text nodes
+      el.get('children').each(function(child) {
+        if (Y.Lang.isValue(child)) {
+          blockEl.append(this.parse(child));
+        }
+      }, this);
 
- 			// return blockEl
-         return blockEl;
-   	}
+      return blockEl;
+    }
 
-   }, {
-   	NAME: 'Parser',
-   	ATTRS: {
-   		A: {
-   			value: 'asdf'
-   		}
-   	}
-   });
+  }, {
+    NAME: 'Parser',
+    ATTRS: {
+      A: {
+        value: 'asdf'
+      }
+    }
+  });
 
 }, '1.0', {
     requires: ['node', 'event', 'base', 'handlebars', 'reticle-attributes']

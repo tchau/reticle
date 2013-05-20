@@ -116,19 +116,31 @@ YUI.add('keyboard-model', function (Y) {
         reticle.removeCurr();
       }), 'del', this);
 
-      // I for insert
+      // A for appending text
       Y.one(document).on('key', wrap(function(e) {
-        menuMan.showAddMenu('append');
-        e.halt();
+        menuMan.editNewTextNode('append');
+        e.preventDefault();
+      }, this), 'a', this);
+
+      // I for inserting text
+      Y.one(document).on('key', wrap(function(e) {
+        menuMan.editNewTextNode('insert');
         e.preventDefault();
       }, this), 'i', this);
 
-      // A
+      // I+SHIFT for insert element
       Y.one(document).on('key', wrap(function(e) {
-        menuMan.showAddMenu('appendAfter');
+        menuMan.showAddElementMenu('insert');
         e.halt();
         e.preventDefault();
-      }, this), 'a', this);
+      }, this), 'i+shift', this);
+
+      // A+SHIFT for append element
+      Y.one(document).on('key', wrap(function(e) {
+        menuMan.showAddElementMenu('append');
+        e.halt();
+        e.preventDefault();
+      }, this), 'a+shift', this);
 
       // J or DOWN
       Y.one(document).on('key', wrap(reticle.scopeDown, reticle), 'arrowdown+shift,74+shift', reticle);

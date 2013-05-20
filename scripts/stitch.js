@@ -38,37 +38,46 @@ YUI().use('node', 'event', 'menu-manager', 'parser', 'reticle-attributes', 'keyb
   // model changes
 
   function displayMeta() {
-    $('#info-layer').empty()
+    $('#info-layer').empty();
 
     $('.block-el').each(function(i, el) {
-    	var metaContent = $('<div class="content"></div>');
-    	var metaEl = $('<div></div>').addClass('meta').append(metaContent);
+
+      // text nodes don't get any meta
+      if (Y.one(el).hasClass('text')) {
+        return;
+      }
+
+      var metaContent = $('<div class="content"></div>');
+      var metaEl = $('<div></div>').addClass('meta').append(metaContent);
 
       // displaying
       metaEl.addClass(Y.Reticle.TagMeta.findByName(el.getAttribute('data-node-name')).displayType);
 
-    	var classes = $(el).attr('data-classes');
-    	var id = $(el).attr('data-id');
-       
+      var classes = $(el).attr('data-classes');
+      var id = $(el).attr('data-id');
+
       var nodeEl = $('<div></div>')
         .addClass('bubble')
         .addClass('node-name')
         .html($(el).attr('data-node-name'));
       metaContent.append(nodeEl);
 
-    	if (Y.Lang.isValue(id)) {
-  	  	metaContent.append($('<div></div>')
+      // draw ID
+      if (Y.Lang.isValue(id)) {
+        metaContent.append($('<div></div>')
           .addClass('bubble')
           .html('#' + id));
-    	}
-    	if (Y.Lang.isValue(classes)) {
+      }
+
+      // draw CLASSES
+      if (Y.Lang.isValue(classes)) {
         metaContent.append($('<div></div>')
           .addClass('bubble')
           .html(classes));
-    	}
+      }
 
-    	$('#info-layer').append(metaEl);
-    	metaEl.offset($(el).offset());
+      $('#info-layer').append(metaEl);
+      metaEl.offset($(el).offset());
     });
   }
 

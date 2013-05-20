@@ -121,7 +121,8 @@ YUI.add('reticle', function (Y) {
       this.fire('structure-change');
     },
 
-    append: function(newEl) {
+    // nests it inside
+    insert: function(newEl) {
       var curr = this.get('curr');
       curr.insert(newEl);
       this.set('curr', newEl);
@@ -131,7 +132,8 @@ YUI.add('reticle', function (Y) {
       this.fire('structure-change');
     },
 
-   	appendAfter: function(newEl) {
+    // appends after as sibling
+    appendAfter: function(newEl) {
       var curr = this.get('curr');
       curr.insert(newEl, 'after');
       this.set('curr', newEl);
@@ -139,24 +141,24 @@ YUI.add('reticle', function (Y) {
 
       // move somehwere else...into a structuremanager thing
       this.fire('structure-change');
-   	}
+    },
 
   }, {
-   	NAME: 'Reticle',
-   	ATTRS: {
-   		curr: {
-   			value: null,
-            validator: function(v) {
-               return Y.Lang.isValue(v);
-            }
-   		},
+    NAME: 'Reticle',
+    ATTRS: {
+      curr: {
+        value: null,
+        validator: function(v) {
+          return Y.Lang.isValue(v);
+        }
+      },
 
-   		keyboard: {
-   			value: null
-   		}
-   	}
+      keyboard: {
+        value: null
+      }
+    }
   });
 
 }, '1.0', {
-    requires: ['node', 'event', 'base', 'widget']
+  requires: ['node', 'event', 'base', 'widget']
 });
