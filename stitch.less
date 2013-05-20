@@ -210,6 +210,18 @@ body {
 	padding-bottom: 50px;
 	margin: 10px;
 
+	.prompt {
+		font-size: 9px;
+		color: #CCC;
+		text-transform: uppercase;
+	}
+
+	.tagset {
+		margin-top: 10px;
+		background: #333;
+		padding: 5px;
+	}
+
 	.tagname {
 		border: 1px solid transparent;
 		font-size: 10px;
@@ -217,7 +229,7 @@ body {
 		width: 40px;
 		padding: 3px;
 		margin: 2px;
-		color: #666;
+		color: #999;
 		.transition(border-color 0.1s);
 		font-family: monospace;
 
@@ -242,7 +254,10 @@ body {
 	}
 
 	input {
-
+		border: none;
+		.border(3px);
+		font-size: 12px;
+		padding: 3px 5px;
 	}
 }
 

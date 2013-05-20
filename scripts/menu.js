@@ -71,19 +71,15 @@ YUI.add('menu', function (Y) {
       // what action?
       var prompt = PROMPT_MODES[this.get('mode')];
 
-      // what tags?
-
-
-      var menu = Y.Node.create('<div>' + prompt +
+      var menu = Y.Node.create('<div><div class="prompt">' + prompt + '</div>' +
           '<input type="text"></input>' +
           '<div class="tagset"></div>' +
           '<div class="foot">ENTER to commit</div>' +
         '</div>');
       menu.addClass('menu');
 
-      var tagset = menu.one('.tagset');
-
       // show contextual menu
+      var tagset = menu.one('.tagset');
       var tags = this._getFilteredTags();
       Y.Array.each(tags, function(tagMeta) {
         var tag = tagMeta.name;
