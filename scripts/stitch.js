@@ -98,10 +98,9 @@ $(document).ready(function() {
 			.addClass('welcome')
 			.html(phrases[rando])));
 	setTimeout(function() {
-		$('.overlay').fadeOut(1000);
+		$('.overlay').fadeOut(500);
 	}, 1000);
 
-	
 
 	// reticle behavior
 	var curr = $('.block-el').first();
@@ -116,7 +115,6 @@ $(document).ready(function() {
 
 	// init
 	moveReticle();
-	
 
 });
 

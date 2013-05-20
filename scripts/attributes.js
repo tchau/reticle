@@ -56,6 +56,8 @@ YUI.add('reticle-attributes', function (Y) {
 
 		{
 			name: 'INPUT',
+			displayType: 'block',
+			terminal: true, // a terminal tag, has no children
 			attributes: [
 				{
 					name: 'accept',
@@ -83,6 +85,7 @@ YUI.add('reticle-attributes', function (Y) {
 		{
 			name: 'LI',
 			validParents: 'UL',
+			validChildren: 'UL',
 			displayType: 'block'
 		},
 

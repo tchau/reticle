@@ -5,11 +5,11 @@ TODO
 PRIMARY EDITING
 
 - INLINE EDIT
-  write basic text nodes (maybe enter should just be the scope-in function...?)
-  ENTER creates a new text node inside this element... and starts you editing it
+  A appends a text node after this element
+  I inserts a text node inside this element
   ESC exits edit mode for that node, puts you back into NAV
-
-  how about mixing text nodes with spans and other inlines?
+  ENTER commits the node
+  [ reticle appearance is kinda funky when editing text nodes...  ]
 
 - EDIT ATTRS
 		- shows all possible attributes for this elemenet, what they do
@@ -20,6 +20,9 @@ PRIMARY EDITING
   info panel explaining all the values (attrs and tags and such)
   always create objects with interesting defaults
 
+NAVIGATION
+- reconsider the current scope in/out scheme... perhaps a pure flat scheme makes sense? 
+- reconsider the modulus navigation (its kinda disorienting)
 
 HELP
 - controls help at bottom of sceren

@@ -23,8 +23,6 @@ YUI.add('menu-manager', function (Y) {
       var currMenu = this.get('currentMenu');
       var reticle = this.get('reticle');
       if (Y.Lang.isValue(currMenu)) {
-
-
         currMenu.destroy();
       }
 
@@ -36,8 +34,10 @@ YUI.add('menu-manager', function (Y) {
       var reticle = this.get('reticle');
 
       // empty text nodes: kill them
-      if (currMenu instanceof Y.Reticle.InlineTextMenu && currMenu.getText().trim() === "") {
-        reticle.removeCurr();
+      if (Y.Lang.isValue(currMenu)) {
+        if (currMenu instanceof Y.Reticle.InlineTextMenu && currMenu.getText().trim() === "") {
+          reticle.removeCurr();
+        }
       }
 
       this._hideMenu();
@@ -70,9 +70,6 @@ YUI.add('menu-manager', function (Y) {
         textNode = parser.parse(Y.Node.create("&nbsp;"));
         reticle.appendAfter(textNode);
       }
-
-      // aww shit......
-      // textNode.append('<input></input>');
 
       // sort of like a menu.. where you can only edit text.. inline
       var menu = new Y.Reticle.InlineTextMenu({});
