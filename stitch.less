@@ -113,6 +113,19 @@ input:focus {
 	z-index: 10;
 	.transition(all 0.1s ease-out);
 
+	.commands {
+		position:absolute;
+		right:0;
+		bottom:-1em;
+		background: @blue;
+		display:none;
+		color: #eee;
+		span:first-letter {
+			font-weight:bold;
+			text-decoration:underline;
+		}
+	}
+
 }
 
 
@@ -207,7 +220,7 @@ input:focus {
 			.transition(color 0.1s);
 		}
 		span.highlighted {
-			color: #eee;
+			color: #fff;
 		}
 	}
 

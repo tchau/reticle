@@ -5,16 +5,18 @@ TODO
 PRIMARY EDITING
 
 - EDIT ATTRS
-    - saves
-		- shows all possible attributes for this elemenet, what they do
-		- value helpers (url, img, number, on/off, form_id) 
-		  that show you the valid values
+		- value helpers (url, img, number, on/off, form_id) showing the valid values
+        what are the value "types"? 
+            - text
+            - pixels
+            - URL
+            - number
+            - MIME_type
+            - specific enum set [left / right/ top /middle /bottom]
+                                [on / off]
+            - specific [e.g. "checked", "required", "readonly"]
+      - always an open field -- with a contextual helper. being an open field means it can be templatable
 		- data helpers: if you want to insert substitutions like {{item.id}} ---- perhaps this should be done almost anywhere...?
-
-EFFECTS
-  - floaty checkmark when you've committed
-  - floaty x when you've cancelled
-  - reticle has commands ON it [add insert edit]. the available comands are also context sensitive
 
 
 APPEND MENU
@@ -27,6 +29,12 @@ NAVIGATION
    - reconsider the modulus navigation (its kinda disorienting)
 
 
+TEMPLATING (json-t)
+  - JSON insert and then, render navigator view
+  - create template variable
+  - create template block
+  - data helper (navigate the JSON structure)
+
 HELP
   - controls help at bottom of sceren
   - live preview on right
@@ -34,13 +42,15 @@ HELP
 
 MENU MANAGER
   - make the choices clickable/mouse-overable not just typable
+  
 
-
-TEMPLATING (json-t)
-  - create template variable
-  - create template block
-  - data helper (navigate the JSON structure)
-
+EFFECTS
+  - floaty checkmark when you've committed
+  - floaty x when you've cancelled
+  - reticle has commands ON it [add insert edit]. the available comands are also context sensitive
+  consider whether all the tags and data need to be shown on meta-layer...
+  maybe only show one layer deep?
+  also reconsider the appearance of the bottom level inline elements (A, SPAN) and whether they nede all that....
 
 EXPORT
 - code generate (export)
@@ -81,3 +91,7 @@ DONE
   I inserts a text node inside this element
   ESC exits edit mode for that node, puts you back into NAV
   ENTER commits the node
+
+- EDIT ATTRS
+  - saves
+  - shows all possible attributes for this elemenet, what they do

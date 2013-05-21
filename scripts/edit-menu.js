@@ -31,14 +31,13 @@ YUI.add('edit-menu', function (Y) {
 
      // TODO load up existing values
      var nodeAttrs = JSON.parse(node.getAttribute('data-node-attributes'));
-console.log(nodeAttrs)
       Y.Array.each(attrs, function(attr) {
-      	var existingValue = nodeAttrs[attr] || "";
-      	var attrEl = Y.Node.create('<div class="attribute-editor">' +
-      		'<label>' + attr + '</label>' +
-      		'<input name="'+attr+'" value="'+existingValue+'"></input>' +
-      	'</div>');
-      	attributesEl.append(attrEl);
+        var existingValue = nodeAttrs[attr] || "";
+        var attrEl = Y.Node.create('<div class="attribute-editor">' +
+          '<label>' + attr + '</label>' +
+          '<input name="' + attr + '" value="' + existingValue + '"></input>' +
+          '</div>');
+        attributesEl.append(attrEl);
       });
 
       menu.addClass('hidden');
@@ -70,7 +69,9 @@ console.log(nodeAttrs)
 
       var nodeAttributes = {};
       contentBox.all('.attribute-editor input').each(function(input) {
-      	nodeAttributes[input.getAttribute('name')] = input.get('value');
+        if (input.get('value').trim() !== '') {
+          nodeAttributes[input.getAttribute('name')] = input.get('value');
+        }
       });
       
       this.fire('update-requested', {

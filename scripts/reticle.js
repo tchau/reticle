@@ -17,7 +17,8 @@ YUI.add('reticle', function (Y) {
        var contentBox = this.get('contentBox');
 
        var el = Y.Node.create('<div id="reticle">' +
-             '<div class="info-panel"></div><div class="menu-container"></div>' +
+             '<div class="info-panel"></div><div class="commands">'+
+             '<span class="insert">insert</span><span class="add">add</span></span class="edit">edit</span></div>' +
           '</div>');
 
        contentBox.append(el);
@@ -81,13 +82,24 @@ YUI.add('reticle', function (Y) {
         height: curr.get('offsetHeight') -2
       });
 
-   //       var reticle = $('#reticle')
-			// reticle.offset(curr.offset());
-			// reticle.width(curr.innerWidth());
-			// reticle.height(curr.innerHeight());
+      // update menu with context
+      this._updateMenuWithContext(Y.Reticle.TagMeta.getCapabilityContext(curr));
+
 
       this.fire('moved');
-   	},
+    },
+
+    _updateMenuWithContext: function(context) {
+
+      // if it's a text node ... cannot do inserts
+      var reticle = Y.one('#reticle');
+      if (!context.insertable)
+        reticle.one('.commands .insert').hide();
+
+
+      // if it's an INPUT tag, can't do inserts
+
+    },
 
     showMenu: function(menu) {
 
@@ -97,10 +109,11 @@ YUI.add('reticle', function (Y) {
 
       menu.render('#menu-layer');
       var reticleXY = reticle.getXY();
-      menu.setXY([ 
+      menu.setXY([
         reticleXY[0],
-        reticleXY[1] + reticle.get('offsetHeight') ]);
-      
+        reticleXY[1] + reticle.get('offsetHeight')
+      ]);
+
       menu.show();
 
     },
@@ -108,7 +121,7 @@ YUI.add('reticle', function (Y) {
     removeCurr: function() {
       var curr = this.get('curr');
 
-      var newCurr; 
+      var newCurr;
 
       if (Y.Lang.isValue(curr.next())) {
         newCurr = curr.next();

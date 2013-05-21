@@ -16,7 +16,9 @@ YUI.add('menu', function (Y) {
     renderUI: function() {
       var contentBox = this.get('contentBox');
       console.log('rendering.....');
-      contentBox.append(Y.Node.create('<input />'));
+      var inputEl = Y.Node.create('<input />');
+      inputEl.set('value', this.get('value'));
+      contentBox.append(inputEl);
     },
 
     bindUI: function() {
@@ -43,6 +45,9 @@ YUI.add('menu', function (Y) {
   }, {
     NAME: 'InlineTextMenu',
     ATTRS: {
+      value: {
+        value: "" // current value of the text node
+      },
       mode: {
         value: null // insert, append
       }
@@ -159,11 +164,19 @@ YUI.add('menu', function (Y) {
       var tagset = contentBox.one('.tagset');
 
       // does this tag name contain all chars?
-      var containsAll = function(tag, chars) {
-        var does = Y.Array.reduce(chars, true, function(prev, c) {
-          return prev && Y.Lang.isValue(tag.one('.' + c));
-        });
-        return does;
+      var scoreTagForChars = function(tag, chars) {
+        var score = 0;
+        var tagNameChars = tag.getAttribute('data-name').split('');
+
+        //dot product tagNameChars * chars
+        for (var i = 0; i < tagNameChars.length; i++) {
+          var c1 = tagNameChars[i];
+          var c2 = chars[i];
+          if (c1 == c2)
+            score++;
+        }
+
+        return score;
       };
 
       tagset.all('.highlighted').removeClass('highlighted');
@@ -172,14 +185,25 @@ YUI.add('menu', function (Y) {
         var chars = str.split('');
 
         var partialMatches = [];
-
+        var bestMatch = {
+          tag: null,
+          score: 0
+        };
         tagset.all('.tagname').each(function(tag) {
-          if (containsAll(tag, chars)) {
+          var score = scoreTagForChars(tag, chars);
+          if (score > 0) {
             // contains all
             partialMatches.push(tag);
             Y.Array.each(chars, function(c) {
               tag.all('.' + c).addClass('highlighted');
             });
+          }
+
+          if (score > bestMatch.score) {
+            bestMatch = {
+              tag: tag,
+              score: score
+            };
           }
         });
 
@@ -187,8 +211,9 @@ YUI.add('menu', function (Y) {
         //var scores
         tagset.all('.best').removeClass('best');
         if (partialMatches.length > 0) {
-          partialMatches[0].addClass('best');
-          this.set('bestMatch', partialMatches[0].getAttribute('data-name'));
+          // partialMatches[0].addClass('best');
+          bestMatch.tag.addClass('best');
+          this.set('bestMatch', bestMatch.tag.getAttribute('data-name'));
         }
     },
 

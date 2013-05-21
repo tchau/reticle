@@ -58,21 +58,51 @@ YUI.add('menu-manager', function (Y) {
       var reticle = this.get('reticle');
       var curr = reticle.get('curr');
 
-      var menu = new Y.Reticle.EditMenu({
-        node: curr
+      // text nodes
+      if (curr.hasClass('text')) {
+        this._editTextNode(curr);
+      }
+      else {
+        var menu = new Y.Reticle.EditMenu({
+          node: curr
+        });
+
+        menu.on('update-requested', function(e) {
+          this._hideMenu();
+
+          //commit the update...
+          reticle.update(e.nodeAttributes);
+        }, this);
+
+        reticle.showMenu(menu);
+        this.set('currentMenu', menu);
+        this.fire('focused');
+        menu.focus();
+      }
+    },
+
+    _editTextNode: function(textNode) {
+      var reticle = this.get('reticle');
+      // sort of like a menu.. where you can only edit text.. inline
+      var menu = new Y.Reticle.InlineTextMenu({
+        value: textNode.get('text')
       });
+      textNode.empty();
+      menu.render(textNode);
 
-      menu.on('update-requested', function(e) {
-        this._hideMenu();
-
-        //commit the update...
-        reticle.update(e.nodeAttributes);
-      }, this);
-
-      reticle.showMenu(menu);
       this.set('currentMenu', menu);
       this.fire('focused');
       menu.focus();
+
+      // if you cancel with no contents...
+      // delete the node
+      menu.on('create-requested', function(e) {
+        var text = menu.getText();
+        this._hideMenu();
+        textNode.empty();
+        textNode.set('text', text);
+        reticle.refresh();
+      }, this);
     },
 
     editNewTextNode: function(mode) {
@@ -91,22 +121,7 @@ YUI.add('menu-manager', function (Y) {
       }
 
       // sort of like a menu.. where you can only edit text.. inline
-      var menu = new Y.Reticle.InlineTextMenu({});
-      menu.render(textNode);
-
-      this.set('currentMenu', menu);
-      this.fire('focused');
-      menu.focus();
-
-      // if you cancel with no contents...
-      // delete the node
-      menu.on('create-requested', function(e) {
-        var text = menu.getText();
-        this._hideMenu();
-        textNode.empty();
-        textNode.set('text', text);
-        reticle.refresh();
-      }, this);
+      this._editTextNode(textNode);
 
       reticle.refresh();
     },

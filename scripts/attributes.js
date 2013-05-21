@@ -127,6 +127,22 @@ YUI.add('reticle-attributes', function (Y) {
 			return Y.Array.find(Y.Reticle.Tags, function(meta) {
 				return (meta.name === name);
 			});
+		},
+
+		// sigh this is pretty bad. 
+		getCapabilityContext: function(blockEl) {
+
+			// text node
+			if (blockEl.hasClass('text') || blockEl.getData()['node-name'] == 'INPUT') {
+				return {
+					insertable: false
+				};
+			} else {
+				return {
+					insertable: true
+				};
+			}
+
 		}
 		// getAsList: function() {
 		// 	var list = [];

@@ -37,19 +37,13 @@ YUI.add('parser', function (Y) {
       // NODE NAME (div, span etc)
       blockEl.setAttribute('data-node-name', el.get('nodeName'));
 
+      // transfer all attributes into a data object
       var nodeAttributes = {};
-
-      // ID
-      var id = el.get('id');
-      if (Y.Lang.isValue(id) && id !== '') {
-        nodeAttributes.id = id;
-      }
-
-      // CLASSES
-      var claz = el.get('className');
-      if (Y.Lang.isValue(claz) && claz !== '') {
-        nodeAttributes.class = claz;
-      }
+      Y.Array.each(el.getDOMNode().attributes, function(attr) {
+        var key = attr.name;
+        var value = attr.value;
+        nodeAttributes[key] = value;
+      });
 
       blockEl.setAttribute('data-node-attributes', JSON.stringify(nodeAttributes));
 
