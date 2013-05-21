@@ -21,6 +21,29 @@ YUI.add('parser', function (Y) {
       return blockEl;
     },
 
+    // recursively parses the block-els we have and creates real html
+    stringify: function(blockEl) {
+
+      console.log('stringifying');
+      if (blockEl.hasClass('text')) {
+        return Y.Node.create(blockEl.get('text'));
+      }
+
+      var tagName = blockEl.getAttribute('data-node-name');
+      var nodeAttributes = JSON.parse(blockEl.getAttribute('data-node-attributes'));
+      var node = Y.Node.create('<' + tagName + '></' + tagName + '>');
+
+      Y.Object.each(nodeAttributes, function(value, key) {
+        node.setAttribute(key, value);
+      });
+
+      blockEl.get('children').each(function(child) {
+        node.append(this.stringify(child));
+      }, this);
+
+      return node;
+    },
+
     // recursively parses DOM into data elements
     parse: function(el) {
 

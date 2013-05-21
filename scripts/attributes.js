@@ -36,15 +36,21 @@ YUI.add('reticle-attributes', function (Y) {
 	// this should probably just be a list
 
 	Y.Reticle.BaseAttributes = [
-		'id', 'class', 'title'
+		  {name: 'id', type:'text'},
+		  {name: 'class', type:'text'}, 
+		  {name: 'title', type:'text'}
 	];
 
 	Y.Reticle.Tags = [
 		{
 			name: 'A',
-			attributes: ['href', 'target'],
+			attributes: [
+				{ name: 'href', type: 'url' },
+				{ name: 'target', type: 'open_enum', choices: ['_blank', '_parent', '_self', '_top'] }
+			],
 			displayType: 'inline',
-			validChildren: ['IMG']
+			validChildren: ['IMG', 'SPAN'],
+			defaultContent: 'A hyperlink'
 		},
 
 		{
@@ -52,11 +58,18 @@ YUI.add('reticle-attributes', function (Y) {
 			displayType: 'block'
 		},
 
+		{ name: 'H1', displayType: 'block', defaultContent: 'Heading 1' },
+		{ name: 'H2', displayType: 'block', defaultContent: 'Heading 2' },
+		{ name: 'H3', displayType: 'block', defaultContent: 'Heading 3' },
+
 		{
-			name: 'UL',
-			attributes: [],
-			validChildren: ['LI'],
-			displayType: 'block'
+			name: 'FORM',
+			displayType: 'block',
+			attributes: [
+				{ name: 'name',   type: 'text' },
+				{ name: 'action', type: 'url' },
+				{ name: 'method', type: 'enum', choices: ['post', 'get'], defaultValue: 'post' }
+				]
 		},
 
 		{
@@ -74,34 +87,35 @@ YUI.add('reticle-attributes', function (Y) {
 				{ attr: 'type', value: 'text' }
 			],
 			attributes: [
-				{
-					name: 'accept',
-					// literal or function
-					values: [ 'audio/*', 'video/*', 'image/*', helpers.mimeType ]
-				},
-
-				{
-					name: 'align',
-					warn: 'deprecated in html4.01',
-					values: [ 'left', 'right', 'top', 'middle', 'bottom' ]
-				},
-
+				{ name: 'accept', values: [ 'audio/*', 'video/*', 'image/*', helpers.mimeType ] },
 				{ name: 'formaction', values: [ helpers.url ] },
-
-				{ name: 'type', values: ['button', 'checkbox', 'radio'] }
+				{ name: 'name', type: 'text' },
+				{ name: 'type', 
+					type: 'enum',
+					choices: ['button', 'checkbox', 'radio', 'text', 'password'],
+					defaultValue: 'text'
+				},
+				{
+					name: 'value',
+					type: 'text',
+					defaultValue: 'Input Value'
+				}
 			]
 		},
 
 		{
 			name: 'P',
-			displayType: 'block'
+			displayType: 'block',
+			validChildren: ['A', 'SPAN', 'IMG'],
+			defaultContent: 'Paragraph text'
 		},
 
 		{
 			name: 'LI',
 			validParents: 'UL',
 			validChildren: 'UL',
-			displayType: 'block'
+			displayType: 'block',
+			defaultContent: 'List Item'
 		},
 
 		{
@@ -113,13 +127,48 @@ YUI.add('reticle-attributes', function (Y) {
 		{
 			name: 'OPTION',
 			displayType: 'block',
+			attributes: [
+				{ name: 'disabled', type: 'specific', choices: ['disabled'] },
+				{ name: 'label',    type: 'text' },
+				{ name: 'selected', type: 'specific', choices: ['selected'] },
+				{ name: 'value',    type: 'text' }
+			],
 			validParents: ['SELECT']
 		},
 
 		{
 			name: 'SPAN',
 			displayType: 'inline'
-		}
+		},
+		{
+			name: 'TABLE',
+			attributes: [],
+			validChildren: ['TR', 'TH', 'TBODY'],
+			displayType: 'block' // well its really a table... 
+		},
+		{
+			name: 'TR',
+			validParents: ['TABLE', 'TBODY', 'TH'],
+			validChildren: ['TD'],
+			displayType: 'block' // well its really a table... 
+		},
+		{
+			name: 'TD',
+			attributes: [
+				{ name: 'rowspan', type: 'number', defaultValue: 1 },
+				{ name: 'colspan', type: 'number', defaultValue: 1 }
+			],
+			validParents: ['TR'],
+			validChildren: ['TD'],
+			defaultContent: 'A cell',
+			displayType: 'block' // well its really a table... 
+		},
+		{
+			name: 'UL',
+			attributes: [],
+			validChildren: ['LI'],
+			displayType: 'block'
+		},
 	];
 
 	Y.Reticle.TagMeta = {
@@ -133,7 +182,7 @@ YUI.add('reticle-attributes', function (Y) {
 		getCapabilityContext: function(blockEl) {
 
 			// text node
-			if (blockEl.hasClass('text') || blockEl.getData()['node-name'] == 'INPUT') {
+			if (blockEl.hasClass('text') || blockEl.getAttribute('data-node-name' == 'INPUT')) {
 				return {
 					insertable: false
 				};

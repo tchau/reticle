@@ -82,8 +82,21 @@ YUI().use('node', 'event', 'menu-manager', 'parser', 'reticle-attributes', 'keyb
     });
   }
 
+  var refreshPreview = function() {
+    console.log('refreshing');
+    var preview = Y.one('#preview');
+    preview.empty();
+    Y.one('#canvas').get('children').each(function(child) {
+      console.log('yeah');
+
+      preview.append(parser.stringify(child));
+    });
+  };
+
   displayMeta();
+  refreshPreview();
   reticle.on('structure-change', displayMeta);
+  reticle.on('structure-change', refreshPreview);
 
 
 });

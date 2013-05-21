@@ -141,15 +141,19 @@ YUI.add('menu-manager', function (Y) {
 
       // generaets newEl
       menu.on('create-requested', function(e) {
-        var el = e.elementName;
-        var node = Y.Node.create('<' + el + '></' + el + '>');
+        var tagName = e.elementName;
+        var node = Y.Node.create('<' + tagName + '></' + tagName + '>');
 
         this._hideMenu();
 
+        this._populateDefaults(tagName, node);
+        console.log(node);
+
+        var newBlockEl = parser.parse(node);
         if (mode == 'append') {
-          reticle.appendAfter(parser.parse(node));
+          reticle.appendAfter(newBlockEl);
         } else if (mode == 'insert') {
-          reticle.insert(parser.parse(node));
+          reticle.insert(newBlockEl);
         }
 
       }, this);
@@ -158,6 +162,21 @@ YUI.add('menu-manager', function (Y) {
       menu.focus();
       this.set('currentMenu', menu);
       this.fire('focused');
+    },
+
+    _populateDefaults: function(tagName, node) {
+      var meta = Y.Reticle.TagMeta.findByName(tagName);
+      Y.Array.each(meta.attributes, function(attribute) {
+        console.log("POP DEF", attribute);
+        if (Y.Lang.isValue(attribute.defaultValue)) {
+          node.setAttribute(attribute.name, attribute.defaultValue);
+        }
+      });
+
+      if (Y.Lang.isValue(meta.defaultContent)) {
+        node.set('text', meta.defaultContent);
+      }
+
     }
 
   }, {

@@ -17,7 +17,7 @@
 	<script src="scripts/stitch.js"></script>
 
 	<!--<link rel="stylesheet" href="bootstrap/css/bootstrap.css">-->
-	<link rel="stylesheet" href="reset.css">
+	<!--<link rel="stylesheet" href="reset.css">-->
 	<link rel="stylesheet/less" href="stitch.less">
 	<script type="text/javascript">
     less = {
@@ -48,60 +48,71 @@
 </head>
 
 <body>
-  <div id="top-tray">
-    import - export
-  </div>
-
-
-  <div id="data">
-    <div id="main-intro" class="intro">
-      <p>
-        <a href="http://www.google.com">Here's a link</a> hey there
-      </p>
-      <p class="yes">
-        welcome to the <a>fucked up </a>
-        <span class="bold">LoremIpsum some other <a>link</a> and click! afasdf as df axaa <a>something else</a> asf sadf asdfasdfwefasdf asdfw s sdf dfs</span>
-        <span class="bold"></span>
-      </p>
+  <div id="workspace">
+    <div id="top-tray">
+      import - export
     </div>
-    <div id="sidebar" class="left sidebar">
-      <div class="picture"></div>
+
+
+    <div id="data">
+      <div id="main-intro" class="intro">
+        <p>
+          <a href="http://www.google.com">Here's a link</a> hey there
+        </p>
+        <p class="yes">
+          welcome to the <a>fucked up </a>
+          <span class="bold">LoremIpsum some other <a>link</a> and click! afasdf as df axaa <a>something else</a> asf sadf asdfasdfwefasdf asdfw s sdf dfs</span>
+          <span class="bold"></span>
+        </p>
+      </div>
+      <div id="sidebar" class="left sidebar">
+        <div class="picture"></div>
+      </div>
     </div>
+
+    <!-- CANVAS -->
+    <div id="canvas" data-node-name="DIV"></div>
+
+
+    <div id="info-layer"></div>
+    <div id="menu-layer"></div>
+
+    <!-- depending on context, you can add certain attributes to the elemnt -->
+    <div id="edit-element-menu">
+      INPUT
+      readonly  (undefined: greyed out)
+      maxlength (undefined: greyed out)
+
+    </div>
+    <!-- depending on context, you can add certain elements-->
+    <div id="add-element-menu">
+      div
+      span
+      a
+      ul
+    </div>
+
+    <div id="tray">Add - Edit - etc. 
+      <div id="shift-status">Shift</div>
+    </div>
+
+    <!--training wheels show new users how to move -->
+    <div id="training-wheels">
+      move:     [j]
+             [h][k][l]
+      ^^:    shift+j
+      vv:    shift+k
+    </div>
+    <a href="http://www.google.com">LINK</a>
   </div>
 
-  <!-- CANVAS -->
-  <div id="canvas" data-node-name="DIV"></div>
-
-
-  <div id="info-layer"></div>
-  <div id="menu-layer"></div>
-
-  <!-- depending on context, you can add certain attributes to the elemnt -->
-  <div id="edit-element-menu">
-    INPUT
-    readonly  (undefined: greyed out)
-    maxlength (undefined: greyed out)
-
-  </div>
-  <!-- depending on context, you can add certain elements-->
-  <div id="add-element-menu">
-    div
-    span
-    a
-    ul
+  <!-- quick and dirty. replace this with an iframe -->
+  <div id="right-space">
+    <div class="heading">Preview</div>
+    <div id="preview"></div>
   </div>
 
-  <div id="tray">Add - Edit - etc. 
-    <div id="shift-status">Shift</div>
-  </div>
+  <div style="clear:both"></div>
 
-  <!--training wheels show new users how to move -->
-  <div id="training-wheels">
-    move:     [j]
-           [h][k][l]
-    ^^:    shift+j
-    vv:    shift+k
-  </div>
-  <a href="http://www.google.com">LINK</a>
 </body>
 </html>

@@ -2,8 +2,11 @@
 TODO
 ============================================================
 
-PRIMARY EDITING
 
+achieve the new scheme ... with meta attrs... and use that info.. as HELPERS to us in filling in the attributes...
+use the defaultValues...
+
+PRIMARY EDITING
 - EDIT ATTRS
 		- value helpers (url, img, number, on/off, form_id) showing the valid values
         what are the value "types"? 
@@ -18,10 +21,13 @@ PRIMARY EDITING
       - always an open field -- with a contextual helper. being an open field means it can be templatable
 		- data helpers: if you want to insert substitutions like {{item.id}} ---- perhaps this should be done almost anywhere...?
 
+LIVE PREVIEW
+  - show the preview
 
 APPEND MENU
-  - info panel explaining all the values (attrs and tags and such)
+  - Info Panel explaining all the values (attrs and tags and such)
   - create objects with interesting defaults
+  - refresh the preview even AS you are cycling through POSSIBILITIES
 
 
 NAVIGATION
