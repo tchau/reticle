@@ -143,12 +143,18 @@ YUI.add('reticle-attributes', function (Y) {
 		{
 			name: 'TABLE',
 			attributes: [],
-			validChildren: ['TR', 'TH', 'TBODY'],
+			validChildren: ['TR', 'THEAD', 'TBODY'],
+			displayType: 'block' // well its really a table... 
+		},
+		{
+			name: 'THEAD',
+			validParents: ['TABLE'],
+			validChildren: ['TR'],
 			displayType: 'block' // well its really a table... 
 		},
 		{
 			name: 'TR',
-			validParents: ['TABLE', 'TBODY', 'TH'],
+			validParents: ['TABLE', 'TBODY', 'THEAD'],
 			validChildren: ['TD'],
 			displayType: 'block' // well its really a table... 
 		},
