@@ -36,14 +36,30 @@ YUI.add('edit-menu', function (Y) {
         var existingValue = nodeAttrs[attr.name] || "";
         var attrEl = Y.Node.create('<div class="attribute-editor">' +
           '<label>' + attr.name + '</label>' +
-          '<input name="' + attr.name + '" value="' + existingValue + '"></input>' +
-          '<div class="choices"></div>' +
           '</div>');
+        attrEl.append(this._getInputForAttribute(attr, existingValue));
         attributesEl.append(attrEl);
-      });
+      }, this);
 
       menu.addClass('hidden');
       contentBox.append(menu);
+    },
+
+    _getInputForAttribute: function(attr, existingValue) {
+
+      if (attr.type == 'enum' && Y.Lang.isValue(attr.choices)) {
+        var selectEl = Y.Node.create('<select class="attr-field" name="'+ attr.name+'"></select>');
+        Y.Array.each(attr.choices, function(choice) {
+          var opt = Y.Node.create('<option class="attr-enum-value" value="' + choice + '">' + choice + '</a>');
+          selectEl.append(opt);
+          if (existingValue == choice) {
+            opt.setAttribute('selected', 'selected');
+          }
+        });
+        return selectEl;
+      }
+
+      return Y.Node.create('<input class="attr-field" name="' + attr.name + '" value="' + existingValue + '"></input>');
     },
 
     // blip in
@@ -70,12 +86,13 @@ YUI.add('edit-menu', function (Y) {
       var contentBox = this.get('contentBox');
 
       var nodeAttributes = {};
-      contentBox.all('.attribute-editor input').each(function(input) {
+      contentBox.all('.attribute-editor .attr-field').each(function(input) {
         if (input.get('value').trim() !== '') {
           nodeAttributes[input.getAttribute('name')] = input.get('value');
         }
       });
 
+      console.log('Commit Edit', nodeAttributes);
       this.fire('update-requested', {
         nodeAttributes: nodeAttributes
       });

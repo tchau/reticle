@@ -74,7 +74,10 @@ YUI.add('reticle-attributes', function (Y) {
 
 		{
 			name: 'IMG',
-			attributes: ['src', 'alt'],
+			attributes: [
+				{ name: 'src', type: 'text', defaultValue: 'no-image.png' },
+				{ name: 'alt', type: 'text' }
+			],
 			validChildren: [],
 			displayType: 'inline'
 		},

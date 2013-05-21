@@ -2,12 +2,13 @@
 TODO
 ============================================================
 
+modifying ANY attribute ... shows change immediately... 
+or... how bout.. even HOVERING over any value...? ?? 
 
-achieve the new scheme ... with meta attrs... and use that info.. as HELPERS to us in filling in the attributes...
-use the defaultValues...
 
 PRIMARY EDITING
 - EDIT ATTRS
+    - need to implement VALUE ASSIST
 		- value helpers (url, img, number, on/off, form_id) showing the valid values
         what are the value "types"? 
             - text
@@ -21,11 +22,9 @@ PRIMARY EDITING
       - always an open field -- with a contextual helper. being an open field means it can be templatable
 		- data helpers: if you want to insert substitutions like {{item.id}} ---- perhaps this should be done almost anywhere...?
 
-LIVE PREVIEW
-  - show the preview
 
 APPEND MENU
-  - Info Panel explaining all the values (attrs and tags and such)
+  - Info Panel explaining all the ELs (attrs and tags and such)
   - create objects with interesting defaults
   - refresh the preview even AS you are cycling through POSSIBILITIES
 
@@ -101,3 +100,7 @@ DONE
 - EDIT ATTRS
   - saves
   - shows all possible attributes for this elemenet, what they do
+  - use defaultValues
+
+LIVE PREVIEW
+  - show the preview

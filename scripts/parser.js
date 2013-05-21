@@ -24,7 +24,6 @@ YUI.add('parser', function (Y) {
     // recursively parses the block-els we have and creates real html
     stringify: function(blockEl) {
 
-      console.log('stringifying');
       if (blockEl.hasClass('text')) {
         return Y.Node.create(blockEl.get('text'));
       }
