@@ -2,9 +2,6 @@ YUI.add('menu', function (Y) {
 
    Y.Reticle = Y.namespace('Y.Reticle');
 
-   // var tags = 'a,div,span,img,h1,h2,h3,h4,table,tr';
-   // tags = tags.split(',');
-
   var PROMPT_MODES = {
     append: 'Add Element',
     insert: 'Insert Element'
@@ -40,9 +37,7 @@ YUI.add('menu', function (Y) {
     },
 
     commit: function() {
-      this.fire('create-requested', {
-        elementName: this.get('bestMatch')
-      });
+      this.fire('create-requested', {});
     }
 
   }, {
@@ -149,27 +144,29 @@ YUI.add('menu', function (Y) {
     bindUI: function() {
       var input = this.get('contentBox').one('input');
       var contentBox = this.get('contentBox');
-      var tagset = contentBox.one('.tagset');
-
-      var containsAll = function(tag, chars) {
-
-        var does = Y.Array.reduce(chars, true, function(prev, c) {
-          return prev && Y.Lang.isValue(tag.one('.' + c));
-        });
-        console.log(tag.getAttribute('data-name'), does);
-        return does;
-      };
 
       // enter key
-      input.on('key', function() {
-        // find best match..
-        this.commit();
-      }, 'enter', this);
+      input.on('key', this.commit, 'enter', this);
 
       // need to make sure it highlights the ones where it matches
       // ALL chars in the input
-      input.on('valuechange', function() {
-        tagset.all('.highlighted').removeClass('highlighted');
+      input.on('valuechange', this._highlightBestMatch, this);
+    },
+
+    _highlightBestMatch: function() {
+      var input = this.get('contentBox').one('input');
+      var contentBox = this.get('contentBox');
+      var tagset = contentBox.one('.tagset');
+
+      // does this tag name contain all chars?
+      var containsAll = function(tag, chars) {
+        var does = Y.Array.reduce(chars, true, function(prev, c) {
+          return prev && Y.Lang.isValue(tag.one('.' + c));
+        });
+        return does;
+      };
+
+      tagset.all('.highlighted').removeClass('highlighted');
         var str = input.get('value');
         str = str.toUpperCase();
         var chars = str.split('');
@@ -193,8 +190,6 @@ YUI.add('menu', function (Y) {
           partialMatches[0].addClass('best');
           this.set('bestMatch', partialMatches[0].getAttribute('data-name'));
         }
-      }, this);
-
     },
 
     commit: function(tag) {

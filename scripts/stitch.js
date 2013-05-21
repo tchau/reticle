@@ -53,8 +53,9 @@ YUI().use('node', 'event', 'menu-manager', 'parser', 'reticle-attributes', 'keyb
       // displaying
       metaEl.addClass(Y.Reticle.TagMeta.findByName(el.getAttribute('data-node-name')).displayType);
 
-      var classes = $(el).attr('data-classes');
-      var id = $(el).attr('data-id');
+      var nodeAttributes = JSON.parse($(el).attr('data-node-attributes'));
+      var classes = nodeAttributes['class'];
+      var id = nodeAttributes['id'];
 
       var nodeEl = $('<div></div>')
         .addClass('bubble')

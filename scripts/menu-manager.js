@@ -53,6 +53,28 @@ YUI.add('menu-manager', function (Y) {
       }
     },
 
+    editCurrentNode: function() {
+      // show all node attributes
+      var reticle = this.get('reticle');
+      var curr = reticle.get('curr');
+
+      var menu = new Y.Reticle.EditMenu({
+        node: curr
+      });
+
+      menu.on('update-requested', function(e) {
+        this._hideMenu();
+
+        //commit the update...
+        reticle.update(e.nodeAttributes);
+      }, this);
+
+      reticle.showMenu(menu);
+      this.set('currentMenu', menu);
+      this.fire('focused');
+      menu.focus();
+    },
+
     editNewTextNode: function(mode) {
       // var textNode = Y.Node.create('')
       var parser = this.get('parser');
@@ -104,7 +126,6 @@ YUI.add('menu-manager', function (Y) {
 
       // generaets newEl
       menu.on('create-requested', function(e) {
-        console.log("making a new one", e.elementName);
         var el = e.elementName;
         var node = Y.Node.create('<' + el + '></' + el + '>');
 
@@ -137,5 +158,5 @@ YUI.add('menu-manager', function (Y) {
   });
 
 }, '1.0', {
-    requires: ['node', 'event', 'base', 'handlebars', 'menu']
+    requires: ['node', 'event', 'base', 'handlebars', 'menu', 'edit-menu']
 });

@@ -31,6 +31,10 @@ body {
 	line-height: 1.4em;
 }
 
+input:focus {
+	outline: 2px solid @blue;
+}
+
 #data {
 	display:none;
 }
@@ -154,24 +158,28 @@ body {
 }
 
 .menu.hidden {
-	transform: scale(0.8);
-	-webkit-transform: scale(0.8);
-	.opacity(0.8);
+	@init: 0.2;
+	transform: scale3d(0.9, @init, 1);
+	-webkit-transform: scale3d(0.9, @init, 1);
+	height: 0%;
+	.opacity(0.2);
 }
 .menu.shown {
-	transform: scale(1);
-	-webkit-transform: scale(1);
+	transform: scale3d(1, 1, 1);
+	-webkit-transform: scale3d(1, 1, 1);
+	height: 100%;
 	.opacity(1);
 }
 .menu {
-	transition: all 0.2s;
-	width: 300px;
+	transition: opacity 0.2s, -webkit-transform 0.17s ease-out;
+	width: 350px;
 	position:relative;
 	padding: 15px;
 	padding-bottom: 50px;
 	background: #111;
 	.border(4px);
 	margin: 10px;
+	color: #999;
 
 	.prompt {
 		font-size: 9px;
@@ -192,7 +200,6 @@ body {
 		width: 40px;
 		padding: 3px;
 		margin: 2px;
-		color: #999;
 		.transition(border-color 0.1s);
 		font-family: monospace;
 
@@ -206,6 +213,22 @@ body {
 
 	.tagname.best {
 		border: 1px solid white;
+	}
+
+	.attributes {
+		.attribute-editor {
+			border: 1px solid #555;
+			background: #444;
+			padding: 5px 8px;
+			display:inline-block;
+
+			label {
+				width: 50px;
+				padding-right: 15px;
+				text-align: right;
+				display: inline-block;
+			}
+		}
 	}
 
 	.foot {

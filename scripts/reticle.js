@@ -29,7 +29,6 @@ YUI.add('reticle', function (Y) {
 
     scopeUp: function() {
       var curr = this.get('curr');
-      // console.log('scoping up');
 
       // limit at canvas top level
       if (curr.get('parentNode').get('id') !== 'canvas') {
@@ -41,7 +40,6 @@ YUI.add('reticle', function (Y) {
     },
 
     scopeDown: function() {
-      console.log('scoping down');
       var curr = this.get('curr');
       if (curr.get('children').size() > 0) {
         curr = curr.get('children').item(0);
@@ -51,7 +49,6 @@ YUI.add('reticle', function (Y) {
     },
 
     moveUp: function() {
-      console.log('moving up');
       var curr = this.get('curr');
       if (!Y.Lang.isValue(curr.previous())) {
         curr = curr.siblings('.block-el:last-child').item(0);
@@ -63,7 +60,6 @@ YUI.add('reticle', function (Y) {
     },
 
     moveDown: function() {
-      console.log('moving down');
       var curr = this.get('curr');
 
       if (!Y.Lang.isValue(curr.next())) {
@@ -101,7 +97,6 @@ YUI.add('reticle', function (Y) {
 
       menu.render('#menu-layer');
       var reticleXY = reticle.getXY();
-      console.log("XY ", reticleXY);
       menu.setXY([ 
         reticleXY[0],
         reticleXY[1] + reticle.get('offsetHeight') ]);
@@ -150,6 +145,13 @@ YUI.add('reticle', function (Y) {
       this._moveReticle();
 
       // move somehwere else...into a structuremanager thing
+      this.fire('structure-change');
+    },
+
+    // update curr with new attributes
+    update: function(nodeAttributes) {
+      var curr = this.get('curr');
+      curr.setAttribute('data-node-attributes', JSON.stringify(nodeAttributes));
       this.fire('structure-change');
     },
 

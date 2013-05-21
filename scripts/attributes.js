@@ -35,9 +35,14 @@ YUI.add('reticle-attributes', function (Y) {
 	// map or ... fuck.
 	// this should probably just be a list
 
+	Y.Reticle.BaseAttributes = [
+		'id', 'class', 'title'
+	];
+
 	Y.Reticle.Tags = [
 		{
 			name: 'A',
+			attributes: ['href', 'target'],
 			displayType: 'inline',
 			validChildren: ['IMG']
 		},
@@ -56,7 +61,7 @@ YUI.add('reticle-attributes', function (Y) {
 
 		{
 			name: 'IMG',
-			attributes: ['src'],
+			attributes: ['src', 'alt'],
 			validChildren: [],
 			displayType: 'inline'
 		},
@@ -65,6 +70,9 @@ YUI.add('reticle-attributes', function (Y) {
 			name: 'INPUT',
 			displayType: 'block',
 			terminal: true, // a terminal tag, has no children
+			defaults: [
+				{ attr: 'type', value: 'text' }
+			],
 			attributes: [
 				{
 					name: 'accept',

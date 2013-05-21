@@ -116,6 +116,12 @@ YUI.add('keyboard-model', function (Y) {
         reticle.removeCurr();
       }), 'del', this);
 
+      // E for editing a node
+      Y.one(document).on('key', wrap(function(e) {
+        menuMan.editCurrentNode();
+        e.preventDefault();
+      }, this), 'e', this);
+
       // A for appending text
       Y.one(document).on('key', wrap(function(e) {
         menuMan.editNewTextNode('append');
