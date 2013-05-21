@@ -102,8 +102,11 @@ YUI.add('reticle', function (Y) {
       menu.render('#menu-layer');
       var reticleXY = reticle.getXY();
       console.log("XY ", reticleXY);
-      menu.setXY([ reticleXY[0],
-       reticleXY[1] + reticle.get('offsetHeight') ]);
+      menu.setXY([ 
+        reticleXY[0],
+        reticleXY[1] + reticle.get('offsetHeight') ]);
+      
+      menu.show();
 
     },
 

@@ -39,7 +39,7 @@ YUI.add('reticle-attributes', function (Y) {
 		{
 			name: 'A',
 			displayType: 'inline',
-			validChildren: []
+			validChildren: ['IMG']
 		},
 
 		{
@@ -52,6 +52,13 @@ YUI.add('reticle-attributes', function (Y) {
 			attributes: [],
 			validChildren: ['LI'],
 			displayType: 'block'
+		},
+
+		{
+			name: 'IMG',
+			attributes: ['src'],
+			validChildren: [],
+			displayType: 'inline'
 		},
 
 		{

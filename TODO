@@ -4,13 +4,6 @@ TODO
 
 PRIMARY EDITING
 
-- INLINE EDIT
-  A appends a text node after this element
-  I inserts a text node inside this element
-  ESC exits edit mode for that node, puts you back into NAV
-  ENTER commits the node
-  [ reticle appearance is kinda funky when editing text nodes...  ]
-
 - EDIT ATTRS
 		- shows all possible attributes for this elemenet, what they do
 		- value helpers (url, img, number, on/off, form_id) 
@@ -70,3 +63,10 @@ DONE
 - insert inside
   - append after, inside [ok]
   - context-sensitive (what tags make sense inside this one)
+
+
+- INLINE EDIT
+  A appends a text node after this element
+  I inserts a text node inside this element
+  ESC exits edit mode for that node, puts you back into NAV
+  ENTER commits the node

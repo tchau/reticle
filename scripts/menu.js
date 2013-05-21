@@ -93,7 +93,21 @@ YUI.add('menu', function (Y) {
           '</div>'));
       });
 
+      menu.addClass('hidden');
       contentBox.append(menu);
+    },
+
+    // blip in
+    show: function() {
+      var contentBox = this.get('contentBox');
+      contentBox.one('.menu').removeClass('hidden');
+      contentBox.one('.menu').addClass('shown');
+    },
+
+    hide: function() {
+      var contentBox = this.get('contentBox');
+      contentBox.one('.menu').removeClass('shown');
+      contentBox.one('.menu').addClass('hidden');
     },
 
     _getFilteredTags: function() {
