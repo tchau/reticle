@@ -65,30 +65,24 @@ YUI.add('reticle-attribute-editor', function (Y) {
     },
 
     _getSampleForInputType: function(attributeType) {
-    	if (attributeType == 'text') {
-    		return '';
-    	}
-    	else if (attributeType == 'pixels') {
-    		return '10px';
-    	}
-    	else if (attributeType == 'url') {
-    		return 'http://www.google.com';
-    	}
-    	else if (attributeType == 'number') {
-    		return '3';
-    	}
-    	else if (attributeType == 'MIME_type') {
-    		return 'MIME_type';
-    	}
-    	else return '';
+      if (attributeType == 'text') {
+        return '';
+      } else if (attributeType == 'pixels') {
+        return '10px';
+      } else if (attributeType == 'url') {
+        return 'http://www.google.com';
+      } else if (attributeType == 'number') {
+        return '3';
+      } else if (attributeType == 'MIME_type') {
+        return 'MIME_type';
+      } else return '';
     },
-
     _requestPreview: function(value) {
-      	console.log('preview', value);
-      	this.fire('preview-requested', {
-      		// mock value
-      		value: value
-      	});
+      console.log('preview', value);
+      this.fire('preview-requested', {
+        // mock value
+        value: value
+      });
     },
 
     bindUI: function() {

@@ -138,6 +138,14 @@ YUI.add('reticle', function (Y) {
       this.fire('structure-change');
     },
 
+    setCurrent: function(newCurr) {
+      if (newCurr != this.get('curr')) {
+        this.set('curr', newCurr);
+        this._moveReticle();
+        this.fire('structure-change');
+      }
+    },
+
     // nests it inside
     insert: function(newEl) {
       var curr = this.get('curr');

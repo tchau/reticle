@@ -16,9 +16,8 @@ PRIMARY EDITING
 
 - EDIT ATTRS
     - Explanations -- info panel tells you what the attrs mean
-		- Context-smart value assist (on/off, form_id, class) showing the valid values [partially completed]
+		- Context-smart value assist (form_id, element_id, class) showing the valid values [partially completed]
 		- data helpers: if you want to insert substitutions like {{item.id}}
-    - specific attrs [e.g. "checked", "required", "readonly", "selected"] are not yet well handled
 
 APPEND MENU
   - Info Panel explaining all the ELs (attrs and tags and such)
@@ -126,5 +125,6 @@ APPEND MENU
             - specific enum set [left / right/ top /middle /bottom]
                                 [on / off]
             - specific [e.g. "checked", "required", "readonly"]
+    - specific attrs [e.g. "checked", "required", "readonly", "selected"] are not yet well handled
 
 - menu "blips" in on the right, and blips away when you commit or cancel

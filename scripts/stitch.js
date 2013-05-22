@@ -36,6 +36,14 @@ YUI().use('node', 'event', 'menu-manager', 'parser', 'reticle-attributes', 'keyb
     menuManager: menuMan
   });
 
+  Y.one('#canvas').delegate('mouseover', function(e) {
+    reticle.setCurrent(e.target);
+  }, '.block-el', this);
+
+  Y.one('#canvas').delegate('mouseout', function(e) {
+    reticle.setCurrent(e.target);
+  }, '.block-el', this);
+
 
   // command interpreter takes action events and turns them into
   // model changes
@@ -90,8 +98,6 @@ YUI().use('node', 'event', 'menu-manager', 'parser', 'reticle-attributes', 'keyb
     var preview = Y.one('#preview');
     preview.empty();
     Y.one('#canvas').get('children').each(function(child) {
-      console.log('yeah');
-
       preview.append(parser.stringify(child));
     });
   };

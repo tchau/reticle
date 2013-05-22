@@ -66,7 +66,11 @@ input:focus {
 
 
 #reticle {
-	border:2px solid @blue;
+
+	// let it all pass through
+	pointer-events:none;
+
+ 	border:2px solid @blue;
 	position: absolute;
 	z-index: 10;
 	.transition(all 0.1s ease-out);
@@ -355,6 +359,7 @@ input:focus {
 	}
 
 	#info-layer {
+		pointer-events: none;
 		z-index:30;
 		position:absolute;
 		top:0;
