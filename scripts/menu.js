@@ -84,7 +84,6 @@ YUI.add('menu', function (Y) {
 
       // categories
       var categories = this._getCategoriesForTags(tags);
-      console.log("CATS", categories);
       Y.Array.each(categories, function(cat) {
         var catEl = Y.Node.create('<div class="tag-category"><div class="title"></div></div>');
         catEl.addClass(cat);
@@ -109,9 +108,15 @@ YUI.add('menu', function (Y) {
           tagset.one('.' + tagMeta.category).append(tagEl);
         }
         else {
-          tagset.append(tagEl);
+
+          tagset.one('.CONTENT').append(tagEl);
         }
       });
+
+      // empty?
+      if (tagset.one('.CONTENT').all('.tagname').size() == 0) {
+        tagset.one('.CONTENT').remove();
+      }
 
       menu.addClass('hidden');
       contentBox.append(menu);

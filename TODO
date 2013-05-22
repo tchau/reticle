@@ -18,9 +18,8 @@ STYLE FINDER
   - knows all the CSS classes we have
   - let us pick one out -- automagically updating the preview as you mouse over the choices!
 
-
 META
-  try fixing the busted appearanceof the meta
+  try fixing the busted appearanceof the block els
   custom renders for certain tags
 
 
@@ -35,14 +34,11 @@ TEMPLATING (json-t)
   - create template block **** HOW?? arghhh :(
   - data helper (navigate the JSON structure)
 
+
 HELP
   - controls help at bottom of sceren
   - live preview on right
 
-
-MENU MANAGER
-  - make the choices clickable/mouse-overable not just typable
-  
 
 EFFECTS
   can visuals bemade morre subtle?

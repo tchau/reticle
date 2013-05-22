@@ -92,6 +92,7 @@ YUI.add('reticle-attributes', function (Y) {
 			displayType: 'inline',
 			category: 'USER_INPUTS',
 			terminal: true, // a terminal tag, has no children
+			validChildren: [],
 			defaults: [
 				{ attr: 'type', value: 'text' }
 			],
@@ -101,7 +102,7 @@ YUI.add('reticle-attributes', function (Y) {
 				{ name: 'name', type: 'text' },
 				{ name: 'type', 
 					type: 'enum',
-					choices: ['button', 'checkbox', 'radio', 'text', 'password'],
+					choices: ['button', 'checkbox', 'radio', 'text', 'password', 'submit', 'file'],
 					defaultValue: 'text'
 				},
 				{
@@ -167,6 +168,7 @@ YUI.add('reticle-attributes', function (Y) {
 		{
 			name: 'TEXTAREA',
 			category: 'USER_INPUTS',
+			displayType: 'block',
 			attributes: [
 				{ name: 'cols', type: 'number' },
 				{ name: 'rows', type: 'number' },
