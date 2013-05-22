@@ -67,6 +67,10 @@ YUI.add('menu-manager', function (Y) {
           node: curr
         });
 
+        menu.on('preview-requested', function(e) {
+          reticle.update(e.nodeAttributes);
+        });
+
         menu.on('update-requested', function(e) {
           this._hideMenu();
 

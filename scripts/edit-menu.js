@@ -40,6 +40,15 @@ YUI.add('edit-menu', function (Y) {
 
         attrEditor.render(menu.one('.attributes'));
         this._attributeEditors.push(attrEditor);
+
+        attrEditor.on('preview-requested', function(e) {
+          var potentialValue = e.value;
+          var nodeAttributes = this.getValue();
+          nodeAttributes[attr.name] = potentialValue;
+          this.fire('preview-requested', {
+            nodeAttributes: nodeAttributes
+          })
+        }, this);
       }, this);
 
       menu.addClass('hidden');
@@ -66,16 +75,21 @@ YUI.add('edit-menu', function (Y) {
       contentBox.delegate('key', Y.bind(this.commit, this), 'enter', 'input');
     },
 
-    commit: function(tag) {
-      var contentBox = this.get('contentBox');
-
+    getValue: function() {
       var nodeAttributes = {};
       Y.Array.each(this._attributeEditors, function(ed) {
         nodeAttributes[ed.getName()] = ed.getValue();
       });
+      return nodeAttributes;
+    },
+
+    commit: function(tag) {
+      var contentBox = this.get('contentBox');
+
+      nodeAttributes = this.getValue();
 
       console.log('Commit Edit', nodeAttributes);
-      
+
       this.fire('update-requested', {
         nodeAttributes: nodeAttributes
       });
