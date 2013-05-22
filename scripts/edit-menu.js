@@ -9,6 +9,9 @@ YUI.add('edit-menu', function (Y) {
 
     initializer: function() {
       Y.Reticle.Menu.superclass.constructor.apply(this, arguments);
+
+      // the editors we manage
+      this._attributeEditors = [];
     },
 
     renderUI: function() {
@@ -27,39 +30,20 @@ YUI.add('edit-menu', function (Y) {
         '</div>');
       menu.addClass('menu');
 
-      var attributesEl = menu.one('.attributes');
-
-     // TODO load up existing values
-     var nodeAttrs = JSON.parse(node.getAttribute('data-node-attributes'));
+      // render attribute fiels
+      var nodeAttrs = JSON.parse(node.getAttribute('data-node-attributes'));
       Y.Array.each(attrs, function(attr) {
-        console.log(attr);
-        var existingValue = nodeAttrs[attr.name] || "";
-        var attrEl = Y.Node.create('<div class="attribute-editor">' +
-          '<label>' + attr.name + '</label>' +
-          '</div>');
-        attrEl.append(this._getInputForAttribute(attr, existingValue));
-        attributesEl.append(attrEl);
+        var attrEditor = new Y.Reticle.AttributeEditor({
+          attr: attr, 
+          existingValue: nodeAttrs[attr.name] || ""
+        });
+
+        attrEditor.render(menu.one('.attributes'));
+        this._attributeEditors.push(attrEditor);
       }, this);
 
       menu.addClass('hidden');
       contentBox.append(menu);
-    },
-
-    _getInputForAttribute: function(attr, existingValue) {
-
-      if (attr.type == 'enum' && Y.Lang.isValue(attr.choices)) {
-        var selectEl = Y.Node.create('<select class="attr-field" name="'+ attr.name+'"></select>');
-        Y.Array.each(attr.choices, function(choice) {
-          var opt = Y.Node.create('<option class="attr-enum-value" value="' + choice + '">' + choice + '</a>');
-          selectEl.append(opt);
-          if (existingValue == choice) {
-            opt.setAttribute('selected', 'selected');
-          }
-        });
-        return selectEl;
-      }
-
-      return Y.Node.create('<input class="attr-field" name="' + attr.name + '" value="' + existingValue + '"></input>');
     },
 
     // blip in
@@ -86,13 +70,12 @@ YUI.add('edit-menu', function (Y) {
       var contentBox = this.get('contentBox');
 
       var nodeAttributes = {};
-      contentBox.all('.attribute-editor .attr-field').each(function(input) {
-        if (input.get('value').trim() !== '') {
-          nodeAttributes[input.getAttribute('name')] = input.get('value');
-        }
+      Y.Array.each(this._attributeEditors, function(ed) {
+        nodeAttributes[ed.getName()] = ed.getValue();
       });
 
       console.log('Commit Edit', nodeAttributes);
+      
       this.fire('update-requested', {
         nodeAttributes: nodeAttributes
       });
@@ -117,5 +100,5 @@ YUI.add('edit-menu', function (Y) {
     }
   });
 }, '1.0', {
-    requires: ['json', 'menu', 'reticle-attributes']
+    requires: ['json', 'menu', 'reticle-attributes', 'reticle-attribute-editor']
 });

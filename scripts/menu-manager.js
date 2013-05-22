@@ -142,10 +142,15 @@ YUI.add('menu-manager', function (Y) {
       // generaets newEl
       menu.on('create-requested', function(e) {
         var tagName = e.elementName;
-        var node = Y.Node.create('<' + tagName + '></' + tagName + '>');
+
+        var node;
+        // do it differently for BR...buggy
+        if (tagName== 'BR')
+          node = Y.Node.create('<BR />');
+        else
+          node = Y.Node.create('<' + tagName + '></' + tagName + '>');
 
         this._hideMenu();
-
         this._populateDefaults(tagName, node);
         console.log(node);
 

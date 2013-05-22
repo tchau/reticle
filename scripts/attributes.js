@@ -37,8 +37,7 @@ YUI.add('reticle-attributes', function (Y) {
 
 	Y.Reticle.BaseAttributes = [
 		  {name: 'id', type:'text'},
-		  {name: 'class', type:'text'}, 
-		  {name: 'title', type:'text'}
+		  {name: 'class', type:'text'}
 	];
 
 	Y.Reticle.Tags = [
@@ -46,13 +45,16 @@ YUI.add('reticle-attributes', function (Y) {
 			name: 'A',
 			attributes: [
 				{ name: 'href', type: 'url' },
-				{ name: 'target', type: 'open_enum', choices: ['_blank', '_parent', '_self', '_top'] }
+				{ name: 'target', type: 'enum', choices: ['', '_blank', '_parent', '_self', '_top'] }
 			],
 			displayType: 'inline',
 			validChildren: ['IMG', 'SPAN'],
 			defaultContent: 'A hyperlink'
 		},
-
+		{
+			name: 'BR',
+			displayType: 'block'
+		},
 		{
 			name: 'DIV',
 			displayType: 'block'
@@ -84,7 +86,7 @@ YUI.add('reticle-attributes', function (Y) {
 
 		{
 			name: 'INPUT',
-			displayType: 'block',
+			displayType: 'inline',
 			terminal: true, // a terminal tag, has no children
 			defaults: [
 				{ attr: 'type', value: 'text' }
@@ -111,6 +113,15 @@ YUI.add('reticle-attributes', function (Y) {
 			displayType: 'block',
 			validChildren: ['A', 'SPAN', 'IMG'],
 			defaultContent: 'Paragraph text'
+		},
+
+		{
+			name: 'LABEL',
+			displayType: 'inline',
+			defaultContent: 'Label',
+			attributes: [
+				{ name: 'for', type: 'element_id' }   //TODO THINK ABOUT HELPERS HERE
+			]
 		},
 
 		{

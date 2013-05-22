@@ -28,6 +28,10 @@ APPEND MENU
   - create objects with interesting defaults
   - refresh the preview even AS you are cycling through POSSIBILITIES
 
+META;
+  try fixing the busted appearanceof the meta
+  custom renders for certain tags
+
 
 NAVIGATION
   - reconsider the current scope in/out scheme... perhaps a pure flat scheme makes sense? 
@@ -50,6 +54,11 @@ MENU MANAGER
   
 
 EFFECTS
+  can visuals bemade morre subtle?
+    no borders
+    show the meta info when needed - some attrs (that matter for navigation) are always present; others show only when you get near them
+
+  - menu positioning is fucked up
   - floaty checkmark when you've committed
   - floaty x when you've cancelled
   - reticle has commands ON it [add insert edit]. the available comands are also context sensitive
