@@ -192,12 +192,7 @@ YUI.add('menu', function (Y) {
       // ALL chars in the input
       input.on('valuechange', this._highlightBestMatch, this);
 
-      // preview request
       contentBox.delegate('hover', function(e) {
-        this.fire('preview-requested', {
-          elementName: e.currentTarget.getAttribute('data-name')
-        });
-
         this.set('bestMatch', e.currentTarget );
       }, '.tagname', this);
 
@@ -213,6 +208,10 @@ YUI.add('menu', function (Y) {
         var bestMatch = this.get('bestMatch');
         tagset.all('.best').removeClass('best');
         bestMatch.addClass('best');
+
+        this.fire('preview-requested', {
+          elementName: bestMatch.getAttribute('data-name')
+        });
       }, this);
     },
 
@@ -269,11 +268,13 @@ YUI.add('menu', function (Y) {
         //var scores
         if (partialMatches.length > 0) {
           // partialMatches[0].addClass('best');
-          this.set('bestMatch', bestMatch.tag);
+          if (this.get('bestMatch') != bestMatch) { // prevent jerkiness
+            this.set('bestMatch', bestMatch.tag);
+          }
         }
     },
 
-    commit: function(tag) {
+    commit: function() {
       this.fire('create-requested', {
         elementName: this.get('bestMatch').getAttribute('data-name')
       });

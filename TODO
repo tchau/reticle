@@ -2,14 +2,19 @@
 TODO
 ============================================================
 
+Next three tasks
+  - CSS
+  - JSON-T? paste, parse, navigate?
+
+
 
 PRIMARY EDITING
 
 - EDIT ATTRS
-    - Explanations
-		- Context-smart value assist (on/off, form_id, class) showing the valid values
-    - specific attrs [e.g. "checked", "required", "readonly"]
+    - Explanations -- info panel tells you what the attrs mean
+		- Context-smart value assist (on/off, form_id, class) showing the valid values [partially completed]
 		- data helpers: if you want to insert substitutions like {{item.id}}
+    - specific attrs [e.g. "checked", "required", "readonly", "selected"] are not yet well handled
 
 APPEND MENU
   - Info Panel explaining all the ELs (attrs and tags and such)

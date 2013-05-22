@@ -160,6 +160,16 @@ YUI.add('reticle', function (Y) {
       this.fire('structure-change');
     },
 
+    replaceCurrWith: function(newEl) {
+      var curr = this.get('curr');
+      curr.replace(newEl);
+      this.set('curr', newEl);
+      this._moveReticle();
+
+      // move somehwere else...into a structuremanager thing
+      this.fire('structure-change');
+    },
+
     // update curr with new attributes
     update: function(nodeAttributes) {
       var curr = this.get('curr');

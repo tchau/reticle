@@ -30,6 +30,10 @@ YUI.add('menu-manager', function (Y) {
       var currMenu = this.get('currentMenu');
       var reticle = this.get('reticle');
 
+      if (Y.one('#append-candidate')) {
+        reticle.removeCurr();
+      }
+
       // empty text nodes: kill them
       if (Y.Lang.isValue(currMenu)) {
         if (currMenu instanceof Y.Reticle.InlineTextMenu && currMenu.getText().trim() === "") {
@@ -146,13 +150,16 @@ YUI.add('menu-manager', function (Y) {
       // displays candidate node
       menu.on('preview-requested', function(e) {
 
-        // hacky
-        if (Y.one('#append-candidate')) {
-          reticle.removeCurr();
-        }
         var newBlockEl = this._makeNodeFromTagName(e.elementName);
         newBlockEl.setAttribute('id', 'append-candidate');
-        this._appendForMode(newBlockEl, mode);
+
+        // hacky
+        if (Y.one('#append-candidate')) {
+          reticle.replaceCurrWith(newBlockEl);
+        }
+        else {
+          this._appendForMode(newBlockEl, mode);
+        }
 
       }, this);
 
@@ -161,8 +168,14 @@ YUI.add('menu-manager', function (Y) {
         var tagName = e.elementName;
 
         var newBlockEl = this._makeNodeFromTagName(tagName);
+        if (Y.one('#append-candidate')) {
+          reticle.replaceCurrWith(newBlockEl);
+        }
+        else {
+          this._appendForMode(newBlockEl, mode);
+        }
+
         this._hideMenu();
-        this._appendForMode(newBlockEl, mode);
 
       }, this);
 
