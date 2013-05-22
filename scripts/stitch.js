@@ -20,6 +20,9 @@ YUI().use('node', 'event', 'menu-manager', 'parser', 'reticle-attributes', 'keyb
   reticle.render();
   GLOB.reticle = reticle;
 
+  // knows all the CSS rules we have in our system
+  // var styleMan = new Y.Reticle.StyleMan({});
+
   // display and hides menus, positions thems
   var menuMan = new Y.Reticle.MenuManager({
     reticle: reticle,

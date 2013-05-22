@@ -33,7 +33,9 @@ YUI.add('parser', function (Y) {
       var node = Y.Node.create('<' + tagName + '></' + tagName + '>');
 
       Y.Object.each(nodeAttributes, function(value, key) {
-        node.setAttribute(key, value);
+        if (Y.Lang.isValue(value)) {
+          node.setAttribute(key, value);
+        }
       });
 
       blockEl.get('children').each(function(child) {

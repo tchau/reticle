@@ -29,6 +29,8 @@ body {
 	font-size: 11px;
 	font-family: helvetica;
 	line-height: 1.4em;
+	margin:0;
+	padding-bottom: 400px;
 }
 
 input:focus {
@@ -81,10 +83,11 @@ input:focus {
 
 #right-space {
 	width: 49%;
-	float:left;
+	position:fixed;
+	right:0;
+	top:0;
 	border-left: 1px solid black;
 	height: 100%;
-	position: relative;
 
 	.heading {
 		position:absolute;
@@ -224,15 +227,22 @@ input:focus {
 		color: #999;
 
 		.prompt {
-			font-size: 9px;
-			color: #CCC;
-			text-transform: uppercase;
+			font-size: 14px;
+			margin-bottom: 10px;
+			color: #DDD;
 		}
 
 		.tagset {
 			margin-top: 10px;
 			background: #333;
 			padding: 5px;
+
+			.tag-category {
+				.title {
+					text-decoration:underline;
+					color: #DDD;
+				}
+			}
 		}
 
 		.tagname {
@@ -263,25 +273,48 @@ input:focus {
 				background: #444;
 				padding: 5px 8px;
 				display:inline-block;
+				position:relative;
 
 				label {
-					width: 50px;
+					width: 45px;
 					padding-right: 15px;
 					text-align: right;
+					font-size:11px;
+					color:#BBB;
 					display: inline-block;
 				}
 				.field {
 					display:inline-block;
+					input {
+						width:150px;
+					}
+				}
+
+				&:hover {
+					.choices {
+						.opacity(1);
+					}
 				}
 
 				.choices {
-					display:inline-block;
+					position:absolute;
+					left: 230px;
+					top: 5px;
+					border:1px solid #999;
+					.border(5px);
+					padding: 5px 12px;
+					background: #fff;
+					color: #666;
+					.opacity(0);
+					.transition(opacity 0.2s);
+
 					a {
 						margin-right: 5px;
 					}
 					a:hover {
 						cursor:pointer;
-						color:#fff;
+						color: #333;
+						text-decoration: underline;
 					}
 				}
 

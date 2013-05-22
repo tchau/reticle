@@ -3,7 +3,7 @@ YUI.add('reticle-attributes', function (Y) {
    Y.Reticle = Y.namespace('Y.Reticle');
 
 	/***
-		Encodes knowledge of HTML
+		Encodes knowledge G HTML
 	*/
 	var helpers = {
 		mimeType: function() {
@@ -53,10 +53,12 @@ YUI.add('reticle-attributes', function (Y) {
 		},
 		{
 			name: 'BR',
+			category: 'STRUCTURE',
 			displayType: 'block'
 		},
 		{
 			name: 'DIV',
+			category: 'STRUCTURE',
 			displayType: 'block'
 		},
 
@@ -66,6 +68,7 @@ YUI.add('reticle-attributes', function (Y) {
 
 		{
 			name: 'FORM',
+			category: 'USER_INPUTS',
 			displayType: 'block',
 			attributes: [
 				{ name: 'name',   type: 'text' },
@@ -87,6 +90,7 @@ YUI.add('reticle-attributes', function (Y) {
 		{
 			name: 'INPUT',
 			displayType: 'inline',
+			category: 'USER_INPUTS',
 			terminal: true, // a terminal tag, has no children
 			defaults: [
 				{ attr: 'type', value: 'text' }
@@ -111,6 +115,7 @@ YUI.add('reticle-attributes', function (Y) {
 		{
 			name: 'P',
 			displayType: 'block',
+			category: 'STRUCTURE',
 			validChildren: ['A', 'SPAN', 'IMG'],
 			defaultContent: 'Paragraph text'
 		},
@@ -126,6 +131,7 @@ YUI.add('reticle-attributes', function (Y) {
 
 		{
 			name: 'LI',
+			category: 'STRUCTURE',
 			validParents: 'UL',
 			validChildren: 'UL',
 			displayType: 'block',
@@ -134,6 +140,7 @@ YUI.add('reticle-attributes', function (Y) {
 
 		{
 			name: 'SELECT',
+			category: 'USER_INPUTS',
 			validChildren: ['OPTION'],
 			displayType: 'block'
 		},
@@ -141,10 +148,11 @@ YUI.add('reticle-attributes', function (Y) {
 		{
 			name: 'OPTION',
 			displayType: 'block',
+			insertable: false,
 			attributes: [
 				{ name: 'disabled', type: 'specific', choices: ['disabled'] },
-				{ name: 'label',    type: 'text' },
-				{ name: 'selected', type: 'specific', choices: ['selected'] },
+				{ name: 'label',    type: 'text',     defaultValue: 'Option'},
+				{ name: 'selected', type: 'specific', choices: ['', 'selected'] },
 				{ name: 'value',    type: 'text' }
 			],
 			validParents: ['SELECT']
@@ -154,8 +162,24 @@ YUI.add('reticle-attributes', function (Y) {
 			name: 'SPAN',
 			displayType: 'inline'
 		},
+
+		{
+			name: 'TEXTAREA',
+			category: 'USER_INPUTS',
+			attributes: [
+				{ name: 'cols', type: 'number' },
+				{ name: 'rows', type: 'number' },
+				{ name: 'maxlength', type: 'number' },
+				{ name: 'wrap', type: 'enum', choices: ['hard', 'soft'] },
+				{ name: 'placeholder', type:'text', defaultValue: 'Placeholder Text' },
+				{ name: 'readonly', type:'specific', choices: ['', 'readonly'] },
+				{ name: 'value',    type: 'text' }
+			],
+		},
+
 		{
 			name: 'TABLE',
+			category: 'STRUCTURE',
 			attributes: [],
 			validChildren: ['TR', 'THEAD', 'TBODY'],
 			displayType: 'block' // well its really a table... 
@@ -185,6 +209,7 @@ YUI.add('reticle-attributes', function (Y) {
 		},
 		{
 			name: 'UL',
+			category: 'STRUCTURE',
 			attributes: [],
 			validChildren: ['LI'],
 			displayType: 'block'

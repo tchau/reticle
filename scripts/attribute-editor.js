@@ -28,15 +28,16 @@ YUI.add('reticle-attribute-editor', function (Y) {
 
           '<label>' + attr.name + '</label>' +
           '<div class="field"></div>' +
-          '<div class="choices"></div>' +
-          '</div>');
+        '</div>');
 
       // attrEl.append(this._getInputForAttribute(attr, existingValue));
       var inputEl = Y.Node.create('<input class="attr-field" name="' + attr.name + '" value="' + existingValue + '"></input>');
+      inputEl.setAttribute('placeholder', this._getSampleForInputType(attr.type));
       attrEl.one('.field').append(inputEl);
 
     	// create a helper for enums
       if (attr.type == 'enum' && Y.Lang.isValue(attr.choices)) {
+      	attrEl.append(Y.Node.create('<div class="choices"></div>'));
       	Y.Array.each(attr.choices, function(choice) {
 	      	var choiceEl = Y.Node.create('<a class="enum-value">' + choice + '</a>') ;
 	      	choiceEl.setData(choice);
@@ -47,9 +48,23 @@ YUI.add('reticle-attribute-editor', function (Y) {
       contentBox.append(attrEl);
     },
 
-    _getInputForAttribute: function(attr, existingValue) {
-    	var contentBox = this.get('contentBox');
-
+    _getSampleForInputType: function(attributeType) {
+    	if (attributeType == 'text') {
+    		return '';
+    	}
+    	else if (attributeType == 'pixels') {
+    		return '10px';
+    	}
+    	else if (attributeType == 'url') {
+    		return 'http://www.google.com';
+    	}
+    	else if (attributeType == 'number') {
+    		return '3';
+    	}
+    	else if (attributeType == 'MIME_type') {
+    		return 'MIME_type';
+    	}
+    	else return '';
     },
 
     _requestPreview: function(value) {

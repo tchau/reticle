@@ -2,37 +2,24 @@
 TODO
 ============================================================
 
-modifying ANY attribute ... shows change immediately... 
-or... how bout.. even HOVERING over any value...? ?? 
-
 
 PRIMARY EDITING
-- EDIT ATTRS
-    - need to implement VALUE ASSIST
-		- value helpers (url, img, number, on/off, form_id) showing the valid values
-        what are the value "types"? 
-            - text
-            - pixels
-            - URL
-            - number
-            - MIME_type
-            - specific enum set [left / right/ top /middle /bottom]
-                                [on / off]
-            - specific [e.g. "checked", "required", "readonly"]
-      - always an open field -- with a contextual helper. being an open field means it can be templatable
-		- data helpers: if you want to insert substitutions like {{item.id}} ---- perhaps this should be done almost anywhere...?
 
+- EDIT ATTRS
+    - Explanations
+		- Context-smart value assist (on/off, form_id, class) showing the valid values
+    - specific attrs [e.g. "checked", "required", "readonly"]
+		- data helpers: if you want to insert substitutions like {{item.id}}
 
 APPEND MENU
   - Info Panel explaining all the ELs (attrs and tags and such)
-  - create objects with interesting defaults
   - refresh the preview even AS you are cycling through POSSIBILITIES
 
-META;
+META
   try fixing the busted appearanceof the meta
   custom renders for certain tags
 
-
+  
 NAVIGATION
   - reconsider the current scope in/out scheme... perhaps a pure flat scheme makes sense? 
    - reconsider the modulus navigation (its kinda disorienting)
@@ -84,7 +71,6 @@ ADVANCED MANIPULATION
 VISUALS
 ============================================================
 
-- menu "blips" in on the right, and blips away when you commit or cancel
 - help icon in lower right
 
 
@@ -99,6 +85,7 @@ DONE
   - append after, inside [ok]
   - context-sensitive (what tags make sense inside this one)
 
+- Categorize the tags
 
 - INLINE EDIT
   A appends a text node after this element
@@ -113,3 +100,21 @@ DONE
 
 LIVE PREVIEW
   - show the preview
+
+
+APPEND MENU
+  - create objects with interesting defaults
+
+- EDIT ATTRS
+    - value helpers (url, img, number, on/off, form_id) showing the valid values
+        what are the value "types"? 
+            - text
+            - pixels
+            - URL
+            - number
+            - MIME_type
+            - specific enum set [left / right/ top /middle /bottom]
+                                [on / off]
+            - specific [e.g. "checked", "required", "readonly"]
+
+- menu "blips" in on the right, and blips away when you commit or cancel

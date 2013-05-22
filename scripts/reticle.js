@@ -85,7 +85,6 @@ YUI.add('reticle', function (Y) {
       // update menu with context
       this._updateMenuWithContext(Y.Reticle.TagMeta.getCapabilityContext(curr));
 
-
       this.fire('moved');
     },
 

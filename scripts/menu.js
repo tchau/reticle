@@ -81,20 +81,50 @@ YUI.add('menu', function (Y) {
       // show contextual menu
       var tagset = menu.one('.tagset');
       var tags = this._getFilteredTags();
+
+      // categories
+      var categories = this._getCategoriesForTags(tags);
+      console.log("CATS", categories);
+      Y.Array.each(categories, function(cat) {
+        var catEl = Y.Node.create('<div class="tag-category"><div class="title"></div></div>');
+        catEl.addClass(cat);
+        catEl.one('.title').set('text', cat);
+        tagset.append(catEl);
+      });
+      
+      tagset.append(Y.Node.create('<div class="tag-category CONTENT"><div class="title">CONTENT</div></div>'));
+
+      // render tags
       Y.Array.each(tags, function(tagMeta) {
         var tag = tagMeta.name;
         var chars = tag.split('');
         chars = Y.Array.map(chars, function(c) {
           return '<span class="' + c + '">' + c + "</span>";
         });
-        tagset.append(
-          Y.Node.create('<div class="tagname" data-name="' + tag + '">' +
-          chars.join('') +
-          '</div>'));
+
+        var tagEl = Y.Node.create('<div class="tagname" data-name="' + tag + '">' +
+            chars.join('') +
+            '</div>');
+        if (Y.Lang.isValue(tagMeta.category)) {
+          tagset.one('.' + tagMeta.category).append(tagEl);
+        }
+        else {
+          tagset.append(tagEl);
+        }
       });
 
       menu.addClass('hidden');
       contentBox.append(menu);
+    },
+
+    _getCategoriesForTags: function(tags) {
+      var cats = [];
+      Y.Array.each(tags, function(tagMeta) {
+        if (Y.Lang.isValue(tagMeta.category) && cats.indexOf(tagMeta.category) == -1) {
+          cats.push(tagMeta.category);
+        }
+      });
+      return cats;
     },
 
     // blip in
