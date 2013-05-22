@@ -12,9 +12,7 @@ PRIMARY EDITING
 		- data helpers: if you want to insert substitutions like {{item.id}}
 
 APPEND MENU
-  - refresh the preview even AS you are cycling through POSSIBILITIES
   - Info Panel explaining all the ELs (attrs and tags and such)
-
 
 STYLE FINDER
   - knows all the CSS classes we have
@@ -24,6 +22,7 @@ STYLE FINDER
 META
   try fixing the busted appearanceof the meta
   custom renders for certain tags
+
 
 NAVIGATION
   - reconsider the current scope in/out scheme... perhaps a pure flat scheme makes sense? 
@@ -109,6 +108,7 @@ LIVE PREVIEW
 
 APPEND MENU
   - create objects with interesting defaults
+  - refresh the preview even AS you are cycling through POSSIBILITIES
 
 - EDIT ATTRS
     - value helpers (url, img, number, on/off, form_id) showing the valid values
