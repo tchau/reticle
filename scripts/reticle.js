@@ -28,6 +28,15 @@ YUI.add('reticle', function (Y) {
        this._moveReticle();
     },
 
+    bindUI: function() {
+      this.before('currChange', function() {
+        this.get('curr').removeClass('active-current');
+      });
+      this.after('currChange', function() {
+        this.get('curr').addClass('active-current');
+      });
+    },
+
     scopeUp: function() {
       var curr = this.get('curr');
 

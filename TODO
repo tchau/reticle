@@ -10,6 +10,9 @@ Next three tasks
   - show up context menu (as you type) of what the attrs are for those ...
   - JSON-T? paste, parse, navigate?
 
+  ***
+   we need to LOCK the curr when we enter a menu.... else it gets all fucked
+  ***
 
 
 PRIMARY EDITING
