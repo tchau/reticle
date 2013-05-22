@@ -186,6 +186,29 @@ YUI.add('menu', function (Y) {
       // need to make sure it highlights the ones where it matches
       // ALL chars in the input
       input.on('valuechange', this._highlightBestMatch, this);
+
+      // preview request
+      contentBox.delegate('hover', function(e) {
+        this.fire('preview-requested', {
+          elementName: e.currentTarget.getAttribute('data-name')
+        });
+
+        this.set('bestMatch', e.currentTarget );
+      }, '.tagname', this);
+
+      contentBox.delegate('click', function(e) {
+        this.set('bestMatch', e.currentTarget );
+        this.commit();
+      }, '.tagname', this);
+
+
+      this.after('bestMatchChange', function() {
+        var contentBox = this.get('contentBox');
+        var tagset = contentBox.one('.tagset');
+        var bestMatch = this.get('bestMatch');
+        tagset.all('.best').removeClass('best');
+        bestMatch.addClass('best');
+      }, this);
     },
 
     _highlightBestMatch: function() {
@@ -239,17 +262,15 @@ YUI.add('menu', function (Y) {
 
         // special highlight for best match
         //var scores
-        tagset.all('.best').removeClass('best');
         if (partialMatches.length > 0) {
           // partialMatches[0].addClass('best');
-          bestMatch.tag.addClass('best');
-          this.set('bestMatch', bestMatch.tag.getAttribute('data-name'));
+          this.set('bestMatch', bestMatch.tag);
         }
     },
 
     commit: function(tag) {
       this.fire('create-requested', {
-        elementName: this.get('bestMatch')
+        elementName: this.get('bestMatch').getAttribute('data-name')
       });
     },
 

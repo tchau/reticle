@@ -12,14 +12,19 @@ PRIMARY EDITING
 		- data helpers: if you want to insert substitutions like {{item.id}}
 
 APPEND MENU
-  - Info Panel explaining all the ELs (attrs and tags and such)
   - refresh the preview even AS you are cycling through POSSIBILITIES
+  - Info Panel explaining all the ELs (attrs and tags and such)
+
+
+STYLE FINDER
+  - knows all the CSS classes we have
+  - let us pick one out -- automagically updating the preview as you mouse over the choices!
+
 
 META
   try fixing the busted appearanceof the meta
   custom renders for certain tags
 
-  
 NAVIGATION
   - reconsider the current scope in/out scheme... perhaps a pure flat scheme makes sense? 
    - reconsider the modulus navigation (its kinda disorienting)
@@ -28,7 +33,7 @@ NAVIGATION
 TEMPLATING (json-t)
   - JSON insert and then, render navigator view
   - create template variable
-  - create template block
+  - create template block **** HOW?? arghhh :(
   - data helper (navigate the JSON structure)
 
 HELP

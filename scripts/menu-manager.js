@@ -143,27 +143,26 @@ YUI.add('menu-manager', function (Y) {
         rootNode: root
       });
 
+      // displays candidate node
+      menu.on('preview-requested', function(e) {
+
+        // hacky
+        if (Y.one('#append-candidate')) {
+          reticle.removeCurr();
+        }
+        var newBlockEl = this._makeNodeFromTagName(e.elementName);
+        newBlockEl.setAttribute('id', 'append-candidate');
+        this._appendForMode(newBlockEl, mode);
+
+      }, this);
+
       // generaets newEl
       menu.on('create-requested', function(e) {
         var tagName = e.elementName;
 
-        var node;
-        // do it differently for BR...buggy
-        if (tagName== 'BR')
-          node = Y.Node.create('<BR />');
-        else
-          node = Y.Node.create('<' + tagName + '></' + tagName + '>');
-
+        var newBlockEl = this._makeNodeFromTagName(tagName);
         this._hideMenu();
-        this._populateDefaults(tagName, node);
-        console.log(node);
-
-        var newBlockEl = parser.parse(node);
-        if (mode == 'append') {
-          reticle.appendAfter(newBlockEl);
-        } else if (mode == 'insert') {
-          reticle.insert(newBlockEl);
-        }
+        this._appendForMode(newBlockEl, mode);
 
       }, this);
 
@@ -171,6 +170,30 @@ YUI.add('menu-manager', function (Y) {
       menu.focus();
       this.set('currentMenu', menu);
       this.fire('focused');
+    },
+
+    _appendForMode: function(newBlockEl, mode) {
+      var reticle = this.get('reticle');
+      if (mode == 'append') {
+        reticle.appendAfter(newBlockEl);
+      } else if (mode == 'insert') {
+        reticle.insert(newBlockEl);
+      }
+    },
+
+    _makeNodeFromTagName: function(tagName) {
+      var parser = this.get('parser');
+
+      var node;
+      // do it differently for BR...buggy
+      if (tagName== 'BR')
+        node = Y.Node.create('<BR />');
+      else
+        node = Y.Node.create('<' + tagName + '></' + tagName + '>');
+
+      this._populateDefaults(tagName, node);
+      var newBlockEl = parser.parse(node);
+      return newBlockEl;
     },
 
     _populateDefaults: function(tagName, node) {

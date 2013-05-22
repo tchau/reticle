@@ -44,7 +44,7 @@ YUI.add('reticle-attributes', function (Y) {
 		{
 			name: 'A',
 			attributes: [
-				{ name: 'href', type: 'url' },
+				{ name: 'href', type: 'url', defaultValue: 'http://www.google.com' },
 				{ name: 'target', type: 'enum', choices: ['', '_blank', '_parent', '_self', '_top'] }
 			],
 			displayType: 'inline',
