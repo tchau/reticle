@@ -35,14 +35,30 @@ YUI.add('reticle-attribute-editor', function (Y) {
       inputEl.setAttribute('placeholder', this._getSampleForInputType(attr.type));
       attrEl.one('.field').append(inputEl);
 
-    	// create a helper for enums
+      // create a helper for enums
       if (attr.type == 'enum' && Y.Lang.isValue(attr.choices)) {
-      	attrEl.append(Y.Node.create('<div class="choices"></div>'));
-      	Y.Array.each(attr.choices, function(choice) {
-	      	var choiceEl = Y.Node.create('<a class="enum-value">' + choice + '</a>') ;
-	      	choiceEl.setData(choice);
-	      	attrEl.one('.choices').append(choiceEl);
-      	});
+        attrEl.append(Y.Node.create('<div class="choices"></div>'));
+        Y.Array.each(attr.choices, function(choice) {
+          var choiceEl = Y.Node.create('<a class="enum-value">' + choice + '</a>');
+          choiceEl.setData(choice);
+          attrEl.one('.choices').append(choiceEl);
+        });
+      }
+
+      // maybe we want a toggle here? to turn it on or off?
+      if (attr.type == 'specific' && Y.Lang.isValue(attr.choices)) {
+        attrEl.append(Y.Node.create('<div class="choices specific"></div>'));
+        var choice = attr.choices[0];
+
+        // positive choice
+        var choiceEl = Y.Node.create('<a class="enum-value">' + choice + '</a>');
+        choiceEl.setData(choice);
+        var choicesEl = attrEl.one('.choices');
+        choicesEl.append(choiceEl);
+
+        var negativeEl = Y.Node.create('<a class="enum-value strikethrough">' + choice + '</a>');
+        negativeEl.setData("");
+        choicesEl.append(negativeEl);
       }
 
       contentBox.append(attrEl);

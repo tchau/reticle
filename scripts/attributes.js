@@ -154,7 +154,7 @@ YUI.add('reticle-attributes', function (Y) {
 			attributes: [
 				{ name: 'disabled', type: 'specific', choices: ['disabled'] },
 				{ name: 'label',    type: 'text',     defaultValue: 'Option'},
-				{ name: 'selected', type: 'specific', choices: ['', 'selected'] },
+				{ name: 'selected', type: 'specific', choices: ['selected'] },
 				{ name: 'value',    type: 'text' }
 			],
 			validParents: ['SELECT']

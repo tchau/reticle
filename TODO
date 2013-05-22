@@ -3,7 +3,11 @@ TODO
 ============================================================
 
 Next three tasks
-  - CSS
+  - CSS/LESS
+    - ooohhh.
+    - can we make it AWARE of the current nesting of HTML els classes and nodes? e.g. .intro [p, h2, .myclass]
+  - once the LESS structure exists we can query it for "classes possibly relevant to me"
+  - show up context menu (as you type) of what the attrs are for those ...
   - JSON-T? paste, parse, navigate?
 
 
