@@ -2,8 +2,10 @@
 @border-color: #AAA;
 @blue: #3576F0;
 
-@steel: #A2AFC6;
-@light-steel: #C2C9D7;
+//@steel: #A2AFC6;
+@steel: #BCC1D8;
+//@light-steel: #C2C9D7;
+@light-steel: #D2D9E8;
 
 /* Micro ClearFix Mixin */
 .clearfix {
@@ -140,7 +142,7 @@ input:focus {
 		&.block {
 			min-height: 10px;
 			padding: 12px 12px 3px 12px;
-			margin: 12px 0 5px 0;
+			margin: 15px 0 5px 0;
 		}
 
 		&.inline {
@@ -246,11 +248,12 @@ input:focus {
 
 		.tagset {
 			margin-top: 10px;
-			background: #333;
-			padding: 5px;
+			background: #222;
+			padding: 15px;
 			font-size: 11px;
 
 			.tag-category {
+				margin-bottom: 10px;
 				.title {
 					text-decoration:underline;
 					color: #DDD;
@@ -408,17 +411,15 @@ input:focus {
 					
 					.bubble {
 						line-height: 1.4em;
-						margin-right: 5px;
 						background: white;
-						border: 1px solid @light-steel;
-						.border(5px);
+						border: 1px solid @steel;
 						padding: 0px 6px;
 						display: inline-block;
 					}
 
 					.bubble.node-name {
-						background:@steel;
-						color:white;
+						color:#333;
+						font-weight: bold;
 					}
 				}
 			}
