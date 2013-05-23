@@ -1,6 +1,7 @@
 @light-grey: #666;
 @border-color: #AAA;
 @blue: #3576F0;
+@light-blue: #518FF0;
 
 //@steel: #A2AFC6;
 @steel: #BCC1D8;
@@ -71,9 +72,9 @@ input:focus {
 
 	// let it all pass through
 	pointer-events:none;
-
- 	border:2px solid @blue;
+ 	border-left: 2px solid @blue;
 	position: absolute;
+	padding-left: 2px;
 	z-index: 10;
 	.transition(all 0.1s ease-out);
 
@@ -134,15 +135,22 @@ input:focus {
 	}
 
 	.block-el.active-current {
-		//border:1px solid blue;
+		border:2px solid @blue;
 		// background: white;
+		&> .meta .bubble, &> .meta .bubble.node-name {
+			border: 1px solid @blue;
+			background: @light-blue;
+			color: #eee;
+		}
 	}
 	.block-el {
 		// 7B8697
 		// background: rgba(162, 175, 198, 0.08);
 		// background: rgba(162, 175, 198, 0.08);
 		background: rgba(123, 134, 151, 0.08);
-		border:1px solid @light-steel;
+		.transition(border 0.2s);
+		border:2px solid @light-steel;
+		position:relative;
 
 		&.block {
 			min-height: 10px;
@@ -156,9 +164,6 @@ input:focus {
 			margin: 5px;
 			margin-right: 5px;
 			min-height: 10px;
-			& > .block-el.text {
-				border: none;
-			}
 
 			&[data-node-name="A"] {
 				color:blue;
@@ -387,63 +392,60 @@ input:focus {
 		left:0;
 	}
 
-	#info-layer {
-		pointer-events: none;
-		z-index:30;
-		position:absolute;
+
+	.meta {
+		position: absolute;
 		top:0;
 		left:0;
+		/*
+		&.inline {
+			.content {
+				position: absolute;
+				top:0;
+				color: #666;
+				font-size: 10px;
+				font-weight: normal;
+				padding: 1px;
+				
+				.bubble {
+					background: #eee;
+					border-right: 1px solid @steel;
+					padding: 1px 3px;
+					display: inline-block;
+				}
 
-		.meta {
-			/*
-			&.inline {
-				.content {
-					position: absolute;
-					top:0;
+				.bubble.node-name {
+					background: white;
 					color: #666;
-					font-size: 10px;
-					font-weight: normal;
-					padding: 1px;
-					
-					.bubble {
-						background: #eee;
-						border-right: 1px solid @steel;
-						padding: 1px 3px;
-						display: inline-block;
-					}
-
-					.bubble.node-name {
-						background: white;
-						color: #666;
-						line-height: 1.4em;
-						font-size: 11px;
-					}
+					line-height: 1.4em;
+					font-size: 11px;
 				}
 			}
-			*/
-			&.block, &.inline {
-				.content {
-					position: relative;
-					top: -0.8em;
-					left: 1em;
-					color: #555;
-					display:inline-block;
-					font-size: 10px;
-					font-weight: normal;
-					
-					.bubble {
-						line-height: 1.4em;
-						background: white;
-						border: 1px solid @steel;
-						padding: 0px 6px;
-						display: inline-block;
-					}
+		}
+		*/
+		&.block, &.inline {
+			.content {
+				.transition(background-color 0.2s);
+				position: relative;
+				top: -0.8em;
+				left: 1em;
+				color: #555;
+				display:inline-block;
+				font-size: 10px;
+				font-weight: normal;
+			}
 
-					.bubble.node-name {
-						color:#333;
-						font-weight: bold;
-					}
-				}
+			.bubble {
+				line-height: 1.4em;
+				background: white;
+				border: 1px solid @steel;
+				padding: 0px 6px;
+				display: inline-block;
+			}
+
+			.bubble.node-name {
+				color:#333;
+				font-weight: bold;
 			}
 		}
 	}

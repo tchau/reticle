@@ -51,8 +51,8 @@ YUI.add('reticle', function (Y) {
 
     scopeDown: function() {
       var curr = this.get('curr');
-      if (curr.get('children').size() > 0) {
-        curr = curr.get('children').item(0);
+      if (curr.all('.block-el').size() > 0) {
+        curr = curr.all('> .block-el').item(0);
       }
       this.set('curr', curr);
       this._moveReticle();

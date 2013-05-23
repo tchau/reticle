@@ -38,13 +38,15 @@ YUI().use('node', 'event', 'menu-manager', 'parser', 'reticle-attributes', 'keyb
 
   // var cssCanvas = new Y.Reticle.StyleCanvas({});
 
-  Y.one('#canvas').delegate('mouseover', function(e) {
-    reticle.setCurrent(e.target);
-  }, '.block-el', this);
+  // Y.one('#canvas').delegate('mouseover', function(e) {
+  //   if (e.target.hasClass('block-el'))
+  //     reticle.setCurrent(e.target);
+  // }, '.block-el', this);
 
-  Y.one('#canvas').delegate('mouseout', function(e) {
-    reticle.setCurrent(e.target);
-  }, '.block-el', this);
+  // Y.one('#canvas').delegate('mouseout', function(e) {
+  //   if (e.target.hasClass('block-el'))
+  //     reticle.setCurrent(e.target);
+  // }, '.block-el', this);
 
 
   Y.one('#toggle-style').on('click', function() {
@@ -57,45 +59,49 @@ YUI().use('node', 'event', 'menu-manager', 'parser', 'reticle-attributes', 'keyb
   function displayMeta() {
     $('#info-layer').empty();
 
-    $('.block-el').each(function(i, el) {
+    Y.all('.block-el').each(function(el) {
 
       // text nodes don't get any meta
       if (Y.one(el).hasClass('text')) {
         return;
       }
 
-      var metaContent = $('<div class="content"></div>');
-      var metaEl = $('<div></div>').addClass('meta').append(metaContent);
+      if (Y.Lang.isValue(el.one('.meta')))
+        el.all('.meta').remove();
+
+      var metaContent = Y.Node.create('<div class="content"></div>');
+      var metaEl = Y.Node.create('<div></div>').addClass('meta').append(metaContent);
 
       // displaying
       metaEl.addClass(Y.Reticle.TagMeta.findByName(el.getAttribute('data-node-name')).displayType);
 
-      var nodeAttributes = JSON.parse($(el).attr('data-node-attributes'));
+      var nodeAttributes = JSON.parse(el.getAttribute('data-node-attributes'));
       var classes = nodeAttributes['class'];
       var id = nodeAttributes['id'];
 
-      var nodeEl = $('<div></div>')
+      var nodeEl = Y.Node.create('<div></div>')
         .addClass('bubble')
         .addClass('node-name')
-        .html($(el).attr('data-node-name'));
-      metaContent.append(nodeEl);
+        .set('text', el.getAttribute('data-node-name'));
+      metaContent.appendChild(nodeEl);
 
       // draw ID
       if (Y.Lang.isValue(id)) {
-        metaContent.append($('<div></div>')
+        metaContent.appendChild(Y.Node.create('<div></div>')
           .addClass('bubble')
-          .html('#' + id));
+          .set('text', '#' + id));
       }
 
       // draw CLASSES
       if (Y.Lang.isValue(classes)) {
-        metaContent.append($('<div></div>')
+        metaContent.appendChild(Y.Node.create('<div></div>')
           .addClass('bubble')
-          .html(classes));
+          .set('text', classes));
       }
 
-      $('#info-layer').append(metaEl);
-      metaEl.offset($(el).offset());
+      // $('#info-layer').append(metaEl);
+      el.appendChild(metaEl);
+      // metaEl.offset($(el).offset());
     });
   }
 
