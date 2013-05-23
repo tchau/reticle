@@ -53,6 +53,10 @@ YUI().use('node', 'event', 'menu-manager', 'parser', 'reticle-attributes', 'keyb
     Y.one('#style-canvas').toggleClass('hidden');
   });
 
+  Y.one('#toggle-help').on('click', function() {
+    Y.one('#training-wheels').toggleClass('minimized');
+  });
+
   // command interpreter takes action events and turns them into
   // model changes
 

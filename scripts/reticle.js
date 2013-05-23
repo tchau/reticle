@@ -73,7 +73,7 @@ YUI.add('reticle', function (Y) {
       var curr = this.get('curr');
 
       if (!Y.Lang.isValue(curr.next('.block-el'))) {
-        curr = curr.siblings('.block-el:first-child').item(0);
+        curr = curr.siblings('.block-el').item(0);
       } else {
         curr = curr.next('.block-el');
       }

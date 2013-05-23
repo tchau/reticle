@@ -21,6 +21,7 @@
 	<!--<link rel="stylesheet" href="reset.css">-->
 	<link rel="stylesheet/less" href="stitch.less">
   <link rel="stylesheet/less" href="starter.less">
+  <link rel="stylesheet/less" href="help.less">
   <link rel="stylesheet/less" href="stylecanvas.less">
 
 	<script type="text/javascript">
@@ -102,33 +103,49 @@
     <div id="info-layer"></div>
     <div id="menu-layer"></div>
 
-    <!-- depending on context, you can add certain attributes to the elemnt -->
-    <div id="edit-element-menu">
-      INPUT
-      readonly  (undefined: greyed out)
-      maxlength (undefined: greyed out)
-
-    </div>
-    <!-- depending on context, you can add certain elements-->
-    <div id="add-element-menu">
-      div
-      span
-      a
-      ul
-    </div>
-
     <div id="tray">Add - Edit - etc. 
       <div id="shift-status">Shift</div>
     </div>
 
     <!--training wheels show new users how to move -->
     <div id="training-wheels">
-      move:     [j]
-             [h][k][l]
-      ^^:    shift+j
-      vv:    shift+k
+      <div id="toggle-help"><a>help</a></div>
+
+      <div class="section">
+        <div class="title">Move</div>
+        <div class="move-up move">
+          <span>UP</span>
+          K or &uarr; 
+        </div>
+        <div class="move-left move">
+          <span>LEFT</span>
+          H or &larr; 
+        </div>
+        <div class="move-down move">
+          <span>DOWN</span>
+          J or &darr; 
+        </div>
+        <div class="move-right move">
+          <span>RIGHT</span>
+          l or &rarr; 
+        </div>
     </div>
-    <a href="http://www.google.com">LINK</a>
+
+
+    <div class="section manipulations">
+      <div class="title">Manipulate</div>
+      <div class="cmd">
+        <span class="key">A</span> add text
+      </div>
+      <div class="cmd">
+        <span class="key">I</span> insert text
+      </div>
+      <div class="cmd">
+        <span class="key">Shift + A</span> add new element
+      </div>
+      <div class="cmd">
+        <span class="key">Shift + I</span> insert new element
+      </div>
   </div>
 
   <!-- quick and dirty. replace this with an iframe -->

@@ -1,0 +1,105 @@
+.opacity(@level: 1) {
+  opacity: @level;
+}
+
+.border(@radius: 5px) {
+  border-radius: @radius;
+}
+
+.transition(@params) {
+  transition: @params;
+  -webkit-transition: @params;
+}
+
+
+#training-wheels {
+
+  background: #eee;
+  border-top: 1px solid #ddd;
+  position:fixed;
+  bottom: 0;
+  width: 100%;
+  padding: 10px;
+  height:110px;
+  .transition(bottom .2s);
+
+  #toggle-help {
+    position:absolute;
+    left: 15px;
+    top: 15px;
+    cursor:pointer;
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+
+  &.minimized {
+    bottom: -90px;
+  }
+
+  .section {
+    position: relative;
+    margin-left: 50px;
+    margin-top: 30px;
+    width: 120px;
+    height: 120px;
+    float: left;
+
+    &.manipulations {
+      width: 450px;
+      color: #666;
+    }
+
+    .cmd {
+      display:inline-block;
+      width: 200px;
+    }
+
+    .title {
+      font-weight:bold;
+      color: #000;
+      text-transform: uppercase;
+    }
+
+    .key {
+      font-size: 14px;
+      color: #333;
+      display:inline-block;
+      width: 80px;
+    }
+  }
+
+  @dim: 45px;
+  @vdim : 40px;
+  .move {
+    position:absolute;
+    background: #efefef;
+    width: 35px;
+    height: 30px;
+    padding: 5px;
+    border: 1px solid #ddd;
+    text-align: center;
+    span {
+      display:block;
+      font-size:10px;
+      color: #666;
+    }
+  }
+
+  .move-up {
+    left: @dim;
+    top:0;
+  }
+  .move-left {
+    left: 0;
+    top: @vdim;
+  }
+  .move-down {
+    left: @dim;
+    top: @vdim;
+  }
+  .move-right {
+    left: 2 * @dim;
+    top: @vdim;
+  }
+}

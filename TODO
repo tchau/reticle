@@ -2,11 +2,10 @@
 TODO
 ============================================================
 
-NAV HELP AT BOTTOM -- highlights when you enter the commands!
+PREVIEW slide in
 
 Next three tasks
   DO THIS FIRST : - JSON-T? paste, parse, navigate?
-
 
   - CSS ok, fake it:
        just load up some fake css rules and make it LOOK like we have an inventory ofthem
@@ -19,6 +18,9 @@ Next three tasks
    Mouse nav: we need to LOCK the curr when we enter a menu.... else it gets all fucked
   ***
 
+IMPORTING
+  - use code mirror or something, just paste in some code
+  - same for export
 
 PRIMARY EDITING
 
@@ -136,3 +138,6 @@ APPEND MENU
     - specific attrs [e.g. "checked", "required", "readonly", "selected"] are not yet well handled
 
 - menu "blips" in on the right, and blips away when you commit or cancel
+
+NAV HELP AT BOTTOM -- highlights when you enter the commands!
+NAV HELP slide in
