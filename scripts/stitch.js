@@ -100,7 +100,7 @@ YUI().use('node', 'event', 'menu-manager', 'parser', 'reticle-attributes', 'keyb
       }
 
       // $('#info-layer').append(metaEl);
-      el.appendChild(metaEl);
+      el.prepend(metaEl);
       // metaEl.offset($(el).offset());
     });
   }

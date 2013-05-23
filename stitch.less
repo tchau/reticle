@@ -160,10 +160,8 @@ input:focus {
 
 		&.inline {
 			display: inline-block;
-			padding: 5px 12px 3px 20px;
 			margin: 5px;
 			margin-right: 5px;
-			min-height: 10px;
 
 			&[data-node-name="A"] {
 				color:blue;
@@ -394,22 +392,21 @@ input:focus {
 
 
 	.meta {
-		position: absolute;
-		top:0;
-		left:0;
-		/*
+
+		.bubble.node-name {
+			color:#333;
+			font-weight: bold;
+		}
+
 		&.inline {
+			display:inline-block;
+
 			.content {
-				position: absolute;
-				top:0;
 				color: #666;
-				font-size: 10px;
-				font-weight: normal;
 				padding: 1px;
 				
 				.bubble {
 					background: #eee;
-					border-right: 1px solid @steel;
 					padding: 1px 3px;
 					display: inline-block;
 				}
@@ -418,12 +415,16 @@ input:focus {
 					background: white;
 					color: #666;
 					line-height: 1.4em;
-					font-size: 11px;
+					font-size: 10px;
 				}
 			}
 		}
-		*/
-		&.block, &.inline {
+
+		&.block {
+			position: absolute;
+			top:0;
+			left:0;
+
 			.content {
 				.transition(background-color 0.2s);
 				position: relative;
@@ -443,10 +444,7 @@ input:focus {
 				display: inline-block;
 			}
 
-			.bubble.node-name {
-				color:#333;
-				font-weight: bold;
-			}
+
 		}
 	}
 }

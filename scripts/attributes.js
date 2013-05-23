@@ -148,7 +148,7 @@ YUI.add('reticle-attributes', function (Y) {
 
 		{
 			name: 'OPTION',
-			displayType: 'block',
+			displayType: 'inline',
 			insertable: false,
 			validChildren: [],
 			attributes: [

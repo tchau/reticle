@@ -2,19 +2,23 @@
 TODO
 ============================================================
 
-
-try to widgetize the blockEls ---- fuck.
+NAV HELP AT BOTTOM -- highlights when you enter the commands!
 
 Next three tasks
-  - really basic CSS/LESS editor
-    - ooohhh. can we make it AWARE of the current nesting of HTML els classes and nodes? e.g. .intro [p, h2, .myclass]
-  - once the LESS structure exists we can query it for "classes possibly relevant to me"
-  - show up context menu (as you type) of what the attrs are for those ...
-  - JSON-T? paste, parse, navigate?
+  DO THIS FIRST : - JSON-T? paste, parse, navigate?
+
+
+  - CSS ok, fake it:
+       just load up some fake css rules and make it LOOK like we have an inventory ofthem
+    - really basic CSS/LESS editor
+      - ooohhh. can we make it AWARE of the current nesting of HTML els classes and nodes? e.g. .intro [p, h2, .myclass]
+    - once the LESS structure exists we can query it for "classes possibly relevant to me"
+    - show up context menu (as you type) of what the attrs are for those ...
 
   ***
-   we need to LOCK the curr when we enter a menu.... else it gets all fucked
+   Mouse nav: we need to LOCK the curr when we enter a menu.... else it gets all fucked
   ***
+
 
 PRIMARY EDITING
 

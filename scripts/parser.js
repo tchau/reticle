@@ -38,7 +38,7 @@ YUI.add('parser', function (Y) {
         }
       });
 
-      blockEl.all('.block-el').each(function(child) {
+      blockEl.all('> .block-el').each(function(child) {
         node.append(this.stringify(child));
       }, this);
 
