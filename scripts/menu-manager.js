@@ -142,6 +142,11 @@ YUI.add('menu-manager', function (Y) {
       // menu
       var root = this._getRootForMode(mode);
 
+      // terminal nodes cannot insert
+      if (mode == 'insert' && Y.Reticle.TagMeta.getCapabilityContext(root).terminal) {
+        return; 
+      }
+
       var menu = new Y.Reticle.Menu({
         mode: mode,
         rootNode: root

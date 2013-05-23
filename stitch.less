@@ -135,7 +135,7 @@ input:focus {
 	}
 
 	.block-el.active-current {
-		border:2px solid @blue;
+		border:2px solid @blue !important;
 		// background: white;
 		&> .meta .bubble, &> .meta .bubble.node-name {
 			border: 1px solid @blue;
@@ -156,6 +156,13 @@ input:focus {
 			min-height: 10px;
 			padding: 12px 12px 3px 12px;
 			margin: 15px 0 5px 0;
+
+			&[data-node-name="BR"] {
+				padding: 0;
+				min-height: 0;
+				margin: 10px 0;
+				border: 2px solid @steel;
+			}
 		}
 
 		&.inline {
@@ -166,6 +173,8 @@ input:focus {
 			&[data-node-name="A"] {
 				color:blue;
 			}
+
+
 		}
 
 		&.text {
@@ -398,22 +407,26 @@ input:focus {
 			font-weight: bold;
 		}
 
-		&.inline {
-			display:inline-block;
+		.bubble {
+			line-height: 1.4em;
+			background: white;
+			border: 1px solid @steel;
+			padding: 0px 6px;
+			display: inline-block;
+		}
 
+		&.inline {
+			display: inline-block;
 			.content {
 				color: #666;
 				padding: 1px;
-				
+
 				.bubble {
-					background: #eee;
 					padding: 1px 3px;
 					display: inline-block;
 				}
 
 				.bubble.node-name {
-					background: white;
-					color: #666;
 					line-height: 1.4em;
 					font-size: 10px;
 				}
@@ -434,14 +447,6 @@ input:focus {
 				display:inline-block;
 				font-size: 10px;
 				font-weight: normal;
-			}
-
-			.bubble {
-				line-height: 1.4em;
-				background: white;
-				border: 1px solid @steel;
-				padding: 0px 6px;
-				display: inline-block;
 			}
 
 

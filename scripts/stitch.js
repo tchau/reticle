@@ -140,16 +140,16 @@ $(document).ready(function() {
 	// reticle behavior
 	var curr = $('.block-el').first();
 
-	var moveReticle = function() {
-		var reticle = $('#reticle');
-		reticle.offset(curr.offset());
-		reticle.width(curr.innerWidth());
-		reticle.height(curr.innerHeight());
-	};
+	// var moveReticle = function() {
+	// 	var reticle = $('#reticle');
+	// 	reticle.offset(curr.offset());
+	// 	reticle.width(curr.innerWidth());
+	// 	reticle.height(curr.innerHeight());
+	// };
 
 
-	// init
-	moveReticle();
+	// // init
+	// moveReticle();
 
 });
 

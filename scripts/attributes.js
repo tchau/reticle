@@ -149,7 +149,7 @@ YUI.add('reticle-attributes', function (Y) {
 		{
 			name: 'OPTION',
 			displayType: 'inline',
-			insertable: false,
+			terminal: true,
 			validChildren: [],
 			attributes: [
 				{ name: 'disabled', type: 'specific', choices: ['disabled'] },
@@ -234,11 +234,11 @@ YUI.add('reticle-attributes', function (Y) {
 			// text node
 			if (blockEl.hasClass('text') || blockEl.getAttribute('data-node-name' == 'INPUT')) {
 				return {
-					insertable: false
+					terminal: true
 				};
 			} else {
 				return {
-					insertable: true
+					terminal: false
 				};
 			}
 

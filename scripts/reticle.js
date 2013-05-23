@@ -60,10 +60,10 @@ YUI.add('reticle', function (Y) {
 
     moveUp: function() {
       var curr = this.get('curr');
-      if (!Y.Lang.isValue(curr.previous())) {
+      if (!Y.Lang.isValue(curr.previous('.block-el'))) {
         curr = curr.siblings('.block-el:last-child').item(0);
       } else {
-        curr = curr.previous();
+        curr = curr.previous('.block-el');
       }
       this.set('curr', curr);
       this._moveReticle();
@@ -72,10 +72,10 @@ YUI.add('reticle', function (Y) {
     moveDown: function() {
       var curr = this.get('curr');
 
-      if (!Y.Lang.isValue(curr.next())) {
+      if (!Y.Lang.isValue(curr.next('.block-el'))) {
         curr = curr.siblings('.block-el:first-child').item(0);
       } else {
-        curr = curr.next();
+        curr = curr.next('.block-el');
       }
       this.set('curr', curr);
       this._moveReticle();
