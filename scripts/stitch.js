@@ -36,6 +36,8 @@ YUI().use('node', 'event', 'menu-manager', 'parser', 'reticle-attributes', 'keyb
     menuManager: menuMan
   });
 
+  // var cssCanvas = new Y.Reticle.StyleCanvas({});
+
   Y.one('#canvas').delegate('mouseover', function(e) {
     reticle.setCurrent(e.target);
   }, '.block-el', this);
@@ -44,6 +46,10 @@ YUI().use('node', 'event', 'menu-manager', 'parser', 'reticle-attributes', 'keyb
     reticle.setCurrent(e.target);
   }, '.block-el', this);
 
+
+  Y.one('#toggle-style').on('click', function() {
+    Y.one('#style-canvas').toggleClass('hidden');
+  });
 
   // command interpreter takes action events and turns them into
   // model changes

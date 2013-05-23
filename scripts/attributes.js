@@ -80,7 +80,7 @@ YUI.add('reticle-attributes', function (Y) {
 		{
 			name: 'IMG',
 			attributes: [
-				{ name: 'src', type: 'text', defaultValue: 'no-image.png' },
+				{ name: 'src', type: 'text', defaultValue: 'placeholder.jpg' },
 				{ name: 'alt', type: 'text' }
 			],
 			validChildren: [],
@@ -183,7 +183,9 @@ YUI.add('reticle-attributes', function (Y) {
 		{
 			name: 'TABLE',
 			category: 'STRUCTURE',
-			attributes: [],
+			attributes: [
+				{ name: 'border', type: 'number', defaultValue: '1' }
+			],
 			validChildren: ['TR', 'THEAD', 'TBODY'],
 			displayType: 'block' // well its really a table... 
 		},

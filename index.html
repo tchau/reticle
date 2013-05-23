@@ -21,6 +21,8 @@
 	<!--<link rel="stylesheet" href="reset.css">-->
 	<link rel="stylesheet/less" href="stitch.less">
   <link rel="stylesheet/less" href="starter.less">
+  <link rel="stylesheet/less" href="stylecanvas.less">
+
 	<script type="text/javascript">
     less = {
         env: "development", // or "production"
@@ -52,7 +54,9 @@
 <body>
   <div id="workspace">
     <div id="top-tray">
-      import - export
+      <div id="toggle-style" class="button">style</div>
+      <div id="button-import" class="button">import</div>
+      <div id="button-export" class="button">export</div>
     </div>
 
 
@@ -73,6 +77,22 @@
       <div id="sidebar" class="left sidebar">
         <div class="picture"></div>
       </div>
+    </div>
+
+    <!-- CSS EDITING -->
+    <div id="style-canvas" class="hidden">
+
+      <div class="ruleset">
+        <div class="selector">#id</div>
+        <div class="declarations">
+          <div class="declaration">
+            <span class="property">font-size</span>
+            <span class="expression">12px</span>
+          </div>
+          <div class="declaration-add button">ADD DECLARATION</div>
+        </div>
+      </div>
+      <div class="rule-add button">ADD RULE</div>
     </div>
 
     <!-- CANVAS -->
