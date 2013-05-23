@@ -4,7 +4,7 @@
 
 var GLOB = {};
 
-YUI().use('node', 'event', 'menu-manager', 'parser', 'reticle-attributes', 'keyboard-model', 'reticle', function (Y) {
+YUI().use('node', 'event', 'reticle-data-navigator', 'menu-manager', 'parser', 'reticle-attributes', 'keyboard-model', 'reticle', function (Y) {
   console.log('initializing Reticle System...');
 
   var parser = new Y.Reticle.Parser();
@@ -35,6 +35,12 @@ YUI().use('node', 'event', 'menu-manager', 'parser', 'reticle-attributes', 'keyb
     reticle: reticle,
     menuManager: menuMan
   });
+
+  // make this SUMMON-able from a given context
+  var dataNav = new Y.Reticle.DataNavigator({
+    context: sample_data
+  });
+  dataNav.render(Y.one('#data-nav'));
 
   // var cssCanvas = new Y.Reticle.StyleCanvas({});
 
