@@ -3,9 +3,44 @@ TODO
 ============================================================
 
 
-  NEXT: Setting Arbitrary DATA
+9
+  NEXT: Setting Arbitrary DATA in the data panel
+
   Also: TRY OUT using the EACH on country select options! SUPER COOL!
     EACH is broken on ARRAYS... can't do the country OPTS fuckkkkk!!!
+10
+  clean up the starting data, make it look good
+11
+  prep demo info (json and country json etc)
+12
+  slides
+  feature checklist to demo: 
+      Navigation scheme 
+        - Rather than your keystrokes moving a cursor amongst text characters, your keystrokes directly manipulate the Elements)
+      Appending nodes
+        - it's all laid out in front of you.
+      Fuzzy autocomplete, 
+      Live updating as you do it,
+        - You see what may emerge by hovering, you don't have to imagine it in your head 
+      - Editor, (DEMO USING TEXTAREA)
+        add a class
+      - Editor value assists,  (DEMO USING THE INPUT)
+      
+      - create IMG tag
+      the context-sensitive menus
+        create a SELECT with OPTIONS 
+
+      finally, the whiz-banger: Handlebars
+      "Nobody wants a static web page. Everything is generative today and backed by data."
+
+      Use handlebars WITH statement to scope into Item.
+        Create a section with Title and Blog Post Body
+
+      show off iteration with EACH
+        paste the COUNTRIES_JSON into data
+        iterate a SELECT OPTIOn
+
+
 
 
 
