@@ -26,6 +26,7 @@ YUI.add('reticle', function (Y) {
 
     syncUI: function() {
        this._moveReticle();
+       this.get('curr').addClass('active-current');
     },
 
     bindUI: function() {

@@ -87,22 +87,12 @@ YUI().use('node', 'event', 'reticle-data-navigator', 'reticle-underlier-editor',
   });
 
   Y.one('#import-data').on('click', function(e) {
-
     menuMan.showUnderlierEditor();
-
-    // // show textarea
-    // var ed = new Y.Reticle.UnderlierEditor({
-    //   title: "Data",
-    //   initialValue: JSON.stringify(reticle.get('pageData'))
-    // });
-    // reticle.showNavigator(ed);
-
-    // ed.on('create-requested', function(e) {
-    //   var newDataStr = e.newData;
-    //   reticle.set('pageData', JSON.parse(newDataStr));
-    //   ed.destroy();
-    // });
   });
+
+  // Y.one('#button-import').on('click', function(e) {
+  //   menuMan.showImportEditor();
+  // });
 
   // command interpreter takes action events and turns them into
   // model changes

@@ -5,14 +5,17 @@ TODO
 
 10
   Also: TRY OUT using the EACH on country select options! SUPER COOL!
-    EACH is broken on ARRAYS... can't do the country OPTS fuckkkkk!!!
+    EACH is broken on ARRAYS... can't do the country OPTS fuckkkkk!!!   [done]
   clean up the starting data, make it look good
 
 11
-  prep demo info (json and country json etc)
+  prep demo info (json and country json etc) [done]
 12
   slides
   feature checklist to demo: 
+
+      10.0.10.170:8080
+
       Navigation scheme 
         - Rather than your keystrokes moving a cursor amongst text characters, your keystrokes directly manipulate the Elements)
       Appending nodes
