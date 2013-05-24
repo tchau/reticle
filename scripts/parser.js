@@ -45,7 +45,6 @@ YUI.add('parser', function (Y) {
 
       if (isHandlebarsBlock(tagName)) {
         // handlebars
-        // return '{{'
         var childStr = "";
         blockEl.all('> .block-el').each(function(child) {
           childStr += this.stringify(child);

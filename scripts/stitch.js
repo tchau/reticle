@@ -81,7 +81,7 @@ YUI().use('node', 'event', 'reticle-data-navigator', 'reticle-underlier-editor',
       dataNav.destroy();
       var activeInput = reticle.get('activeInput');
       if (Y.Lang.isValue(activeInput)) {
-        activeInput.set('value', '{{' + path + '}}');
+        activeInput.set('value', '{{{' + path + '}}}');
       }
     }, this);
   });
@@ -172,6 +172,7 @@ YUI().use('node', 'event', 'reticle-data-navigator', 'reticle-underlier-editor',
     Y.one('#canvas').get('children').each(function(child) {
       str += parser.stringify(child);
     });
+    console.log(str);
     preview.append(Y.Handlebars.render(str, reticle.get('pageData')));
   };
 
