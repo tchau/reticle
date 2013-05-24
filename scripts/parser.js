@@ -87,6 +87,10 @@ YUI.add('parser', function (Y) {
       var nodeName = el.get('nodeName');
       blockEl.addClass(Y.Reticle.TagMeta.findByName(nodeName).displayType);
 
+      if (isHandlebarsBlock(nodeName)) {
+        blockEl.addClass('handlebars-block');
+      }
+
       // NODE NAME (div, span etc)
       blockEl.setAttribute('data-node-name', el.get('nodeName'));
 

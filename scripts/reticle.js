@@ -110,7 +110,6 @@ YUI.add('reticle', function (Y) {
     },
 
     showMenu: function(menu) {
-
       // sigh
       // menu.render(Y.one('#reticle').one('.menu-container'));
       var reticle = Y.one('#reticle');
@@ -123,9 +122,17 @@ YUI.add('reticle', function (Y) {
       ]);
 
       menu.show();
-
     },
+    showNavigator: function(nav) {
+      var reticle = Y.one('#');
 
+      nav.render('#menu-layer');
+      nav.setXY([
+        80, 200
+      ]);
+
+      nav.show();
+    },
     removeCurr: function() {
       var curr = this.get('curr');
 
@@ -197,11 +204,30 @@ YUI.add('reticle', function (Y) {
     refresh: function() {
       this._moveReticle();
       this.fire('structure-change');
+    },
+
+    // based on where CURR is, figure out the context. if no HB blocks are above us, it
+    // must be the global data
+    getCurrentContext: function() {
+
+      var curr = this.get('curr');
+      var tplBlocks = curr.ancestors('.block-el.handlebars-block');
+
+      console.log("TEMPLATE BLOCKS", tplBlocks);
+
+      // if none
+      if (tplBlocks.size() == 0) {
+        return this.get('pageData');
+      }
+
     }
 
   }, {
     NAME: 'Reticle',
     ATTRS: {
+      pageData: {
+        value: null
+      },
       curr: {
         value: null,
         validator: function(v) {

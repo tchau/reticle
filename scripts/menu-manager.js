@@ -7,6 +7,10 @@ YUI.add('menu-manager', function (Y) {
    };
 
    var tags = ['div', 'span', 'h1'];
+   var isHandlebarsBlock = function(tagName) {
+    var meta = Y.Reticle.TagMeta.findByName(tagName);
+    return Y.Lang.isValue(meta.type) && meta.type == 'handlebars';
+   };
 
    Y.extend(Y.Reticle.MenuManager, Y.Base, {
 
@@ -89,6 +93,7 @@ YUI.add('menu-manager', function (Y) {
       }
     },
 
+    // supports plain text OR hb injection
     _editTextNode: function(textNode) {
       var reticle = this.get('reticle');
       // sort of like a menu.. where you can only edit text.. inline
@@ -172,15 +177,30 @@ YUI.add('menu-manager', function (Y) {
       menu.on('create-requested', function(e) {
         var tagName = e.elementName;
 
-        var newBlockEl = this._makeNodeFromTagName(tagName);
-        if (Y.one('#append-candidate')) {
-          reticle.replaceCurrWith(newBlockEl);
+        // show yet another
+        if (isHandlebarsBlock(tagName)) {
+          var dataNav = new Y.Reticle.DataNavigator({
+            context: reticle.getCurrentContext()
+          });
+          reticle.showNavigator(dataNav);
+
+          dataNav.on('commit', function(e) {
+            var path = e.variablePath;
+            // now, create the element
+          });
+
         }
         else {
-          this._appendForMode(newBlockEl, mode);
-        }
+          var newBlockEl = this._makeNodeFromTagName(tagName);
+          if (Y.one('#append-candidate')) {
+            reticle.replaceCurrWith(newBlockEl);
+          }
+          else {
+            this._appendForMode(newBlockEl, mode);
+          }
 
-        this._hideMenu();
+          this._hideMenu();
+        }
 
       }, this);
 

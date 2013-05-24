@@ -19,6 +19,7 @@ YUI.add('menu', function (Y) {
       var inputEl = Y.Node.create('<input />');
       inputEl.set('value', this.get('value'));
       contentBox.append(inputEl);
+      contentBox.append(Y.Node.create('<div class="hb-assist"></div>'));
     },
 
     bindUI: function() {

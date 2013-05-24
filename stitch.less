@@ -391,6 +391,11 @@ input:focus {
 			padding: 3px 5px;
 			width: 70px;
 		}
+
+		.hb-assist {
+			width: 10px;
+			height: 10px;
+		}
 	}
 
 	#menu-layer {
@@ -398,6 +403,32 @@ input:focus {
 		position: absolute;
 		top:0;
 		left:0;
+	}
+
+	.data-navigator {
+		background: #efefef;
+		border: 1px solid #eee;
+		width: 400px;
+		padding: 5px;
+
+		.data-node {
+			margin-left: 25px;
+			padding: 3px;
+			border: 1px solid transparent;
+			&:hover {
+				border:1px solid @blue;
+				cursor: pointer;
+			}
+
+			.key {
+				font-weight:bold;
+				display:inline-block;
+				width: 120px;
+				padding-right:5px;
+				overflow:hidden;
+				text-overflow: ellipsis;
+			}
+		}
 	}
 
 

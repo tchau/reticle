@@ -15,7 +15,8 @@ YUI().use('node', 'event', 'reticle-data-navigator', 'menu-manager', 'parser', '
   // for manipulation -- sort of like the BLOCK CURSOR
   // in a text editor
   var reticle = new Y.Reticle.Reticle({
-  	curr:     Y.one('.block-el')
+  	curr:     Y.one('.block-el'),
+    pageData: sample_data
   });
   reticle.render();
   GLOB.reticle = reticle;
@@ -37,10 +38,10 @@ YUI().use('node', 'event', 'reticle-data-navigator', 'menu-manager', 'parser', '
   });
 
   // make this SUMMON-able from a given context
-  var dataNav = new Y.Reticle.DataNavigator({
-    context: sample_data
-  });
-  dataNav.render(Y.one('#data-nav'));
+  // var dataNav = new Y.Reticle.DataNavigator({
+  //   context: sample_data
+  // });
+  // dataNav.render(Y.one('#data-nav'));
 
   // var cssCanvas = new Y.Reticle.StyleCanvas({});
 

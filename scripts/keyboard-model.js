@@ -23,6 +23,8 @@ YUI.add('keyboard-model', function (Y) {
 
   var keymap = Y.Node.DOM_EVENTS.key.eventDef.KEY_MAP;
   keymap.shift = 16;
+  keymap.ctrl = 17;
+  keymap.meta = 91;
   keymap.arrowup = 38;
   keymap.arrowleft = 37;
   keymap.arrowdown = 40;
@@ -78,7 +80,7 @@ YUI.add('keyboard-model', function (Y) {
     listen: function() {
 
       Y.one(document).on('keydown', function(e) {
-        // console.log(e.keyCode);
+        console.log(e.keyCode);
       });
 
       var reticle = this.get('reticle');
@@ -134,6 +136,13 @@ YUI.add('keyboard-model', function (Y) {
         e.preventDefault();
       }, this), 'i', this);
 
+      // SUMMON
+      // Y.one(document).on('key', function(e) {
+      //   console.log("SUMMON");
+      //   e.halt();
+      //   e.preventDefault();
+      // }, 's', this);
+
       // I+SHIFT for insert element
       Y.one(document).on('key', wrap(function(e) {
         menuMan.showAddElementMenu('insert');
@@ -147,6 +156,7 @@ YUI.add('keyboard-model', function (Y) {
         e.halt();
         e.preventDefault();
       }, this), 'a+shift', this);
+
 
       // J or DOWN
       Y.one(document).on('key', wrap(reticle.scopeDown, reticle), 'arrowdown+shift,74+shift', reticle);

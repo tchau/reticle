@@ -12,7 +12,6 @@ YUI.add('reticle-data-navigator', function (Y) {
       Y.Reticle.DataNavigator.superclass.constructor.apply(this, arguments);
     },
 
-
     /**
 
       obj: {
@@ -31,21 +30,48 @@ YUI.add('reticle-data-navigator', function (Y) {
       console.log(this.get('context'));
       var data = this.get('context');
 
-      Y.Object.each(data, function(value, key) {
-        // make a child...?
+      var menu = Y.Node.create("<div></div>");
+      menu.addClass('data-navigator');
+      contentBox.append(menu); 
 
-        // or just render a huge ass tree thing?
-        // onclick - commit the path to that object? 
+      var rootNode = this._renderNodeForShit(data);
+      menu.append(rootNode.get('children'));
 
-      });
+      // Y.Object.each(data, function(value, key) {
+      //   // make a child...?
+      //   console.log(key);
+      //   this._renderNodeForShit(value);
+      //   // or just render a huge ass tree thing?
+      //   // onclick - commit the path to that object? 
+      // });
+    },
 
-      /*
-        recursively
-    
-        make widgets... and stick listeners on them...??? or make each thing its own widget... with
-        widget children..?
+    _renderNodeForShit: function(value, key) {
+      if (Y.Lang.isArray(value)) {
+        var arr = Y.Node.create('<div class="data-node array"><div class="key">' + key + '</div><div class="value"></div></div>');
+        Y.Array.each(value, function(obj, i) {
+          arr.one('.value').append(this._renderNodeForShit(obj, i));
+        }, this);
+        return arr;
+      }
+      else if (Y.Lang.isObject(value)) {
+        var objEl = Y.Node.create('<div class="data-node object"><div class="key">' + key + '</div><div class="value"></div></div>');
 
-      */
+        Y.Object.each(value, function(obj, okey) {
+          objEl.one('.value').append(this._renderNodeForShit(obj, okey));
+        }, this);
+        
+        return objEl;
+      }
+      else {
+        // terminal
+        return Y.Node.create('<div class="data-node terminal"><div class="key">' + key + '</div>  ' + value + '</div>');
+      }
+
+    },
+
+    setXY: function(xy) {
+      this.get('boundingBox').setXY(xy);
     },
 
     bindUI: function() {
