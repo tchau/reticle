@@ -35,7 +35,7 @@ YUI.add('reticle-data-navigator', function (Y) {
       contentBox.append(menu); 
 
       var rootNode = this._renderNodeForShit(data);
-      menu.append(rootNode.get('children'));
+      menu.append(rootNode.one('.value'));
 
       // Y.Object.each(data, function(value, key) {
       //   // make a child...?
@@ -46,9 +46,36 @@ YUI.add('reticle-data-navigator', function (Y) {
       // });
     },
 
+    bindUI: function() {
+      var contentBox = this.get('contentBox');
+      contentBox.delegate('click', function(e) {
+        // need to get the PATH
+        var targetNode = e.currentTarget;
+        var ancestors = targetNode.ancestors('.data-node');
+        console.log(ancestors);
+
+        var path = this._generatePathFromAncstry(ancestors);
+        path += ('.' + targetNode.getAttribute('data-key'));
+
+        console.log("FULL PATH TO DATA: " + path);
+
+        e.stopPropagation();
+      }, '.data-node', this);
+
+    },
+
+    _generatePathFromAncstry: function(ancestors) {
+      var keys = [];
+      ancestors.each(function(ancestor) {
+        keys.push( ancestor.getAttribute('data-key') );
+      });
+      return keys.join('.');
+    },
+
     _renderNodeForShit: function(value, key) {
       if (Y.Lang.isArray(value)) {
         var arr = Y.Node.create('<div class="data-node array"><div class="key">' + key + '</div><div class="value"></div></div>');
+        arr.setAttribute('data-key', key);
         Y.Array.each(value, function(obj, i) {
           arr.one('.value').append(this._renderNodeForShit(obj, i));
         }, this);
@@ -56,26 +83,25 @@ YUI.add('reticle-data-navigator', function (Y) {
       }
       else if (Y.Lang.isObject(value)) {
         var objEl = Y.Node.create('<div class="data-node object"><div class="key">' + key + '</div><div class="value"></div></div>');
+        objEl.setAttribute('data-key', key);
 
         Y.Object.each(value, function(obj, okey) {
           objEl.one('.value').append(this._renderNodeForShit(obj, okey));
         }, this);
-        
+
         return objEl;
       }
       else {
         // terminal
-        return Y.Node.create('<div class="data-node terminal"><div class="key">' + key + '</div>  ' + value + '</div>');
+        var terminalEl = Y.Node.create('<div class="data-node terminal"><div class="key">' + key + '</div>  ' + value + '</div>');
+        terminalEl.setAttribute('data-key', key);
+        return terminalEl;
       }
 
     },
 
     setXY: function(xy) {
       this.get('boundingBox').setXY(xy);
-    },
-
-    bindUI: function() {
-      var contentBox = this.get('contentBox');
     },
 
     commit: function(tag) {

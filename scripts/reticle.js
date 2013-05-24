@@ -128,7 +128,7 @@ YUI.add('reticle', function (Y) {
 
       nav.render('#menu-layer');
       nav.setXY([
-        80, 200
+        80, 100
       ]);
 
       nav.show();
