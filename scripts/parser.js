@@ -29,7 +29,7 @@ YUI.add('parser', function (Y) {
     stringify: function(blockEl) {
 
       if (blockEl.hasClass('text')) {
-        console.log(blockEl.get('text'));
+        // console.log(blockEl.get('text'));
         // var textEl = Y.Node.create(blockEl.get('text'));
         // if (Y.Lang.isValue(textEl)) {
         //   return textEl.get('outerHTML');

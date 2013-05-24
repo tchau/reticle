@@ -64,6 +64,22 @@ YUI().use('node', 'event', 'reticle-data-navigator', 'menu-manager', 'parser', '
     Y.one('#training-wheels').toggleClass('minimized');
   });
 
+  Y.one('#summon-data').on('click', function() {
+    var dataNav = new Y.Reticle.DataNavigator({
+      context: reticle.getCurrentContext()
+    });
+    reticle.showNavigator(dataNav);
+
+    dataNav.on('create-requested', function(e) {
+      var path = e.variablePath;
+      dataNav.destroy();
+      var activeInput = reticle.get('activeInput');
+      if (Y.Lang.isValue(activeInput)) {
+        activeInput.set('value', '{{' + path + '}}');
+      }
+    }, this);
+  });
+
   // command interpreter takes action events and turns them into
   // model changes
 

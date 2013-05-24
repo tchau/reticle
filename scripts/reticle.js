@@ -35,6 +35,11 @@ YUI.add('reticle', function (Y) {
       this.after('currChange', function() {
         this.get('curr').addClass('active-current');
       });
+
+      // NASTY HACK
+      Y.one(document).delegate('focus', function(e) {
+        this.set('activeInput', e.target);
+      }, 'input', this);
     },
 
     scopeUp: function() {
@@ -236,6 +241,10 @@ YUI.add('reticle', function (Y) {
       },
 
       keyboard: {
+        value: null
+      },
+
+      activeInput: {
         value: null
       }
     }

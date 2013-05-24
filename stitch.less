@@ -143,6 +143,10 @@ input:focus {
 			color: #eee;
 		}
 	}
+
+	.block-el.handlebars-block {
+		background: gold;
+	}
 	.block-el {
 		// 7B8697
 		// background: rgba(162, 175, 198, 0.08);
@@ -403,11 +407,14 @@ input:focus {
 		position: absolute;
 		top:0;
 		left:0;
+		width:0;
+		height:0;
 	}
 
 	.yui3-datanavigator-content {
 		background: #eee;
 		border: 1px solid #ccc;
+		width: 400px;
 		padding: 10px;
 
 		.title {
@@ -417,7 +424,6 @@ input:focus {
 	}
 
 	.data-navigator {
-		width: 400px;
 
 		.data-node {
 			margin-left: 25px;
