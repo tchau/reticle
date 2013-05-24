@@ -147,11 +147,11 @@ input:focus {
 
 	.block-el.handlebars-block {
 		&.active-current {
-			.meta .bubble { color: gold; }
 		}
 		.meta {
 			.bubble {
 				background: gold;
+				color: #333;
 			}
 		}
 		border: 2px solid gold;
@@ -425,6 +425,7 @@ input:focus {
 		border: 1px solid #ccc;
 		width: 400px;
 		padding: 10px;
+		transition: opacity 0.2s, -webkit-transform 0.15s ease-out;
 
 		.title {
 			font-size: 14px;

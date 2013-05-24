@@ -40,6 +40,30 @@ YUI.add('reticle-attributes', function (Y) {
 		  {name: 'class', type:'text'}
 	];
 
+
+
+// HANDLEBARS
+  var HB_TAGS = [{
+			name: 'EACH',
+			category: 'HANDLEBARS',
+			type: 'handlebars',
+			attributes: [
+				{ name: 'argument', type: 'data' } // needs to invoke the friggin... data navigator..
+			],
+			displayType: 'block'
+		},
+		{
+			name: 'WITH',
+			category: 'HANDLEBARS',
+			type: 'handlebars',
+			attributes: [
+				{ name: 'argument', type: 'data' } // needs to invoke the friggin... data navigator..
+			],
+			displayType: 'block'
+		}
+	];
+	Y.Reticle.HB_TAGS = HB_TAGS;
+
 	Y.Reticle.Tags = [
 		{
 			name: 'A',
@@ -142,7 +166,7 @@ YUI.add('reticle-attributes', function (Y) {
 		{
 			name: 'SELECT',
 			category: 'USER_INPUTS',
-			validChildren: ['OPTION'],
+			validChildren: ['OPTION', 'EACH'],
 			displayType: 'block'
 		},
 
@@ -156,8 +180,7 @@ YUI.add('reticle-attributes', function (Y) {
 				{ name: 'label',    type: 'text',     defaultValue: 'Option'},
 				{ name: 'selected', type: 'specific', choices: ['selected'] },
 				{ name: 'value',    type: 'text' }
-			],
-			validParents: ['SELECT']
+			]
 		},
 
 		{

@@ -7,6 +7,11 @@ var GLOB = {};
 YUI().use('node', 'event', 'reticle-data-navigator', 'menu-manager', 'parser', 'reticle-attributes', 'keyboard-model', 'reticle', function (Y) {
   console.log('initializing Reticle System...');
 
+ var isHandlebarsBlock = function(tagName) {
+  var meta = Y.Reticle.TagMeta.findByName(tagName);
+  return Y.Lang.isValue(meta.type) && meta.type == 'handlebars';
+ };
+ 
   var parser = new Y.Reticle.Parser();
   var parsedEl = parser.parse(Y.one('#data'));
   Y.one('#canvas').append(parsedEl.get('children'));
@@ -80,6 +85,10 @@ YUI().use('node', 'event', 'reticle-data-navigator', 'menu-manager', 'parser', '
     }, this);
   });
 
+  Y.one('#import-data').on('click', function(e) {
+
+  });
+
   // command interpreter takes action events and turns them into
   // model changes
 
@@ -100,7 +109,8 @@ YUI().use('node', 'event', 'reticle-data-navigator', 'menu-manager', 'parser', '
       var metaEl = Y.Node.create('<div></div>').addClass('meta').append(metaContent);
 
       // displaying
-      metaEl.addClass(Y.Reticle.TagMeta.findByName(el.getAttribute('data-node-name')).displayType);
+      var nodeName = el.getAttribute('data-node-name');
+      metaEl.addClass(Y.Reticle.TagMeta.findByName(nodeName).displayType);
 
       var nodeAttributes = JSON.parse(el.getAttribute('data-node-attributes'));
       var classes = nodeAttributes['class'];
@@ -109,7 +119,7 @@ YUI().use('node', 'event', 'reticle-data-navigator', 'menu-manager', 'parser', '
       var nodeEl = Y.Node.create('<div></div>')
         .addClass('bubble')
         .addClass('node-name')
-        .set('text', el.getAttribute('data-node-name'));
+        .set('text', nodeName);
       metaContent.appendChild(nodeEl);
 
       // draw ID
@@ -124,6 +134,13 @@ YUI().use('node', 'event', 'reticle-data-navigator', 'menu-manager', 'parser', '
         metaContent.appendChild(Y.Node.create('<div></div>')
           .addClass('bubble')
           .set('text', classes));
+      }
+
+      // if a handlebars, show the argument
+      if (isHandlebarsBlock(nodeName)) {
+        metaContent.appendChild(Y.Node.create('<div></div>')
+          .addClass('bubble')
+          .set('text', nodeAttributes.argument));
       }
 
       // $('#info-layer').append(metaEl);

@@ -169,6 +169,7 @@ YUI.add('menu', function (Y) {
             filtered.push(meta);
           }
         });
+
       } else {
         // go through all potential children
         Y.Array.each(Y.Reticle.Tags, function(meta) {

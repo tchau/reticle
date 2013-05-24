@@ -45,6 +45,11 @@ YUI.add('menu-manager', function (Y) {
         }
       }
 
+      // ughhh
+      var nav = reticle.get('currentNav');
+      if (nav)
+        nav.destroy();
+
       this._hideMenu();
     },
 

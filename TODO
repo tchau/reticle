@@ -3,22 +3,9 @@ TODO
 ============================================================
 
 
-Next three tasks
-  DO THIS FIRST : - JSON-T? paste, parse, navigate?
-
-  // OK how to add a BLOCK EXPRESSION
-      {{#each ITEMS }} {{/each}}
-      {{#with ITEM  }} {{/with}}
-
-  // OK how to insert PATHS
-      {{name}}
-      {{author.name}}
-
-    paths can appear in 
-
-  // data navigator -- clicking returns a path from CURRENT CONTEXT
-  // designed to invoke the navigator given a context
-
+  NEXT: Setting Arbitrary DATA
+  Also: TRY OUT using the EACH on country select options! SUPER COOL!
+    EACH is broken on ARRAYS... can't do the country OPTS fuckkkkk!!!
 
 
 
@@ -33,7 +20,6 @@ Next three tasks
    Mouse nav: we need to LOCK the curr when we enter a menu.... else it gets all fucked
   ***
 
-PREVIEW slide in
 
 IMPORTING
   - use code mirror or something, just paste in some code
@@ -158,3 +144,13 @@ APPEND MENU
 
 NAV HELP AT BOTTOM -- highlights when you enter the commands!
 NAV HELP slide in
+
+  // OK how to add a BLOCK EXPRESSION
+      {{#each ITEMS }} {{/each}}
+      {{#with ITEM  }} {{/with}}
+  // OK how to insert PATHS
+      {{name}}
+      {{author.name}}
+    paths can appear in 
+  // data navigator -- clicking returns a path from CURRENT CONTEXT
+  // designed to invoke the navigator given a context

@@ -27,6 +27,8 @@ YUI.add('reticle-data-navigator', function (Y) {
       var rootNode = this._renderNodeForShit(data);
       menu.append(rootNode.one('.value'));
 
+      menu.addClass('hidden');
+
       // Y.Object.each(data, function(value, key) {
       //   // make a child...?
       //   console.log(key);
@@ -92,7 +94,12 @@ YUI.add('reticle-data-navigator', function (Y) {
       }
 
     },
-
+    // blip in
+    show: function() {
+      var contentBox = this.get('contentBox');
+      contentBox.removeClass('hidden');
+      contentBox.addClass('shown');
+    },
     setXY: function(xy) {
       this.get('boundingBox').setXY(xy);
     },

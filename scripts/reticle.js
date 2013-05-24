@@ -137,6 +137,7 @@ YUI.add('reticle', function (Y) {
       ]);
 
       nav.show();
+      this.set('currentNav', nav);
     },
     removeCurr: function() {
       var curr = this.get('curr');
@@ -267,6 +268,10 @@ YUI.add('reticle', function (Y) {
       },
 
       activeInput: {
+        value: null
+      },
+
+      currentNav: {
         value: null
       }
     }
