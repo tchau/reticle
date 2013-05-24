@@ -131,11 +131,11 @@ YUI.add('reticle', function (Y) {
 
       var newCurr;
 
-      if (Y.Lang.isValue(curr.next())) {
-        newCurr = curr.next();
+      if (Y.Lang.isValue(curr.next('.block-el'))) {
+        newCurr = curr.next('.block-el');
       }
-      else if (Y.Lang.isValue(curr.previous())) {
-        newCurr = curr.previous();
+      else if (Y.Lang.isValue(curr.previous('.block-el'))) {
+        newCurr = curr.previous('.block-el');
       }
       else {
         newCurr = curr.get('parentNode');

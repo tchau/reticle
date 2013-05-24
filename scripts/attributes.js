@@ -219,6 +219,23 @@ YUI.add('reticle-attributes', function (Y) {
 			validChildren: ['LI'],
 			displayType: 'block'
 		},
+
+		// HANDLEBARS
+		{
+			name: 'EACH',
+			category: 'HANDLEBARS',
+			type: 'handlebars',
+			attributes: [
+				{ name: 'argument', type: 'data' } // needs to invoke the friggin... data navigator..
+			],
+			displayType: 'block'
+		},
+		{
+			name: 'WITH',
+			category: 'HANDLEBARS',
+			type: 'handlebars',
+			displayType: 'block'
+		}
 	];
 
 	Y.Reticle.TagMeta = {

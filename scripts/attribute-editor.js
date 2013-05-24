@@ -61,7 +61,22 @@ YUI.add('reticle-attribute-editor', function (Y) {
         choicesEl.append(negativeEl);
       }
 
+      // Handlebars
+      if (attr.type == 'data') {
+        inputEl.on('focus', this._displayDataHelper());
+      }
+
       contentBox.append(attrEl);
+    },
+
+    _displayDataHelper: function() {
+      // try to show the data helper for this context
+
+      // what var is available in this SCOPE
+
+      // show the dataNav for that var
+
+      // on commit, submit that as the value of this attr
     },
 
     _getSampleForInputType: function(attributeType) {
@@ -77,6 +92,7 @@ YUI.add('reticle-attribute-editor', function (Y) {
         return 'MIME_type';
       } else return '';
     },
+    
     _requestPreview: function(value) {
       console.log('preview', value);
       this.fire('preview-requested', {

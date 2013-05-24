@@ -7,6 +7,10 @@ YUI.add('parser', function (Y) {
    };
 
    var tags = ['div', 'span', 'h1'];
+   var isHandlebarsBlock = function(tagName) {
+    var meta = Y.Reticle.TagMeta.findByName(tagName);
+    return Y.Lang.isValue(meta.type) && meta.type == 'handlebars';
+   };
 
    Y.extend(Y.Reticle.Parser, Y.Base, {
 
@@ -30,19 +34,44 @@ YUI.add('parser', function (Y) {
 
       var tagName = blockEl.getAttribute('data-node-name');
       var nodeAttributes = JSON.parse(blockEl.getAttribute('data-node-attributes'));
-      var node = Y.Node.create('<' + tagName + '></' + tagName + '>');
 
-      Y.Object.each(nodeAttributes, function(value, key) {
-        if (Y.Lang.isValue(value)) {
-          node.setAttribute(key, value);
-        }
-      });
+      if (isHandlebarsBlock(tagName)) {
+        // handlebars
+        // return '{{'
+        var childStr = "";
+        blockEl.all('> .block-el').each(function(child) {
+          childStr += this.stringify(child);
+        }, this);
 
-      blockEl.all('> .block-el').each(function(child) {
-        node.append(this.stringify(child));
-      }, this);
+        // argument to the handlebars block thing
+        // return '{{' + tagName + ' ' + nodeAttributes.argument + '}}' + childStr + '{{/' + tagName + '}}';
+        // var hbStr = '{{#' + tagName.toLowerCase() + ' ' + 'collection' + '}}' + childStr + '{{/' + tagName.toLowerCase() + '}}';
+        var hbStr = '{{#' + tagName.toLowerCase() + ' ' + nodeAttributes.argument + '}}' + childStr + '{{/' + tagName.toLowerCase() + '}}';
+        console.log(hbStr);
+        return hbStr;
+      }
+      else {
 
-      return node;
+
+        // stupid BR
+        if (tagName == 'BR')
+          return '<br />';
+
+        // plain HTML
+        var node = Y.Node.create('<' + tagName + '></' + tagName + '>');
+
+        Y.Object.each(nodeAttributes, function(value, key) {
+          if (Y.Lang.isValue(value)) {
+            node.setAttribute(key, value);
+          }
+        });
+
+        blockEl.all('> .block-el').each(function(child) {
+          node.append(this.stringify(child));
+        }, this);
+      }
+
+      return node.get('outerHTML');
     },
 
     // recursively parses DOM into data elements

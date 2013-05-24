@@ -119,9 +119,12 @@ YUI().use('node', 'event', 'reticle-data-navigator', 'menu-manager', 'parser', '
     console.log('refreshing');
     var preview = Y.one('#preview');
     preview.empty();
+
+    var str = "";
     Y.one('#canvas').get('children').each(function(child) {
-      preview.append(parser.stringify(child));
+      str += parser.stringify(child);
     });
+    preview.append(Y.Handlebars.render(str, sample_data));
   };
 
   displayMeta();

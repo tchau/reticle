@@ -118,6 +118,14 @@ YUI.add('menu', function (Y) {
         tagset.one('.CONTENT').remove();
       }
 
+      // now, tack on handlebars type shit
+      // var hbEl = Y.Node.create('<div class="tag-category HANDLEBARS"><div class="title">HANDLEBARS</div></div>');
+      // var hbExprEl = Y.Node.create('<div class="tagname" data-name="each">' +
+      //       .join('') +
+      //       '</div>');
+      //   if (Y.Lang.isValue(tagMeta.category)) {
+      // tagset.append(hbEl);
+
       menu.addClass('hidden');
       contentBox.append(menu);
     },
