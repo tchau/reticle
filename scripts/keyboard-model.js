@@ -73,7 +73,6 @@ YUI.add('keyboard-model', function (Y) {
           SHIFT_STATE = false;
         }
 
-        $('#shift-status').removeClass('on');
       });
     },
 
@@ -86,8 +85,8 @@ YUI.add('keyboard-model', function (Y) {
       var reticle = this.get('reticle');
       var menuMan = this.get('menuManager');
 
-      Y.one(document).on('key', this._showShift, 'shift', this);
-      Y.one(document).on('key', this._hideShift, 'keyup:shift', this);
+      // Y.one(document).on('key', this._showShift, 'shift', this);
+      // Y.one(document).on('key', this._hideShift, 'keyup:shift', this);
 
       var wrap = Y.bind(function(fun, scope) {
         return Y.bind(function(e) {
