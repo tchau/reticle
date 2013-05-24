@@ -221,8 +221,30 @@ YUI.add('reticle', function (Y) {
       console.log("TEMPLATE BLOCKS", tplBlocks);
 
       // if none
-      if (tplBlocks.size() == 0) {
+      if (tplBlocks.size() === 0) {
         return this.get('pageData');
+      }
+      else {
+        // scope in depending on what blocks are above us
+        // scope into dis shit yo...
+
+        var scopes = [];
+        tplBlocks.each(function(parent) {
+          // ughhhhhhhhh
+          var attr = JSON.parse(parent.getAttribute('data-node-attributes'));
+          var upperScope = attr.argument;
+          scopes.push(upperScope);
+        });
+
+        console.log("SCOPES", scopes);
+        var currentScope = this.get('pageData');
+
+        scopes.reverse();
+        while (scopes.length > 0) {
+          currentScope = currentScope[scopes.pop()];
+        }
+
+        return currentScope;
       }
 
     }

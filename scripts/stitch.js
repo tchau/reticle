@@ -133,7 +133,6 @@ YUI().use('node', 'event', 'reticle-data-navigator', 'menu-manager', 'parser', '
   }
 
   var refreshPreview = function() {
-    console.log('refreshing');
     var preview = Y.one('#preview');
     preview.empty();
 
@@ -141,7 +140,6 @@ YUI().use('node', 'event', 'reticle-data-navigator', 'menu-manager', 'parser', '
     Y.one('#canvas').get('children').each(function(child) {
       str += parser.stringify(child);
     });
-    console.log(str);
     preview.append(Y.Handlebars.render(str, sample_data));
   };
 
