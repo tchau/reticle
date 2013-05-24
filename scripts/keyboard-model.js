@@ -80,7 +80,7 @@ YUI.add('keyboard-model', function (Y) {
     listen: function() {
 
       Y.one(document).on('keydown', function(e) {
-        console.log(e.keyCode);
+        // console.log(e.keyCode);
       });
 
       var reticle = this.get('reticle');

@@ -125,6 +125,7 @@ YUI().use('node', 'event', 'reticle-data-navigator', 'menu-manager', 'parser', '
     Y.one('#canvas').get('children').each(function(child) {
       str += parser.stringify(child);
     });
+    console.log(str);
     preview.append(Y.Handlebars.render(str, sample_data));
   };
 

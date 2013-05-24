@@ -234,6 +234,9 @@ YUI.add('reticle-attributes', function (Y) {
 			name: 'WITH',
 			category: 'HANDLEBARS',
 			type: 'handlebars',
+			attributes: [
+				{ name: 'argument', type: 'data' } // needs to invoke the friggin... data navigator..
+			],
 			displayType: 'block'
 		}
 	];

@@ -164,13 +164,7 @@ YUI.add('menu-manager', function (Y) {
         newBlockEl.setAttribute('id', 'append-candidate');
 
         // hacky
-        if (Y.one('#append-candidate')) {
-          reticle.replaceCurrWith(newBlockEl);
-        }
-        else {
-          this._appendForMode(newBlockEl, mode);
-        }
-
+        this._guardedAppend(newBlockEl, mode);
       }, this);
 
       // generaets newEl
@@ -184,21 +178,24 @@ YUI.add('menu-manager', function (Y) {
           });
           reticle.showNavigator(dataNav);
 
-          dataNav.on('commit', function(e) {
+          dataNav.on('create-requested', function(e) {
+            console.log('data create', e);
             var path = e.variablePath;
             // now, create the element
-          });
+            var newBlockEl = this._makeNodeFromTagName(tagName);
+            dataNav.destroy();
+
+            // set one of the attrs
+            newBlockEl.setAttribute('data-node-attributes', JSON.stringify({ argument: path }));
+            this._guardedAppend(newBlockEl, mode);
+            this._hideMenu();
+
+          }, this);
 
         }
         else {
           var newBlockEl = this._makeNodeFromTagName(tagName);
-          if (Y.one('#append-candidate')) {
-            reticle.replaceCurrWith(newBlockEl);
-          }
-          else {
-            this._appendForMode(newBlockEl, mode);
-          }
-
+          this._guardedAppend(newBlockEl, mode);
           this._hideMenu();
         }
 
@@ -208,6 +205,16 @@ YUI.add('menu-manager', function (Y) {
       menu.focus();
       this.set('currentMenu', menu);
       this.fire('focused');
+    },
+
+    _guardedAppend: function(newBlockEl, mode) {
+      var reticle = this.get('reticle');
+      if (Y.one('#append-candidate')) {
+        reticle.replaceCurrWith(newBlockEl);
+      }
+      else {
+        this._appendForMode(newBlockEl, mode);
+      }
     },
 
     _appendForMode: function(newBlockEl, mode) {

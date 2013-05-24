@@ -29,7 +29,15 @@ YUI.add('parser', function (Y) {
     stringify: function(blockEl) {
 
       if (blockEl.hasClass('text')) {
-        return Y.Node.create(blockEl.get('text'));
+        console.log(blockEl.get('text'));
+        // var textEl = Y.Node.create(blockEl.get('text'));
+        // if (Y.Lang.isValue(textEl)) {
+        //   return textEl.get('outerHTML');
+        // }
+        // else {
+        //   return '';
+        // }
+        return blockEl.get('text');
       }
 
       var tagName = blockEl.getAttribute('data-node-name');
@@ -46,12 +54,12 @@ YUI.add('parser', function (Y) {
         // argument to the handlebars block thing
         // return '{{' + tagName + ' ' + nodeAttributes.argument + '}}' + childStr + '{{/' + tagName + '}}';
         // var hbStr = '{{#' + tagName.toLowerCase() + ' ' + 'collection' + '}}' + childStr + '{{/' + tagName.toLowerCase() + '}}';
+        console.log("HB CHILD STR " + childStr);
         var hbStr = '{{#' + tagName.toLowerCase() + ' ' + nodeAttributes.argument + '}}' + childStr + '{{/' + tagName.toLowerCase() + '}}';
-        console.log(hbStr);
+        // console.log(hbStr);
         return hbStr;
       }
       else {
-
 
         // stupid BR
         if (tagName == 'BR')
@@ -70,7 +78,6 @@ YUI.add('parser', function (Y) {
           node.append(this.stringify(child));
         }, this);
       }
-
       return node.get('outerHTML');
     },
 

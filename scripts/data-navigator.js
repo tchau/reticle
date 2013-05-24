@@ -12,26 +12,16 @@ YUI.add('reticle-data-navigator', function (Y) {
       Y.Reticle.DataNavigator.superclass.constructor.apply(this, arguments);
     },
 
-    /**
-
-      obj: {
-        valueA: TERMINAL,
-        valueB: obj,
-        valueC: arr
-      }
-
-      [terminal1, terminal2]
-
-    */
-
     renderUI: function() {
       var contentBox = this.get('contentBox');
 
       console.log(this.get('context'));
       var data = this.get('context');
 
+      var title = Y.Node.create("<div class='title'>Select a Variable</div>");
       var menu = Y.Node.create("<div></div>");
       menu.addClass('data-navigator');
+      contentBox.append(title); 
       contentBox.append(menu); 
 
       var rootNode = this._renderNodeForShit(data);
@@ -52,12 +42,15 @@ YUI.add('reticle-data-navigator', function (Y) {
         // need to get the PATH
         var targetNode = e.currentTarget;
         var ancestors = targetNode.ancestors('.data-node');
-        console.log(ancestors);
 
-        var path = this._generatePathFromAncstry(ancestors);
-        path += ('.' + targetNode.getAttribute('data-key'));
+        var pathArr = this._generatePathFromAncstry(ancestors);
+        pathArr.push(targetNode.getAttribute('data-key'));
+        var path = pathArr.join('.');
 
         console.log("FULL PATH TO DATA: " + path);
+        this.fire('create-requested', {
+          variablePath: path
+        });
 
         e.stopPropagation();
       }, '.data-node', this);
@@ -69,7 +62,7 @@ YUI.add('reticle-data-navigator', function (Y) {
       ancestors.each(function(ancestor) {
         keys.push( ancestor.getAttribute('data-key') );
       });
-      return keys.join('.');
+      return keys;
     },
 
     _renderNodeForShit: function(value, key) {
