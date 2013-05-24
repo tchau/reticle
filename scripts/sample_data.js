@@ -1,4 +1,4 @@
-var sample_data ={
+var sample_data = {
   "collection" : {
     "id" : "4f4731a424ac6bdc824f5db1",
     "enabled" : true,
@@ -178,10 +178,10 @@ var sample_data ={
     },
     "logoImageId" : "50b2edbae4b054abacd8e13a",
     "shareButtonOptions" : {
-      "2" : true,
-      "6" : true,
+      "3" : true,
       "1" : true,
-      "3" : true
+      "2" : true,
+      "6" : true
     },
     "logoImageUrl" : "/item/50b2edbae4b054abacd8e13a",
     "authenticUrl" : "http://tchau.squarespace.com",
@@ -205,6 +205,24 @@ var sample_data ={
       "iconUrl" : "http://a0.twimg.com/profile_images/1847549606/selfportrait2_normal.png",
       "collectionId" : "50424925e4b05d1570d7c0b0",
       "serviceName" : "twitter"
+    }, {
+      "serviceId" : 1,
+      "userId" : "1616503",
+      "userName" : "chau.thomas@gmail.com",
+      "screenname" : "Thomas Chau",
+      "addedOn" : 1369405261594,
+      "profileUrl" : "https://foursquare.com/user/1616503",
+      "iconUrl" : "https://is1.4sqi.net/userpix_thumbs/LDBZESB1BVVAYJVF.jpg",
+      "collectionId" : "519f774de4b0c90b263bef20",
+      "serviceName" : "foursquare"
+    }, {
+      "serviceId" : 21,
+      "userId" : "103428183316338776140",
+      "screenname" : "Thomas Chau",
+      "addedOn" : 1369405460242,
+      "profileUrl" : "https://plus.google.com/103428183316338776140",
+      "iconUrl" : "https://lh6.googleusercontent.com/-o9pFMAdZp2k/AAAAAAAAAAI/AAAAAAAAAAg/2ioA4PbebwU/photo.jpg",
+      "serviceName" : "google"
     } ],
     "statsMigrated" : false
   },
@@ -242,9 +260,9 @@ var sample_data ={
       "currenciesSupported" : [ "USD" ],
       "stripePublishableKey" : "pk_live_aqiezHxGFJ9hcLuNswEsqimR",
       "measurementStandard" : 1,
+      "stripeConnected" : true,
       "isLive" : false,
-      "storeState" : 2,
-      "stripeConnected" : true
+      "storeState" : 2
     },
     "useEscapeKeyToLogin" : true
   }

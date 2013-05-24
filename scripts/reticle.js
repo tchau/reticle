@@ -239,7 +239,10 @@ YUI.add('reticle', function (Y) {
           // ughhhhhhhhh
           var attr = JSON.parse(parent.getAttribute('data-node-attributes'));
           var upperScope = attr.argument;
-          scopes.push(upperScope);
+
+          // split it out b/c HB can use dot notation
+          var upperScopes = upperScope.split('.');
+          scopes = scopes.concat(upperScopes);
         });
 
         console.log("SCOPES", scopes);
@@ -249,6 +252,8 @@ YUI.add('reticle', function (Y) {
         while (scopes.length > 0) {
           currentScope = currentScope[scopes.pop()];
         }
+
+        console.log("SCOPE FOUND", currentScope);
 
         return currentScope;
       }

@@ -46,6 +46,8 @@ YUI.add('reticle-data-navigator', function (Y) {
         var ancestors = targetNode.ancestors('.data-node');
 
         var pathArr = this._generatePathFromAncstry(ancestors);
+
+        // ARGHHHH kinda bad... gotta slice out the numbers..  weird inconsistency
         pathArr.push(targetNode.getAttribute('data-key'));
         var path = pathArr.join('.');
 
@@ -62,7 +64,11 @@ YUI.add('reticle-data-navigator', function (Y) {
     _generatePathFromAncstry: function(ancestors) {
       var keys = [];
       ancestors.each(function(ancestor) {
-        keys.push( ancestor.getAttribute('data-key') );
+
+        // ARGHHHH kinda bad... gotta slice out the numbers..  weird inconsistency
+        // for iterations with EACH we don't want the array index... fkn
+        if (! Y.Lang.isNumber(Number(ancestor.getAttribute('data-key'))))
+          keys.push( ancestor.getAttribute('data-key') );
       });
       return keys;
     },

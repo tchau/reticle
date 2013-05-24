@@ -7,6 +7,7 @@ TODO
   Also: TRY OUT using the EACH on country select options! SUPER COOL!
     EACH is broken on ARRAYS... can't do the country OPTS fuckkkkk!!!
   clean up the starting data, make it look good
+
 11
   prep demo info (json and country json etc)
 12
@@ -36,6 +37,10 @@ TODO
         include author
 
       show off iteration with EACH
+        use my SocialAccounts
+          profile picture
+          link containing to profileUrl, containing username
+
         paste the COUNTRIES_JSON into data
         iterate a SELECT OPTIOn
 
