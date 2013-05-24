@@ -4,7 +4,7 @@ TODO
 
 
 9
-  NEXT: Setting Arbitrary DATA in the data panel
+  fix the fuckin BODY parsing... fuckkkk
 
   Also: TRY OUT using the EACH on country select options! SUPER COOL!
     EACH is broken on ARRAYS... can't do the country OPTS fuckkkkk!!!
@@ -35,6 +35,8 @@ TODO
 
       Use handlebars WITH statement to scope into Item.
         Create a section with Title and Blog Post Body
+        Use blog post Image
+        include author
 
       show off iteration with EACH
         paste the COUNTRIES_JSON into data

@@ -4,14 +4,15 @@
 
 var GLOB = {};
 
-YUI().use('node', 'event', 'reticle-data-navigator', 'menu-manager', 'parser', 'reticle-attributes', 'keyboard-model', 'reticle', function (Y) {
+YUI().use('node', 'event', 'reticle-data-navigator', 'reticle-underlier-editor', 'menu-manager', 
+  'parser', 'reticle-attributes', 'keyboard-model', 'reticle', function (Y) {
   console.log('initializing Reticle System...');
 
  var isHandlebarsBlock = function(tagName) {
   var meta = Y.Reticle.TagMeta.findByName(tagName);
   return Y.Lang.isValue(meta.type) && meta.type == 'handlebars';
  };
- 
+
   var parser = new Y.Reticle.Parser();
   var parsedEl = parser.parse(Y.one('#data'));
   Y.one('#canvas').append(parsedEl.get('children'));
@@ -87,6 +88,20 @@ YUI().use('node', 'event', 'reticle-data-navigator', 'menu-manager', 'parser', '
 
   Y.one('#import-data').on('click', function(e) {
 
+    menuMan.showUnderlierEditor();
+
+    // // show textarea
+    // var ed = new Y.Reticle.UnderlierEditor({
+    //   title: "Data",
+    //   initialValue: JSON.stringify(reticle.get('pageData'))
+    // });
+    // reticle.showNavigator(ed);
+
+    // ed.on('create-requested', function(e) {
+    //   var newDataStr = e.newData;
+    //   reticle.set('pageData', JSON.parse(newDataStr));
+    //   ed.destroy();
+    // });
   });
 
   // command interpreter takes action events and turns them into
@@ -157,7 +172,7 @@ YUI().use('node', 'event', 'reticle-data-navigator', 'menu-manager', 'parser', '
     Y.one('#canvas').get('children').each(function(child) {
       str += parser.stringify(child);
     });
-    preview.append(Y.Handlebars.render(str, sample_data));
+    preview.append(Y.Handlebars.render(str, reticle.get('pageData')));
   };
 
   displayMeta();

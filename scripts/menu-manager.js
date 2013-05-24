@@ -212,6 +212,27 @@ YUI.add('menu-manager', function (Y) {
       this.fire('focused');
     },
 
+    showUnderlierEditor: function() {
+      var reticle = this.get('reticle');
+
+      // show textarea
+      var ed = new Y.Reticle.UnderlierEditor({
+        title: "Data",
+        initialValue: JSON.stringify(reticle.get('pageData'))
+      });
+
+      ed.on('create-requested', function(e) {
+        var newDataStr = e.newData;
+        reticle.set('pageData', JSON.parse(newDataStr));
+        ed.destroy();
+      });
+
+      reticle.showNavigator(ed);
+      ed.focus();
+      this.set('currentMenu', ed);
+      this.fire('focused');
+    },
+
     _guardedAppend: function(newBlockEl, mode) {
       var reticle = this.get('reticle');
       if (Y.one('#append-candidate')) {

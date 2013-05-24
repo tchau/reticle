@@ -105,6 +105,8 @@ YUI.add('reticle-attributes', function (Y) {
 			name: 'IMG',
 			attributes: [
 				{ name: 'src', type: 'text', defaultValue: 'placeholder.jpg' },
+				{ name: 'height', type: 'text' },
+				{ name: 'width', type: 'text' },
 				{ name: 'alt', type: 'text' }
 			],
 			validChildren: [],

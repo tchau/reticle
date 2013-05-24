@@ -32,8 +32,13 @@ YUI.add('reticle', function (Y) {
       this.before('currChange', function() {
         this.get('curr').removeClass('active-current');
       });
+      
       this.after('currChange', function() {
         this.get('curr').addClass('active-current');
+      });
+
+      this.after('pageDataChange', function() {
+        this.fire('structure-change');
       });
 
       // NASTY HACK
@@ -123,7 +128,7 @@ YUI.add('reticle', function (Y) {
       var reticleXY = reticle.getXY();
       menu.setXY([
         reticleXY[0],
-        reticleXY[1] + reticle.get('offsetHeight')
+        reticleXY[1] + (reticle.get('offsetHeight') / 2)
       ]);
 
       menu.show();

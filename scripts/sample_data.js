@@ -1,4 +1,4 @@
-var sample_data = {
+var sample_data ={
   "collection" : {
     "id" : "4f4731a424ac6bdc824f5db1",
     "enabled" : true,
@@ -9,7 +9,7 @@ var sample_data = {
     "navigationTitle" : "A DUSTY TOME",
     "urlId" : "a-dusty-tome",
     "itemCount" : 47,
-    "updatedOn" : 1368914051263,
+    "updatedOn" : 1369402913972,
     "description" : "",
     "pageSize" : 14,
     "folder" : false,
@@ -29,20 +29,33 @@ var sample_data = {
     "recordType" : 1,
     "version" : 1,
     "addedOn" : 1368914029069,
-    "updatedOn" : 1368914051260,
+    "updatedOn" : 1369402913966,
     "displayIndex" : 46,
     "starred" : false,
     "passthrough" : false,
     "workflowState" : 1,
     "publishOn" : 1368914029069,
     "authorId" : "4f0ddab6d09a105c7ebcb36f",
+    "systemDataId" : "1369402909499-ZRCUMCHXMCLXRN0S2T9S",
+    "systemDataVariants" : "612x612,100w,300w,500w",
+    "systemDataSourceType" : "JPEG",
+    "systemDataOrigin" : "USER_UPLOAD",
+    "filename" : "1ea2eef2a03e11e192e91231381b3d7a_7.jpg",
     "mediaFocalPoint" : {
       "x" : 0.5,
       "y" : 0.5,
       "source" : 3
     },
+    "colorData" : {
+      "topLeftAverage" : "372327",
+      "topRightAverage" : "496177",
+      "bottomLeftAverage" : "250405",
+      "bottomRightAverage" : "280e17",
+      "centerAverage" : "b18e78",
+      "suggestedBgColor" : "270000"
+    },
     "urlId" : "29amnlpnoo9d5j1ufcobdh4sbflwsk",
-    "title" : "",
+    "title" : "Quote by Ford",
     "sourceUrl" : "",
     "body" : "<div class=\"sqs-layout sqs-grid-12 columns-12\" data-type=\"item\" id=\"item-5197f87fe4b0079d49c667a7\"><div class=\"row sqs-row\"><div class=\"col sqs-col-12 span-12\"></div></div><div class=\"row sqs-row\"><div class=\"col sqs-col-12 span-12\"><div class=\"sqs-block quote-block\" data-block-json=\"&#123;&quot;quote&quot;:&quot;If I had asked people what they wanted, they would have said faster horses&quot;,&quot;source&quot;:&quot;henry ford&quot;&#125;\" data-block-type=\"31\" id=\"block-8d88cd6b496a24c65ebd\"><div class=\"sqs-block-content\"><figure>\n  <blockquote>\n    <span>&#147;</span>If I had asked people what they wanted, they would have said faster horses<span>&#148;</span>\n  </blockquote>\n  <figcaption class=\"source\">&mdash; henry ford</figcaption></figure>\n</div></div></div></div></div>",
     "excerpt" : "",
@@ -74,10 +87,11 @@ var sample_data = {
       "systemGenerated" : false
     },
     "fullUrl" : "/a-dusty-tome/29amnlpnoo9d5j1ufcobdh4sbflwsk",
-    "assetUrl" : "http://static.squarespace.com/static/4f0ddab6d09a105c7ebcb36d/4f4731a424ac6bdc824f5db1/5197f87fe4b0079d49c667a7/1368914051260/",
+    "assetUrl" : "http://static.squarespace.com/static/4f0ddab6d09a105c7ebcb36d/4f4731a424ac6bdc824f5db1/5197f87fe4b0079d49c667a7/1369402913966/1ea2eef2a03e11e192e91231381b3d7a_7.jpg",
     "postItemInjectCode" : "",
-    "contentType" : "text/html",
+    "contentType" : "image/jpeg",
     "pushedServices" : { },
+    "originalSize" : "612x612",
     "recordTypeLabel" : "text"
   },
   "pagination" : {
@@ -146,7 +160,7 @@ var sample_data = {
   "website" : {
     "id" : "4f0ddab6d09a105c7ebcb36d",
     "identifier" : "tchau",
-    "contentModifiedOn" : 1369176238347,
+    "contentModifiedOn" : 1369402913977,
     "siteStatus" : { },
     "language" : "en-US",
     "timeZone" : "America/New_York",
@@ -165,9 +179,9 @@ var sample_data = {
     "logoImageId" : "50b2edbae4b054abacd8e13a",
     "shareButtonOptions" : {
       "2" : true,
-      "3" : true,
       "6" : true,
-      "1" : true
+      "1" : true,
+      "3" : true
     },
     "logoImageUrl" : "/item/50b2edbae4b054abacd8e13a",
     "authenticUrl" : "http://tchau.squarespace.com",
@@ -228,8 +242,8 @@ var sample_data = {
       "currenciesSupported" : [ "USD" ],
       "stripePublishableKey" : "pk_live_aqiezHxGFJ9hcLuNswEsqimR",
       "measurementStandard" : 1,
-      "storeState" : 2,
       "isLive" : false,
+      "storeState" : 2,
       "stripeConnected" : true
     },
     "useEscapeKeyToLogin" : true
